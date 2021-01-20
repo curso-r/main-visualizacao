@@ -1,0 +1,59 @@
+---
+title: "Relatórios automáticos"
+subtitle: "O poder do RMarkdown"
+author: "<img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '20%'>"
+date: ""
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "css/custom-intro.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+knit: pagedown::chrome_print            
+---
+
+
+```{r, child="00-preamble.Rmd"}
+
+```
+
+class: middle, center
+
+# `r blue("Introdução")`
+
+---
+# O que é RMarkdown?
+
+...
+
+---
+# Por que o RMarkdown é legal?
+
+...
+
+---
+
+# Algumas aplicações
+
+---
+
+# Sintaxe
+
+---
+
+# Chunks
+
+---
+
+# Yaml
+
+
+---
+
+# Vamos ao R!
+
+```{r, echo=FALSE, fig.align="center"}
+knitr::include_graphics("img/cat.gif")
+```
