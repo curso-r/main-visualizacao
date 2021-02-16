@@ -72,3 +72,18 @@ Aula 04: Miscelânea
 - Covid (é meio triste, mas tem tudo que precisamos)
 - Dados de vacinação (deve ter alguma já)
 - `{dados}` para exemplos mais simples
+
+
+**Pacotes necessários**:
+
+```{r eval=FALSE, include=TRUE}
+install.packages(c(
+  "tidyverse",
+  "pagedown",
+  "xaringan",
+  "bookdown",
+  "flexdashboard",
+  "xaringanthemer"
+))
+```
+
