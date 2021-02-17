@@ -64,7 +64,7 @@ exemplos_rmd <- tibble::tibble(pacote = as.character(),
   
   tibble::add_row(pacote = "[pagedown](https://github.com/rstudio/pagedown)",
                   desc = "Currículos, cartas e trabalhos acadêmicos",
-                  exemplos = "- [Relatório do Observatório da Insolvência](https://abjur.github.io/obsFase2/relatorio/obs_recuperacoes_abj.pdf) <br> - [Mestrado do Athos Damiani (em andamento)](https://github.com/Athospd/mestrado/blob/master/inst/monografia/monografia.pdf) <br> - [Currículo da Beatriz](https://beatrizmilz.github.io/resume/) ") %>%
+                  exemplos = "- [Relatório do Observatório da Insolvência](https://abjur.github.io/obsFase2/relatorio/obs_recuperacoes_abj.pdf) <br> - [Mestrado do Athos Damiani (em andamento)](https://github.com/Athospd/mestrado/blob/master/inst/monografia/monografia.pdf) <br> - [Currículo do William Amorim](https://williamorim.github.io/resume/) ") %>%
   
     tibble::add_row(pacote = "[flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/)",
                   desc = "Dashboards",
@@ -73,7 +73,7 @@ exemplos_rmd <- tibble::tibble(pacote = as.character(),
   
   tibble::add_row(pacote = "[learnr](https://rstudio.github.io/learnr/)",
                   desc = "Tutoriais interativos",
-                  exemplos = "- [Text mining with tidy data principles](https://juliasilge.shinyapps.io/learntidytext/)") %>%
+                  exemplos = "- [Text mining with tidy data principles](https://juliasilge.shinyapps.io/learntidytext/) <br> - [Teacups, Giraffes,  & Statistics](https://tinystats.github.io/teacups-giraffes-and-statistics/)") %>%
   
   tibble::add_row(pacote = "[rticles](https://github.com/rstudio/rticles)",
                   desc = "Artigos científicos",
@@ -132,6 +132,12 @@ exemplos_rmd %>%
 
 # Yaml
 
+- Os arquivos .Rmd começam com códigos em yaml.
+
+- Esse "bloco" de código é delimitado por `---`.
+
+- Apresenta metadados e parâmetros utilizados para gerar o documento final.
+
 ```{yaml}
 ---
 title: "Relatórios automáticos"
@@ -149,11 +155,11 @@ class: middle, center
 
 # .blue[Principais saídas]
 
-
+<!-- Quero usar essa imagem, mas não está claro se é liberado o uso: https://alison.netlify.app/rmd-valentine/images/rmarkdown_hedgehog_wide.png -->
 
 ---
 ## Relatórios
-<!-- flexdashboard -->
+
 
 ### HTML
 
