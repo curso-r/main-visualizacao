@@ -55,20 +55,33 @@ class: middle, center
 
 
 ---
-# Por que o RMarkdown é legal?
+## Por que o RMarkdown é legal?
 
-## Possibilita ...
+- Possibilita automatizar a criação de produtos em R. Construindo um relatório em R Markdown, com exceção das interpretações e conclusões, só precisamos montá-lo uma vez. A partir daí, com apenas um clique podemos:
 
-- Automatizar a criação de produtos em R
+  - replicar o relatório para diversas versões da base de dados (modificações, correções, processos periódicos);
 
+  - replicar o relatório para diversas variáveis.
+  
+.pull-left[
 - Criar documentos reprodutíveis
 
 - Criar diversos tipos de produtos 
+]
 
+.pull-right[
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/reproducibility_court.png?raw=true" alt="Ilustração por &amp;lt;a href='https://github.com/allisonhorst/stats-illustrations'&amp;gt; Allison Horst&amp;lt;/a&amp;gt;." width="50%" /&gt;
+&lt;img src="https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/reproducibility_court.png?raw=true" alt="Ilustração por &amp;lt;a href='https://github.com/allisonhorst/stats-illustrations'&amp;gt; Allison Horst&amp;lt;/a&amp;gt;." width="100%" /&gt;
 &lt;p class="caption"&gt;Ilustração por &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt; Allison Horst&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
+]
+
+
+
+
+
+
+
 ---
 
 # Algumas aplicações
@@ -120,11 +133,43 @@ class: middle, center
 # Sintaxe
 
 
+Principais marcadores utilizados para formatar texto:
+
+- uma palavra entre asteriscos fica em itálico: `*texto*` é transformado em *texto*
+
+- uma palavra entre dois asteríscos fica em negrito: `**texto**` é transformado em **texto**
+
+- um ou mais hashtags viram títulos: `# Título muito grande`, `## Título grande`, `### Título médio`, `#### Título pequeno`, `##### Título muito pequeno`
+
+- hiperlinks podem ser criados com a estrutura `[texto](link)`: 
+
+- `[link para o site da Curso-R](https://curso-r.com)` é transformado em [link para o site da Curso-R](https://curso-r.com).
+
+- para deixar o texto com `esse formato` (formato de código), apenas coloque o texto entre duas crases.
+
+
 Material de consulta: [Livro: Ciência de Dados em R - Seção sobre Markdown](https://livro.curso-r.com/9-1-markdown.html)
 
 ---
 
 # Chunks
+
+
+- Em um arquivo R Markdown, precisamos escrever nossos códigos dentro dos *chunks*. Para inserir um chunk, utilize o atalho `CTRL + ALT + I`.
+
+- É possível adicionar campos de código utilizando a seguinte sintaxe:
+
+````md
+```{r}
+codigo em R aqui
+```
+````
+
+- Dentro dos chunks você poderá escrever códigos em R como se fosse o nosso script .R tradicional. 
+
+
+
+
 
 Material de consulta: [Livro: Ciência de Dados em R - Seção sobre R Markdown](https://livro.curso-r.com/9-2-r-markdown.html)
 
