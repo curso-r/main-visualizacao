@@ -83,7 +83,9 @@ install.packages(c(
   "xaringan",
   "bookdown",
   "flexdashboard",
-  "xaringanthemer"
+  "xaringanthemer",
+  "sf",
+  "geobr"
 ))
 ```
 
