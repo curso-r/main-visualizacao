@@ -11,7 +11,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-knit: pagedown::chrome_print            
+# knit: pagedown::chrome_print            
 ---
 
 ```{r echo=FALSE}
@@ -30,13 +30,33 @@ class: middle, center
 ---
 # O que é RMarkdown?
 
-...
+- O R Markdown é um pacote para criação de relatórios automatizados utilizando as linguagens de programação R e de marcação Markdown. 
+
+
+
+> Linguagens de marcação utilizam marcadores (símbolos, tags, funções) para formatar um arquivo de texto simples. Os exemplos mais famosos de linguagem de marcação são o HTML e LaTeX.
+
+
+- A linguagem de marcação Markdown serve para construirmos e formatarmos diversos formatos de arquivos (PDF, HTML, Word, entre outros) a partir de um arquivo de texto com regras bem simples. 
+
+- O R Markdown é uma extensão de Markdown que nos permite colocar código de R.
+
 
 ---
 # Por que o RMarkdown é legal?
 
-...
+## Possibilita ...
 
+- Automatizar a criação de produtos em R
+
+- Criar documentos reprodutíveis
+
+- Criar diversos tipos de produtos 
+
+```{r, echo=FALSE, out.width="50%", fig.align='center', fig.cap="Ilustração por <a href='https://github.com/allisonhorst/stats-illustrations'> Allison Horst</a>."}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/reproducibility_court.png?raw=true")
+
+```
 ---
 
 # Algumas aplicações
@@ -124,9 +144,14 @@ exemplos_rmd %>%
 
 # Sintaxe
 
+
+Material de consulta: [Livro: Ciência de Dados em R - Seção sobre Markdown](https://livro.curso-r.com/9-1-markdown.html)
+
 ---
 
 # Chunks
+
+Material de consulta: [Livro: Ciência de Dados em R - Seção sobre R Markdown](https://livro.curso-r.com/9-2-r-markdown.html)
 
 ---
 
@@ -138,7 +163,7 @@ exemplos_rmd %>%
 
 - Apresenta metadados e parâmetros utilizados para gerar o documento final.
 
-```{yaml}
+```{yml}
 ---
 title: "Relatórios automáticos"
 subtitle: "O poder do RMarkdown"
@@ -148,12 +173,27 @@ output: xaringan::moon_reader
 ---
 ```
 
+---
+
+## Knit! 
+
+- Ppara gerarmos o relatório na extensão desejada, precisamos *renderizá-lo*, isto é, transformar o arquivo R Markdown em um PDF, HTML ou Word. 
+
+- Isso pode ser feito no RStudio a partir do botão `knit`, que fica logo acima do script, ou pelo atalho `CTRL + SHIFT + K`.
+
+```{r, echo=FALSE, fig.align="center", out.width="100%", fig.cap="Fonte: <a href='https://rmarkdown.rstudio.com/articles_integration.html'>RStudio</a>"}
+knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/ac50fc099900e8dd42fb3858cc9b54b00c3a26a6/25493/articles/images/rmdint-dropdown.png")
+```
 
 
 ---
 class: middle, center
 
 # .blue[Principais saídas]
+
+```{r, echo=FALSE,   out.width="45%", fig.cap="<center><b>Fonte: <a href='https://rmarkdown.rstudio.com'>Pacote `rmarkdown`</a></b></center>"}
+knitr::include_graphics("https://r-ladies-sao-paulo.github.io/xaringan/img/markdown.png")
+```
 
 <!-- Quero usar essa imagem, mas não está claro se é liberado o uso: https://alison.netlify.app/rmd-valentine/images/rmarkdown_hedgehog_wide.png -->
 
@@ -163,13 +203,13 @@ class: middle, center
 
 ### HTML
 
-```{yaml}
+```{yml}
 output: html_document
 ```
 
 ### Word (.docx)
 
-```{yaml}
+```{yml}
 output: word_document
 ```
 
@@ -179,7 +219,7 @@ output: word_document
 
 ### PDF (com Tex)
 
-```{yaml}
+```{yml}
 output: pdf_document
 ```
 
@@ -197,7 +237,7 @@ tinytex::install_tinytex()
 
 ### PDF com o pacote Pagedown
 
-```{yaml}
+```{yml}
 output: html_document
 knit: pagedown::chrome_print
 ```
@@ -215,27 +255,27 @@ pagedown::chrome_print("relatorio.html")
 ## Apresentações
 
 - **ioslides**
-```{yaml}
+```{yml}
 output: ioslides_presentation
 ```
 
 - **Slidy**
-```{yaml}
+```{yml}
 output: slidy_presentation
 ```
 
 - **Beamer** - Necessário o TeX
-```{yaml}
+```{yml}
 output: beamer_presentation
 ```
 
 - **Powerpoint** 
-```{yaml}
+```{yml}
 output: powerpoint_presentation
 ```
 
 - **xaringan** 
-```{yaml}
+```{yml}
 output: xaringan::moon_reader
 ```
 
