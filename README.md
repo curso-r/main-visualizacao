@@ -39,7 +39,6 @@ Aula 02: Visualização
     -   theme()
 -   Mapas em ggplot2
 -   Customizando temas
--   Tabelas: `{gt}` e `{gtsummary}`
 
 Aula 03: RMarkdown avançado
 
@@ -54,6 +53,7 @@ Aula 04: Miscelânea
 -   Templates legais da comunidade
 -   Gráficos animados com `{gganimate}`
 -   Grudando gráficos com `{patchwork}`
+-   Tabelas: `{gt}` e `{gtsummary}`
 -   distill e blogdown
 -   Netlify
 
