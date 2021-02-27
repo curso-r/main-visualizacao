@@ -161,3 +161,8 @@ a, a > code {
 .remark-slide-content code {
     font-size: 16px;
 }
+
+.blue{
+  color:#6495ed; 
+  font-weight: bold;
+}

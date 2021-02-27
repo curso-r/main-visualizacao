@@ -12,7 +12,7 @@ abaixo**.
 
 | Turma         | Material                                        | Github                                           |
 |:--------------|:------------------------------------------------|:-------------------------------------------------|
-| março de 2021 | <https://curso-r.github.io/202103-visualizacao> | <https://github.com/curso-r/202103-visualizacao> |
+| Março de 2021 | <https://curso-r.github.io/202103-visualizacao> | <https://github.com/curso-r/202103-visualizacao> |
 
 # Esqueleto do curso
 
@@ -39,7 +39,6 @@ Aula 02: Visualização
     -   theme()
 -   Mapas em ggplot2
 -   Customizando temas
--   Tabelas: `{gt}` e `{gtsummary}`
 
 Aula 03: RMarkdown avançado
 
@@ -54,6 +53,7 @@ Aula 04: Miscelânea
 -   Templates legais da comunidade
 -   Gráficos animados com `{gganimate}`
 -   Grudando gráficos com `{patchwork}`
+-   Tabelas: `{gt}` e `{gtsummary}`
 -   distill e blogdown
 -   Netlify
 
@@ -65,3 +65,16 @@ escolha. Fazer não só a visualização, mas uma apresentação ou relatório
 -   Covid (é meio triste, mas tem tudo que precisamos)
 -   Dados de vacinação (deve ter alguma já)
 -   `{dados}` para exemplos mais simples
+
+**Pacotes necessários**:
+
+``` r
+install.packages(c(
+  "tidyverse",
+  "pagedown",
+  "xaringan",
+  "bookdown",
+  "flexdashboard",
+  "xaringanthemer"
+))
+```

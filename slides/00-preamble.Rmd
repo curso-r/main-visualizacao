@@ -16,6 +16,10 @@ options(width = 85)
 # devtools::install_github("gadenbuie/xaringanExtra")
 ```
 
+```{r echo=FALSE}
+library(magrittr, include.only = "%>%")
+```
+
 ```{r xaringanExtra-clipboard, echo=FALSE}
 xaringanExtra::use_clipboard()
 ```

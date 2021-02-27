@@ -91,19 +91,36 @@ Doutorando em Estatística pelo IME-USP. Secretário-geral da Associação Brasi
 
 ## Nossos cursos
 
+
 .pull-left[
 <div class="container center">
   <div class="card">
     <h2>Programação em R</h2>
     <hr style = "background-color: #3bb44a;"/>
+    <p><a href = "https://www.curso-r.com/cursos/intro-programacao/">Introdução à programação com R</a></p>
     <p><a href = "https://www.curso-r.com/cursos/r4ds-1/">R para Ciência de dados I</a></p>
-        <p><a href = "https://www.curso-r.com/cursos/r4ds-2/">R para Ciência de dados II</a></p>
-        <p><a href = "https://www.curso-r.com/cursos/rcpp/">Introdução ao R com C++</a></p>
+    <p><a href = "https://www.curso-r.com/cursos/r4ds-2/">R para Ciência de dados II</a></p>
+    <p><a href = "https://www.curso-r.com/cursos/pacotes/">Pacotes</a></p>
+    <p><a href = "https://www.curso-r.com/cursos/rcpp/">Introdução ao R com C++</a></p>
+
   </div>
 </div>
 
 <br>
 
+<div class="container center">
+  <div class="card">
+    <h2>Extração de dados</h2>
+    <hr style = "background-color: #eeba30;"/>
+    <p><a href = "https://www.curso-r.com/cursos/faxina/">Faxina de dados</a></p>
+    <p><a href = "https://www.curso-r.com/cursos/web-scraping/">Web scraping</a></p>
+
+  </div>
+</div>
+]
+
+
+.pull-right[
 <div class="container center">
   <div class="card">
     <h2>Modelagem</h2>
@@ -114,17 +131,6 @@ Doutorando em Estatística pelo IME-USP. Secretário-geral da Associação Brasi
     <p><a href = "https://www.curso-r.com/cursos/deep-learning/">Deep Learning</a></p>
   </div>
 </div>
-]
-
-
-.pull-right[
-<div class="container center">
-  <div class="card">
-    <h2>Extração de dados</h2>
-    <hr style = "background-color: #eeba30;"/>
-    <p><a href = "https://www.curso-r.com/cursos/web-scraping/">Web scraping</a></p>
-  </div>
-</div>
 
 <br>
 
@@ -132,11 +138,18 @@ Doutorando em Estatística pelo IME-USP. Secretário-geral da Associação Brasi
   <div class="card">
     <h2>Comunicação e automação</h2>
     <hr style = "background-color: #ff6699;"/>
+    <p><a href = "https://www.curso-r.com/cursos/dashboards/">Relatórios e visualização de dados</a></p>
     <p><a href = "https://www.curso-r.com/cursos/dashboards/">Dashboards com R</a></p>
-        <p><a href = "https://www.curso-r.com/cursos/deploy/">Deploy</a></p>
+    <p><a href = "https://www.curso-r.com/cursos/deploy/">Deploy</a></p>
   </div>
 </div>
 ]
+
+
+
+
+
+
 
 ---
 class: middle, center
@@ -147,7 +160,11 @@ class: middle, center
 
 # Relatórios automáticos e visualização
 
-## Introdução
+
+```{r, echo=FALSE, out.width="90%", fig.align='center', fig.cap="Ilustração por <a href='https://github.com/allisonhorst/stats-illustrations'> Allison Horst</a>."}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/blob/master/openscapes/environmental-data-science-r4ds-general.png?raw=true")
+```
+
 
 
 ---
@@ -155,16 +172,87 @@ class: middle, center
 # Relatórios automáticos
 
 
+.pull-left[
+
+- RMarkdown básico
+
+- Principais saídas: 
+  - Relatórios (word, html, pdf)
+  - Apresentações 
+  - Dashboards estáticos
+  - Livros
+  - Blogs e sites
+  
+]
+
+.pull-right[
+
+```{r, echo=FALSE, out.width="100%", fig.align='center', fig.cap="Ilustração por <a href='https://github.com/allisonhorst/stats-illustrations'> Allison Horst</a>."}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/rmarkdown_wizards.png?raw=true")
+```
+
+]
+
 ---
 
 # Visualização
+
+.pull-left[
+
+- Gráficos com o pacote ggplot2 
+  - Temas para gráficos
+  - Gráficos animados
+  - Unindo gráficos em uma única imagem
+  
+- Mapas com o ggplot2 
+
+- Tabelas
+]
+
+.pull-right[
+
+```{r, echo=FALSE, out.width="100%", fig.align='center', fig.cap="Ilustração por <a href='https://github.com/allisonhorst/stats-illustrations'> Allison Horst</a>."}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/gganimate_fireworks.PNG?raw=true")
+```
+
+]
+
+
+
+
 
 
 ---
 
 # Resultados
 
-No final, você terá ...
+
+
+.pull-left[
+
+No final, você poderá...
+
+- Criar documentos reprodutíveis
+
+- Construir lindos gráficos em ggplot2
+
+- Construir mapas do Brasil usando a mesma sintaxe que você já conhece
+
+- Compartilhar suas análises usando R em todas as etapas do ciclo da ciência de dados
+
+
+
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE, out.width="100%", fig.align='center', fig.cap="Ilustração por <a href='https://github.com/allisonhorst/stats-illustrations'> Allison Horst</a>."}
+knitr::include_graphics(c("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/presenting_monster.png","https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-artwork/reproducibility_court.png?raw=true"))
+
+```
+
+]
 
 ---
 
