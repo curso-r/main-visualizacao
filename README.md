@@ -39,6 +39,7 @@ Aula 02: Visualização
     -   theme()
 -   Mapas em ggplot2
 -   Customizando temas
+-   Tabelas: `{gt}` e `{gtsummary}`
 
 Aula 03: RMarkdown avançado
 
@@ -53,7 +54,6 @@ Aula 04: Miscelânea
 -   Templates legais da comunidade
 -   Gráficos animados com `{gganimate}`
 -   Grudando gráficos com `{patchwork}`
--   Tabelas: `{gt}` e `{gtsummary}`
 -   distill e blogdown
 -   Netlify
 
@@ -69,12 +69,25 @@ escolha. Fazer não só a visualização, mas uma apresentação ou relatório
 **Pacotes necessários**:
 
 ``` r
+# Pacotes instalados via CRAN
 install.packages(c(
   "tidyverse",
   "pagedown",
   "xaringan",
   "bookdown",
   "flexdashboard",
-  "xaringanthemer"
+  "xaringanthemer",
+  "sf",
+  "geobr",
+  "gganimate",
+  "ggalt",
+  "officedown"
+  "rticles",
+  "prettydoc",
+  "ggthemes"
 ))
+
+# Pacotes instalados via GitHub
+install.packages("remotes")
+remotes::install_github("cienciadedatos/dados")
 ```
