@@ -77,6 +77,7 @@ Aula 04: Miscelânea
 **Pacotes necessários**:
 
 ```{r eval=FALSE, include=TRUE}
+# Pacotes instalados via CRAN
 install.packages(c(
   "tidyverse",
   "pagedown",
@@ -86,13 +87,17 @@ install.packages(c(
   "xaringanthemer",
   "sf",
   "geobr",
-  "prettydoc",
-  "officedown",
-  "flextable",
+  "gganimate",
+  "ggalt",
+  "officedown"
   "rticles",
-  "forcats",
-  "ggalt"
-  "gganimate"
+  "prettydoc",
+  "ggthemes",
+  "flextable"
 ))
+
+# Pacotes instalados via GitHub
+install.packages("remotes")
+remotes::install_github("cienciadedatos/dados")
 ```
 
