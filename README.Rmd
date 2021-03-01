@@ -85,7 +85,14 @@ install.packages(c(
   "flexdashboard",
   "xaringanthemer",
   "sf",
-  "geobr"
+  "geobr",
+  "prettydoc",
+  "officedown",
+  "flextable",
+  "rticles",
+  "forcats",
+  "ggalt"
+  "gganimate"
 ))
 ```
 
