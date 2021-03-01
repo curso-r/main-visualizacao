@@ -22,7 +22,7 @@ temperatura_por_mes <- clima %>%
 # um gráfico seria a sobreposição dessas camadas.
 # Hadley Wickham, A layered grammar of graphics 
 
-# Gráfico de pontos (dispersão) -------------------------------------------
+# Gráfico de linhas -------------------------------------------
 
 # Apenas o canvas
 temperatura_por_mes %>% 
@@ -344,3 +344,49 @@ pinguins %>%
   theme_bw() +
   labs(x = "Comprimento do bico (cm)",
        y = "Contagem")
+
+# pontos ------------------------------------------------------------------
+
+# essa é a representação que dá destaque total ao valor numérico dos dados. é a representação "mais crua" dos dados.
+# a quantidade de tinta gasta por linha da base de dados é a menor possível
+
+# serve para destacar o formato da nuve de pontos formada por dados numéricos
+# só a nuvem em si não comunica nenhuma mensagem explicitamente. a intepretação fica a cargo de quem vê o gráfico
+
+clima %>% 
+  filter(origem == "JFK") %>% 
+  group_by(dia_do_ano = lubridate::floor_date(data_hora, "day")) %>%
+  summarise(temperatura = min(temperatura)) %>% 
+  ggplot(aes(x = dia_do_ano, y = temperatura)) + 
+  geom_point()
+
+# é interessante complementar um gráfico de pontos com algum elemento de destaque
+
+# geom_smooth é interessante para destacar tendências
+clima %>% 
+  filter(origem == "JFK") %>% 
+  group_by(dia_do_ano = lubridate::floor_date(data_hora, "day")) %>%
+  summarise(temperatura = min(temperatura)) %>% 
+  ggplot(aes(x = dia_do_ano, y = temperatura)) + 
+  geom_point() + 
+  geom_smooth() +
+  ggthemes::theme_wsj()
+
+# geom_encircle é interessante para destacar pontos distantes da nuvem de pontos
+
+library(ggalt)
+
+dados <- clima %>% 
+  filter(origem == "JFK") %>% 
+  group_by(dia_do_ano = lubridate::floor_date(data_hora, "day")) %>% 
+  summarise(temperatura = min(temperatura))
+
+dia_estranho <- dados %>% 
+  filter(dia_do_ano == as.Date("2013-05-08"))
+  
+dados %>% 
+  ggplot(aes(x = dia_do_ano, y = temperatura)) + 
+  geom_point() + 
+  ggalt::geom_encircle(data = dia_estranho, color = "red", s_shape = .1, expand = .01, size = 3)
+
+                       
