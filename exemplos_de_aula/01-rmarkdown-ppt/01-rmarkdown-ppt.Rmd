@@ -54,7 +54,7 @@ summary(cars)
 plot(pressure)
 ```
 
-## Slide com tablea
+## Slide com tabela
 
 ```{r tabela}
 knitr::kable(head(mtcars, 4))

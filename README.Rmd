@@ -72,7 +72,7 @@ Aula 04: Miscelânea
 - Covid (é meio triste, mas tem tudo que precisamos)
 - Dados de vacinação (deve ter alguma já)
 - `{dados}` para exemplos mais simples
-
+- Remedy
 
 **Pacotes necessários**:
 

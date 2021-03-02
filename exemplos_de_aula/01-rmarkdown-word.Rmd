@@ -53,7 +53,9 @@ Posso referenciar uma figura assim: \@ref(fig:boxplot) e uma tabela assim: \@ref
 
 ### Criando um ggplot
 
-Colocar um ggplot2 no word é razoavelmente fácil.
+Colocar um ggplot2 no word é razoavelmente fácil. 
+
+Uma versão com resolução mais baixa:
 
 ```{r fig.width=6, fig.cap="Gráfico de dispersão que compara a área e a população de municípios do meio-oestes estadunidense.", fig.id = "boxplot", echo = FALSE, message=FALSE, warning=FALSE}
 
@@ -77,7 +79,46 @@ gg <- ggplot(midwest, aes(x=area, y=poptotal)) +
        size = "Densidade\npopulacional",
        col = "Estado")
 
-plot(gg)
+ggplot2::ggsave("arquivo.svg", gg)
+```
+
+```{r fig.width=6, fig.cap="Gráfico de dispersão que compara a área e a população de municípios do meio-oestes estadunidense.", fig.id = "boxplot", echo = FALSE, message=FALSE, warning=FALSE}
+
+options(scipen=999)  # turn-off scientific notation like 1e+48
+library(ggplot2)
+theme_set(theme_bw())  # pre-set the bw theme.
+data("midwest", package = "ggplot2")
+# midwest <- read.csv("http://goo.gl/G1K41K")  # bkup data source
+
+# Scatterplot
+gg <- ggplot(midwest, aes(x=area, y=poptotal)) + 
+  geom_point(aes(col=state, size=popdensity)) + 
+  geom_smooth(method="loess", se=F) + 
+  xlim(c(0, 0.1)) + 
+  ylim(c(0, 500000)) + 
+  labs(subtitle="Area Vs População", 
+       y="População", 
+       x="Área", 
+       title="Gráfico de dispersão", 
+       caption = "Source: base midwest do pacote ggplot2",
+       size = "Densidade\npopulacional",
+       col = "Estado")
+
+gg
+```
+
+Versão com resolução mais alta (parâmetro `dpi=300`)
+
+```{r fig.width=6, fig.cap="Gráfico de dispersão que compara a área e a população de municípios do meio-oestes estadunidense.", echo = FALSE, message=FALSE, warning=FALSE, dpi=300}
+gg
+```
+
+
+Versão vetorizada (SVG):
+
+```{r fig.width=6, fig.cap="Gráfico de dispersão que compara a área e a população de municípios do meio-oestes estadunidense.", echo = FALSE, message=FALSE, warning=FALSE}
+ggplot2::ggsave("arquivo.svg", gg)
+knitr::include_graphics("arquivo.svg")
 ```
 
 ## Usando o pacote flextable

@@ -30,7 +30,7 @@ class: middle, center
 ---
 # O que é RMarkdown?
 
-- O R Markdown é um pacote para criação de relatórios automatizados utilizando as linguagens de programação R e de marcação Markdown. 
+- O R Markdown é um pacote para criação de __relatórios automatizados__ utilizando as linguagens de programação R e de marcação Markdown. 
 
 
 
@@ -39,13 +39,13 @@ class: middle, center
 
 - A linguagem de marcação Markdown serve para construirmos e formatarmos diversos formatos de arquivos (PDF, HTML, Word, entre outros) a partir de um arquivo de texto com regras bem simples. 
 
-- O R Markdown é uma extensão de Markdown que nos permite colocar código de R.
+- O __RMarkdown__ é uma extensão de Markdown que nos permite __colocar código de R__.
 
 
 ---
 ## Por que o RMarkdown é legal?
 
-- Possibilita automatizar a criação de produtos em R. Construindo um relatório em R Markdown, com exceção das interpretações e conclusões, só precisamos montá-lo uma vez. A partir daí, com apenas um clique podemos:
+- Possibilita automatizar a criar produtos com o R. Construindo um relatório em RMarkdown, com exceção das interpretações e conclusões, só precisamos montá-lo uma vez. A partir daí, com apenas um clique podemos:
 
   - replicar o relatório para diversas versões da base de dados (modificações, correções, processos periódicos);
 
@@ -132,26 +132,76 @@ exemplos_rmd %>%
 ```
 
 ---
-# Referências 
 
-## Em Inglês
+# Estrutura
 
-- [Site do pacote RMarkdown](https://rmarkdown.rstudio.com/)
-  - [Página com diversas referências](https://rmarkdown.rstudio.com/articles.html)
-- [Folha de cola - _cheatsheet_](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
-- [Livro: _R Markdown: The Definitive Guide_](https://bookdown.org/yihui/rmarkdown/)
-- [Livro: _R Markdown Cookbook_](https://bookdown.org/yihui/rmarkdown-cookbook/)
-- Pessoas para seguir no Twitter:
-  - [Yihui Xie](https://twitter.com/xieyihui)
-  - [Garrick Aden-Buie](https://twitter.com/grrrck) 
-  - [Alison Presmanes Hill](https://twitter.com/apreshill)
+Todo arquivo RMarkdown terá a seguinte estrutura:
 
+--
 
-## Em Português
+.pull-left[
 
-- [Livro da Curso-R - Capítulo sobre relatórios](https://livro.curso-r.com/9-relatorios.html)
+- Um preâmbulo com configurações
+]
+
+.pull-right[
 
 
+```yaml
+---
+title: "Relatório maravilhoso"
+*output: html_document
+---
+```
+
+]
+
+--
+
+.pull-left[
+
+- Blocos de texto (em Markdown)
+
+]
+
+.pull-right[
+
+````md
+*Texto em __RMarkdown__!
+````
+
+]
+
+--
+
+.pull-left[
+
+- Blocos de código (em R ou outra linguagem)
+
+]
+
+.pull-right[
+
+
+````md
+```{r}`r ''`
+*print("ola, codigo R")
+```
+````
+
+]
+
+--
+
+> Dependendo do formato de saída, o RMarkdown pode precisar ser dividido em vários arquivos ou precisar de arquivos adicionais.
+
+---
+
+# Vamos ao R!
+
+```{r vamos-ao-r, echo=FALSE, fig.align='center'}
+knitr::include_graphics("img/cat.gif")
+```
 
 ---
 
@@ -191,9 +241,6 @@ codigo em R aqui
 ````
 
 - Dentro dos chunks você poderá escrever códigos em R como se fosse o nosso script .R tradicional. 
-
-
-
 
 
 Material de consulta: [Livro: Ciência de Dados em R - Seção sobre R Markdown](https://livro.curso-r.com/9-2-r-markdown.html)
@@ -336,14 +383,22 @@ output: xaringan::moon_reader
 
 - Mais saídas: [RStudio Formats](https://rmarkdown.rstudio.com/formats.html)
 
-
 ---
+# Referências 
 
-# Vamos ao R!
+## Em Inglês
 
-```{r, echo=FALSE, fig.align="center"}
-knitr::include_graphics("img/cat.gif")
-```
+- [Site do pacote RMarkdown](https://rmarkdown.rstudio.com/)
+  - [Página com diversas referências](https://rmarkdown.rstudio.com/articles.html)
+- [Folha de cola - _cheatsheet_](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
+- [Livro: _R Markdown: The Definitive Guide_](https://bookdown.org/yihui/rmarkdown/)
+- [Livro: _R Markdown Cookbook_](https://bookdown.org/yihui/rmarkdown-cookbook/)
+- Pessoas para seguir no Twitter:
+  - [Yihui Xie](https://twitter.com/xieyihui)
+  - [Garrick Aden-Buie](https://twitter.com/grrrck) 
+  - [Alison Presmanes Hill](https://twitter.com/apreshill)
 
 
+## Em Português
 
+- [Livro da Curso-R - Capítulo sobre relatórios](https://livro.curso-r.com/9-relatorios.html)

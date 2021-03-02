@@ -6,23 +6,25 @@ output:
   prettydoc::html_pretty:
     theme: cayman
     highlight: github
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
-## 
-
-`html_pretty` in the [**prettydoc**](https://github.com/yixuan/prettydoc/)
-package is a new output format for creating HTML documents from R Markdown files.
-`html_pretty` is more lightweight compared to `html_document`, and is more
-stylish than `html_vignette` when creating package vignettes.
+`html_pretty` in the
+[**prettydoc**](https://github.com/yixuan/prettydoc/) package is a new
+output format for creating HTML documents from R Markdown files.
+`html_pretty` is more lightweight compared to `html_document`, and is
+more stylish than `html_vignette` when creating package vignettes.
 
 ## New Styles
 
-`html_pretty` currently supports three page themes (`cayman`, `tactile` and
-`architect`), and two syntax highlight styles (`github` and `vignette`).
-The theme and highlight styles can be specified in the document metadata,
-for example:
+`html_pretty` currently supports three page themes (`cayman`, `tactile`
+and `architect`), and two syntax highlight styles (`github` and
+`vignette`). The theme and highlight styles can be specified in the
+document metadata, for example:
 
-```yaml
+``` {.yaml}
 output:
   prettydoc::html_pretty:
     theme: architect
@@ -31,8 +33,8 @@ output:
 
 ## Your Familiar Tools
 
-Feel free to use the `knitr` infrastructure with dozens of tunable options in
-your document.
+Feel free to use the `knitr` infrastructure with dozens of tunable
+options in your document.
 
 ```{r fig.width=6, fig.height=6, fig.align='center'}
 set.seed(123)
@@ -47,7 +49,7 @@ smoothScatter(x, xlab = "x1", ylab = "x2")
 You can include code snippets of languages other than R, but note that
 the block header has no curly brackets around the language name.
 
-```cpp
+``` {.cpp}
 // [[Rcpp::export]]
 NumericVector timesTwo(NumericVector x) {
     return x * 2;
@@ -55,7 +57,9 @@ NumericVector timesTwo(NumericVector x) {
 ```
 
 You can also write math expressions, e.g. $Y = X\beta + \epsilon$,
-footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+footnotes[^1], and tables, e.g. using `knitr::kable()`.
+
+[^1]: A footnote here.
 
 ```{r, echo=FALSE, results='asis'}
 knitr::kable(head(iris, 10))
@@ -63,6 +67,7 @@ knitr::kable(head(iris, 10))
 
 ## Stay Tuned
 
-Please visit the [development page](https://github.com/yixuan/prettydoc/) of the 
-`prettydoc` package for latest updates and news. Comments, bug reports and
-pull requests are always welcome.
+Please visit the [development
+page](https://github.com/yixuan/prettydoc/) of the `prettydoc` package
+for latest updates and news. Comments, bug reports and pull requests are
+always welcome.

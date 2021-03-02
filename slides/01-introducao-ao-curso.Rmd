@@ -258,13 +258,13 @@ knitr::include_graphics(c("https://github.com/allisonhorst/stats-illustrations/r
 
 # Dinâmica
 
-- Pelo menos um exemplo prático por aula
-    - Foco: bases públicas, modelagem estatística
+- Pelo menos **um exemplo prático** por aula
+    - __Foco__: bases públicas, modelagem estatística
 
 - Exercícios para casa, com entrega facultativa
 
-- Trabalho final, com entrega obrigatória
-    - As pessoas que fizerem os melhores trabalhos receberão uma bolsa para fazer qualquer curso da Curso-R
+- __Trabalho final__, com entrega obrigatória
+    - As pessoas que fizerem os __melhores__ trabalhos receberão uma __bolsa__ para fazer qualquer curso da Curso-R
     - Mais detalhes sobre o trabalho final nas próximas aulas
 
 ---

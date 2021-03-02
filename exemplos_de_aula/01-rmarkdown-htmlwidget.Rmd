@@ -1,0 +1,18 @@
+---
+title: "Untitled"
+output: 
+  pdf_document:
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+Exemplo de Rmd com html Widget
+
+```{r cars}
+plotly::ggplotly(ggplot2::qplot(pressure$temperature, pressure$pressure))
+```
