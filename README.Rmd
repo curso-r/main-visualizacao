@@ -29,6 +29,12 @@ Aula 01: RMarkdown básico
 
 - Ciclo da ciência de dados (mostrar que estamos em visualização + comunicação)
 - Referências de rmarkdown (site, cheatsheet, livro yihui, vídeos)
+
+- Instalação: executar os diferentes exemplos, para testar se todas as dependências estão instaladas.
+
+
+Aula 02: Visualização
+
 - Showcase
 - Sintaxe Markdown
 - Chunks
@@ -37,8 +43,6 @@ Aula 01: RMarkdown básico
   - relatório (word, html, pdf, pagedown)
   - apresentação (ppt, ioslides, beamer)
   - flexdashboard
-
-Aula 02: Visualização
 
 - Revisão ggplot2
     - ggplot()
