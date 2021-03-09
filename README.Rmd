@@ -97,7 +97,8 @@ install.packages(c(
   "rticles",
   "prettydoc",
   "ggthemes",
-  "flextable"
+  "flextable",
+  "patchwork"
 ))
 
 # Pacotes instalados via GitHub

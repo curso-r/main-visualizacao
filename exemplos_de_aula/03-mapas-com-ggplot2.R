@@ -17,6 +17,7 @@ library(dplyr)
 # Trabalhando com bases georreferenciadas -----------------
 
 ## Primeiro vamos baixar os dados -------------------------
+# Isso só precisa ser feito uma vez!
 
 # Criar a pasta onde colocaremos os arquivos
 fs::dir_create("dados/shp")
@@ -62,16 +63,13 @@ iqa_cetesb %>%
   ggplot() +
   geom_sf()
 
+iqa_cetesb %>%
+  ggplot() +
+  geom_sf(aes(color = classe))
 
 iqa_cetesb %>%
   ggplot() +
-  geom_sf(aes(fill = classe)) +
-  scale_fill_brewer() # arrumar essa escala de cores
-
-
-iqa_cetesb %>%
-  ggplot() +
-  geom_sf(aes(fill = valor))
+  geom_sf(aes(color = valor))
 
 
 ## Trabalhando com bases não georreferenciadas ------------
@@ -136,6 +134,19 @@ ggplot() +
   geom_sf(data = iqa_cetesb) +
   theme_bw()
 
+# Usando os verbos do dplyr --------------------------------
+## Também podemos agrupar os dados espaciais! ---------------
+
+estados %>%
+  ggplot() +
+  geom_sf()
+
+estados %>%
+  group_by(name_region) %>%
+  summarise() %>%
+  ungroup() %>%
+  ggplot() +
+  theme_bw()
 
 
 ## Joins Espaciais ----------------------------------
@@ -149,8 +160,9 @@ dados_iqa_municipios <-
   iqa_cetesb %>%
   st_join(municipios)
 
-
 glimpse(dados_iqa_municipios)
+
+## Podemos filtrar os dados como fazemos em tibbles "comuns"
 
 dados_iqa_filtrados <- dados_iqa_municipios %>%
   filter(name_muni == "São Paulo")
@@ -187,28 +199,8 @@ gg_iqa_saopaulo <- ggplot() +
   coord_sf()
 
 
-# Fazer uma composição
+# Fazer uma composição com patchkwork
 library(patchwork)
 
 (gg_estado + gg_brasil) / gg_iqa_saopaulo
 
-
-# Também podemos agrupar os dados espaciais!
-
-estados %>%
-  ggplot() +
-  geom_sf()
-
-estados %>%
-  group_by(name_region) %>%
-  summarise() %>%
-  ungroup() %>%
-  ggplot() +
-  theme_bw()
-
-
-# Materiais interessantes ---------------------------------------------
-#
-#   https://mauriciovancine.github.io/disciplina-analise-geoespacial-r/
-#
-#   https://raw.githubusercontent.com/rstudio/cheatsheets/master/sf.pdf
