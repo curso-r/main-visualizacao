@@ -98,11 +98,14 @@ install.packages(c(
   "prettydoc",
   "ggthemes",
   "flextable",
-  "patchwork"
+  "patchwork",
+  "gt",
+  "gtsummary"
 ))
 
 # Pacotes instalados via GitHub
 install.packages("remotes")
 remotes::install_github("cienciadedatos/dados")
+remotes::install_github("ThinkR-open/remedy")
 ```
 
