@@ -11,6 +11,18 @@
     <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
     <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
     <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script src="libs/mark.js/mark.min.js"></script>
+    <link href="libs/xaringanExtra-search/search.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-search/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":true,"autoSearch":true}) })</script>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra_fit-screen/fit-screen.js"></script>
     <link rel="stylesheet" href="css/custom-intro.css" type="text/css" />
   </head>
   <body>
@@ -22,6 +34,20 @@ class: center, middle, inverse, title-slide
 ### <img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '20%'>
 
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -526,6 +552,25 @@ Class:
 
 - Dica: você pode encurtar o link com o [bit.ly](https://bitly.com)
 
+
+---
+class: middle, center
+
+# .blue[Pacote {xaringanExtra}]
+
+---
+
+- O pacote `xaringanExtra` oferece extensões para utilizar nas apresentações que fazemos com `xaringan`.
+
+- O pacote deve ser instalado através do GitHub:
+
+
+```r
+# install.packages("devtools")
+remotes::install_github("gadenbuie/xaringanExtra")
+```
+
+- O melhor lugar para saber mais é [a documentação](https://pkg.garrickadenbuie.com/xaringanExtra/#/)
 ---
 
 ## Outros pacotes
@@ -545,8 +590,6 @@ Class:
 - [countdown](https://pkg.garrickadenbuie.com/countdown/#1) - ❌ CRAN, ✔️ GitHub
  
 - [emo](https://github.com/hadley/emo) + [ermoji](https://www.garrickadenbuie.com/project/ermoji/)  - ❌ CRAN, ✔️ GitHub
-
-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

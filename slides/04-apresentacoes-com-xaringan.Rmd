@@ -513,6 +513,24 @@ knitr::include_graphics("img/rmd-html.png")
 
 - Dica: você pode encurtar o link com o [bit.ly](https://bitly.com)
 
+
+---
+class: middle, center
+
+# .blue[Pacote {xaringanExtra}]
+
+---
+
+- O pacote `xaringanExtra` oferece extensões para utilizar nas apresentações que fazemos com `xaringan`.
+
+- O pacote deve ser instalado através do GitHub:
+
+```{r eval=FALSE, echo=TRUE}
+# install.packages("devtools")
+remotes::install_github("gadenbuie/xaringanExtra")
+```
+
+- O melhor lugar para saber mais é [a documentação](https://pkg.garrickadenbuie.com/xaringanExtra/#/)
 ---
 
 ## Outros pacotes
@@ -532,5 +550,3 @@ knitr::include_graphics("img/rmd-html.png")
 - [countdown](https://pkg.garrickadenbuie.com/countdown/#1) - `r emo::ji("x")` CRAN, `r emo::ji("heavy_check_mark")` GitHub
  
 - [emo](https://github.com/hadley/emo) + [ermoji](https://www.garrickadenbuie.com/project/ermoji/)  - `r emo::ji("x")` CRAN, `r emo::ji("heavy_check_mark")` GitHub
-
-

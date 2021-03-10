@@ -64,6 +64,12 @@ fs::dir_create("exercicios_resolucao/xaringan/css")
 
 
 ## 12. Mude o estilo da sua apresentação! 
+
+## 13. (Opcional) Utilize alguma (ou mais de uma) extensão
+# utilizando o pacote xaringanExtra.
+# Veja a documentação do pacote: 
+# https://github.com/gadenbuie/xaringanExtra
+# https://pkg.garrickadenbuie.com/xaringanExtra/
   
 ## 13. Gere um arquivo PDF da sua apresentação usando a função 
 # chrome_print() do pacote pagedown. 
