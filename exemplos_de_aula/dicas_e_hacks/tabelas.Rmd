@@ -1,0 +1,50 @@
+---
+title: "Tabelas no RMarkdown"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(magrittr, include.only = "%>%")
+
+dados_tabela <- dados::pinguins %>%
+  dplyr::select(especies, ilha, massa_corporal, sexo) %>%   dplyr::slice(1:20)
+```
+
+## knitr::kable()
+
+- Funciona bem com: HTML, PDF
+- Não funciona bem: Word
+
+```{r}
+dados_tabela %>% knitr::kable()
+```
+
+
+## DT::datatable()
+
+- Funciona bem com: HTML
+- Não funciona bem: 
+  - Word. Usando no YAML `always_allow_html: true` e instalando o PhantomJS (com `webshot::install_phantomjs()` ), uma versão não interativa é adicionada no arquivo word (a tabela é adicionada como uma imagem).
+  - PDF - não fica interativo. Só as linhas que cabem na primeira página serão mostradas.
+
+
+```{r}
+dados_tabela %>% DT::datatable()
+```
+
+
+## gt::gt()
+
+```{r}
+
+```
+
+
