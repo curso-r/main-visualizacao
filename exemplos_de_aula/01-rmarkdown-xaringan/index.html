@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Exemplo de apresentação</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Beatriz Milz" />
+    <meta name="author" content="Julio Trecenti" />
+    <meta name="date" content="2021-03-11" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Exemplo de apresentação
+## Feito com xaringan + xaringanthemer
+### Beatriz Milz
+### Julio Trecenti
+### 2021-03-11
+
+---
+
+class:  inverse, center, middle 
+
+
+
+
+
+
+
+
+# O que podemos adicionar na apresentação? 
+
+---
+class: middle
+
+
+## O que podemos adicionar na apresentação? 
+
+- Texto
+
+- Texto marcado com Markdown
+
+- HTML
+
+- Links
+
+- Código R
+
+- Tabelas
+
+- Gráficos
+
+- Qualquer resultado de código de R :) Visualizações, gráficos, tabelas, etc.
+
+
+
+---
+class: middle, center
+
+# Exemplos
+
+&lt;img src="https://media0.giphy.com/media/CjmvTCZf2U3p09Cn0h/giphy-downsized.gif" width="40%" /&gt;
+
+
+---
+class: middle
+
+## Texto
+
+O pacote foi criado por Yihui Xie, que é desenvolvedor de software na RStudio. Yihui Xie também desenvolveu os seguintes pacotes: knitr, animation, bookdown, blogdown, pagedown e tinytex.
+
+## Markdown
+
+O pacote `xaringan` foi criado por [**Yihui Xie**](https://yihui.name/), que é ~~um ninja~~ desenvolvedor de software na *RStudio*.
+
+**Código Markdown:**
+
+
+```r
+# O pacote `xaringan` foi criado por [**Yihui Xie**](https://yihui.name/),
+# que é ~~um ninja~~ desenvolvedor de software na *RStudio*.
+```
+
+
+
+---
+class: middle
+
+## Links em Markdown
+
+
+
+[**Yihui Xie**](https://yihui.name/) também desenvolveu os seguintes pacotes: [knitr](https://yihui.name/knitr/), [animation](https://yihui.name/animation/), [bookdown](https://bookdown.org/), [blogdown](https://github.com/rstudio/blogdown), [pagedown](https://github.com/rstudio/blogdown) e [tinytex](https://yihui.name/tinytex/).
+
+**Código Markdown:**
+
+````md
+[**Yihui Xie**](https://yihui.name/) também desenvolveu os seguintes pacotes:
+[knitr](https://yihui.name/knitr/),
+[animation](https://yihui.name/animation/),
+[bookdown](https://bookdown.org/),
+[blogdown](https://github.com/rstudio/blogdown),
+[pagedown](https://github.com/rstudio/blogdown) e
+[tinytex](https://yihui.name/tinytex/).
+````
+
+
+
+---
+class: 
+
+## Códigos em R
+
+### Código + Resultado
+
+- Utilizando a opção de chunk  `echo=TRUE`
+
+
+```r
+nrow(mtcars)
+```
+
+```
+## [1] 32
+```
+
+
+---
+class: 
+
+
+### Apenas código
+
+- Utilizando as opções de chunk  `echo=TRUE` e `eval=FALSE`
+
+
+```r
+nrow(mtcars)
+```
+
+
+---
+class: 
+
+
+### Apenas resultado
+
+- Utilizando a opção de chunk  `echo=FALSE`
+
+
+
+```
+## [1] 32
+```
+
+---
+class: 
+
+
+### Código inline
+
+A base mtcars possui 32 carros.
+
+**Código Markdown:**
+
+````md
+ A base mtcars possui 32 carros.
+````
+
+
+---
+class: middle
+
+## Tabelas
+
+### Tabelas em Markdown
+
+.panelset[
+.panel[.panel-name[Tabela]
+
+| Sepal.Length| Sepal.Width| Petal.Length| Petal.Width|Species |
+|------------:|-----------:|------------:|-----------:|:-------|
+|          5.1|         3.5|          1.4|         0.2|setosa  |
+|          4.9|         3.0|          1.4|         0.2|setosa  |
+|          4.7|         3.2|          1.3|         0.2|setosa  |
+|          4.6|         3.1|          1.5|         0.2|setosa  |
+|          5.0|         3.6|          1.4|         0.2|setosa  |
+|          5.4|         3.9|          1.7|         0.4|setosa  |
+]
+
+.panel[.panel-name[Código Markdown]
+
+
+````md
+| Sepal.Length| Sepal.Width| Petal.Length| Petal.Width|Species |
+|------------:|-----------:|------------:|-----------:|:-------|
+|          5.1|         3.5|          1.4|         0.2|setosa  |
+|          4.9|         3.0|          1.4|         0.2|setosa  |
+|          4.7|         3.2|          1.3|         0.2|setosa  |
+|          4.6|         3.1|          1.5|         0.2|setosa  |
+|          5.0|         3.6|          1.4|         0.2|setosa  |
+|          5.4|         3.9|          1.7|         0.4|setosa  |
+````
+
+]
+]
+
+---
+class: middle
+
+
+
+### Tabelas em R
+
+
+```r
+knitr::kable(x = head(iris), format = "html")
+```
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Sepal.Length &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sepal.Width &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Petal.Length &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Petal.Width &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Species &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4.6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+- Existem outras opções de pacotes para apresentar tabelas!
+
+---
+class: middle
+
+### Gráficos em `R` - `ggplot2`
+
+.panelset[
+.panel[.panel-name[R Code]
+
+
+
+```r
+library(ggplot2)
+grafico &lt;- ggplot(data = dados::pinguins, 
+                       aes(x = comprimento_nadadeira,
+                           y = massa_corporal)) +
+  geom_point(aes(color = especies, shape = especies),
+             size = 3, alpha = 0.8) +
+  theme_minimal() +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  labs(x = "Comprimento da nadadeira (mm)",
+       y = "Massa corporal (g)",
+       color = "Espécie",
+       shape = "Espécie") +
+  theme(legend.position = c(0.2, 0.8),
+        legend.background = element_rect(fill = "white", color = NA),
+        plot.title.position = "plot",
+        plot.caption = element_text(hjust = 0, face= "italic"),
+        plot.caption.position = "plot")
+```
+]
+
+.panel[.panel-name[Plot]
+
+
+```r
+grafico
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-7-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+Gráfico da documentação do pacote [{palmerpenguins}](https://github.com/allisonhorst/palmerpenguins). 
+
+
+
+
+---
+class: middle, center
+
+
+# Muito legal!
+
+ 
+&lt;img src="https://media1.giphy.com/media/Nm8ZPAGOwZUQM/giphy.gif" width="50%" /&gt;
+ 
+---
+class: middle, center
+
+# Mas existem mais!
+
+&lt;img src="https://media0.giphy.com/media/5i7umUqAOYYEw/giphy-downsized.gif" width="50%" /&gt;
+
+
+---
+class: middle
+
+# O que **mais** podemos adicionar na apresentação? 
+
+- Equações
+
+- Imagens
+
+- GIF
+
+- Tweets
+
+- Emojis 😄
+
+- Videos 🎥
+
+---
+class: middle
+
+## Equações
+
+### Equação centralizada
+
+`$$INTRAG_{i} = 100 * n_{i} / n_{t}$$`
+
+**Código Markdown:**
+
+````md
+$$INTRAG_{i} = 100 * n_{i} / n_{t}$$
+````
+
+---
+class: middle
+
+## Equações
+
+
+### Equação junto ao texto
+
+Ou também na linha `\(INTRAG_{i} = 100 * n_{i} / n_{t}\)`, junto ao texto!
+
+**Código Markdown:**
+
+````md
+Ou também na linha $INTRAG_{i} = 100 * n_{i} / n_{t}$, junto ao texto!
+````
+
+
+---
+class: middle
+
+## Imagens
+
+
+```r
+knitr::include_graphics("https://blog.curso-r.com/images/logo.png")
+```
+
+&lt;img src="https://blog.curso-r.com/images/logo.png" width="90%" /&gt;
+
+
+
+
+
+
+
+---
+class: middle
+
+## GIFs
+
+&lt;img src="https://media2.giphy.com/media/S857VNxM6HwlZuYXrU/giphy.gif" width="40%" style="display: block; margin: auto;" /&gt;
+
+
+- O Addin [giphyr](https://github.com/haozhu233/giphyr) ajuda a procurar Gifs diretamente do RStudio!
+
+
+```r
+devtools::install_github("haozhu233/giphyr")
+```
+
+
+
+---
+class: middle
+
+## Tweets 
+
+- No twitter, copie o código disponível em "Incorporar esse tweet".
+&lt;center&gt;
+&lt;blockquote class="twitter-tweet" data-lang="pt"&gt;&lt;p lang="pt" dir="ltr"&gt;Lançamos a Comunidade Curso-R&lt;a href="https://t.co/1ZNhiMs3wS"&gt;https://t.co/1ZNhiMs3wS&lt;/a&gt;&lt;br&gt;Um fórum para qualquer um com interesse em aprender, compartilhar conhecimento, tirar dúvidas, responder dúvidas, compartilhar links interessantes e discutir assuntos relacionados à linguagem R &lt;a href="https://twitter.com/hashtag/rstats?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#rstats&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/rstudios?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#rstudios&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/rprogramming?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#rprogramming&lt;/a&gt;&lt;/p&gt;&amp;mdash; curso-r (@curso_r) &lt;a href="https://twitter.com/curso_r/status/1233440564999311369?ref_src=twsrc%5Etfw"&gt;28 de fevereiro de 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;/center&gt;
+
+
+
+
+
+---
+class: middle
+exclude: true
+
+## Tweets 
+
+- Adicione o seguinte código no `yaml`:
+
+```r
+    # nature:
+    #   beforeInit: "https://platform.twitter.com/widgets.js"
+```
+
+
+
+
+---
+Class: middle, center
+
+## Emojis
+
+- Para utilizar emojis, instale o pacote:
+
+
+```r
+devtools::install_github("hadley/emo")
+```
+
+
+- Exemplo:
+````md
+# 💜
+````
+
+💜
+
+- O addin `ermoji` ajuda a procurar emojis!
+
+
+```r
+devtools::install_github("gadenbuie/ermoji")
+```
+
+---
+Class: middle, center
+
+## Videos do YouTube
+
+- Opção Compartilhar &gt; Incorporar: 
+
+
+&lt;center&gt;&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/jup8qNCxMN8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;&lt;/center&gt;
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

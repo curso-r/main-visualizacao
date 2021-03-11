@@ -16,6 +16,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+knit: pagedown::chrome_print     
 ---
 class:  inverse, center, middle 
 
@@ -28,7 +29,8 @@ library(xaringanthemer)
 style_duo_accent(
   primary_color = "#FFAEBC",
   secondary_color = "#A0E7E5",
-  inverse_header_color = "#FFAEBC"
+  inverse_header_color = "#e91e63",
+  title_slide_text_color = "#167ac6"
 )
 ```
 
@@ -47,7 +49,9 @@ class: middle
 
 - Texto
 
-- `Markdown`
+- Texto marcado com Markdown
+
+- HTML
 
 - Links
 
@@ -222,43 +226,43 @@ knitr::kable(x = head(iris), format = "html")
 ---
 class: middle
 
-## Gráficos
-
 ### Gráficos em `R` - `ggplot2`
 
 .panelset[
 .panel[.panel-name[R Code]
 
-```{r}
+
+```{r mass-flipper, warning = FALSE, message = FALSE}
 library(ggplot2)
-
+grafico <- ggplot(data = dados::pinguins, 
+                       aes(x = comprimento_nadadeira,
+                           y = massa_corporal)) +
+  geom_point(aes(color = especies, shape = especies),
+             size = 3, alpha = 0.8) +
+  theme_minimal() +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  labs(x = "Comprimento da nadadeira (mm)",
+       y = "Massa corporal (g)",
+       color = "Espécie",
+       shape = "Espécie") +
+  theme(legend.position = c(0.2, 0.8),
+        legend.background = element_rect(fill = "white", color = NA),
+        plot.title.position = "plot",
+        plot.caption = element_text(hjust = 0, face= "italic"),
+        plot.caption.position = "plot")
 ```
-
-```{r message=FALSE, warning=FALSE, out.width="60%", cache = TRUE, fig.cap="<center><b>Fonte: <a href='https://www.datanovia.com/en/blog/gganimate-how-to-create-plots-with-beautiful-animation-in-r/'>Adaptado de Data Novia</a></b></center>"}
-grafico_gapminder <- ggplot(
-  gapminder, 
-  aes(x = gdpPercap, y=lifeExp, size = pop, colour = country)
-  ) +
-  geom_point(show.legend = FALSE, alpha = 0.7) +
-  scale_color_viridis_d() +
-  scale_size(range = c(2, 12)) +
-  scale_x_log10() +
-  labs(x = "PIB per capita", y = "Expectativa de vida (anos)")+
-  xaringanthemer::theme_xaringan()
-```
-
-
 ]
 
 .panel[.panel-name[Plot]
 
-```{r}
-grafico_gapminder
+```{r echo=TRUE, message=FALSE, warning=FALSE, out.width='75%', fig.height=3.5, fig.width=8, fig.retina=2, fig.align='center'}
+grafico
 ```
 
 ]
 ]
 
+Gráfico da documentação do pacote [{palmerpenguins}](https://github.com/allisonhorst/palmerpenguins). 
 
 
 
@@ -353,7 +357,7 @@ class: middle
 
 ## GIFs
 
-```{r echo=FALSE, out.width="60%"}
+```{r echo=FALSE, out.width="40%", fig.align='center'}
 knitr::include_graphics("https://media2.giphy.com/media/S857VNxM6HwlZuYXrU/giphy.gif")
 ```
 
@@ -408,9 +412,9 @@ devtools::install_github("hadley/emo")
 
 
 - Exemplo:
-```{r echo=TRUE}
+````md
 # `r emo::ji("purple_heart")`
-```
+````
 
 `r emo::ji("purple_heart")`
 
