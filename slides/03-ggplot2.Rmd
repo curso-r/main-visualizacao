@@ -10,7 +10,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-# knit: pagedown::chrome_print      
+knit: pagedown::chrome_print      
 ---
 
 ```{r, child="00-preamble.Rmd"}

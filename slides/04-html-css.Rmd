@@ -11,7 +11,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-# knit: pagedown::chrome_print            
+knit: pagedown::chrome_print            
 ---
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)

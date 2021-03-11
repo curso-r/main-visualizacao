@@ -16,7 +16,7 @@ options(width = 85)
 # devtools::install_github("gadenbuie/xaringanExtra")
 ```
 
-```{r echo=FALSE}
+```{r include=FALSE}
 library(magrittr, include.only = "%>%")
 ```
 
@@ -41,7 +41,7 @@ xaringanExtra::use_share_again()
 xaringanExtra::use_scribble()
 ```
 
-```{r xaringan-extra-styles}
+```{r xaringan-extra-styles, include=FALSE}
 xaringanExtra::use_extra_styles(
   hover_code_line = TRUE,         #<<
   mute_unhighlighted_code = FALSE  #<<
