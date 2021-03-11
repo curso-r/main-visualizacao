@@ -55,8 +55,8 @@ Aula 02: Visualização
 
 Aula 03: RMarkdown avançado
 
-- `{xaringan}` e `{xaringanExtra}`
 - Editando CSS
+- `{xaringan}` e `{xaringanExtra}`
 - Hacks e dicas práticas para relatórios Word, PDF e HTML
 - `{bookdown}`
 - `{htmlWidgets}`
