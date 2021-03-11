@@ -25,17 +25,16 @@ knitr::kable(CursoR:::listar_turmas_recentes("visualizacao"))
 
 # Esqueleto do curso
 
-Aula 01: RMarkdown básico
+Aula 01: Introdução
 
 - Ciclo da ciência de dados (mostrar que estamos em visualização + comunicação)
 - Referências de rmarkdown (site, cheatsheet, livro yihui, vídeos)
-
+- Showcase
 - Instalação: executar os diferentes exemplos, para testar se todas as dependências estão instaladas.
 
 
-Aula 02: Visualização
+Aula 02: RMarkdown básico e Visualização
 
-- Showcase
 - Sintaxe Markdown
 - Chunks
 - YAML
@@ -49,25 +48,33 @@ Aula 02: Visualização
     - aes()
     - alguns geom_*()
     - theme()
-- Mapas em ggplot2
+
 - Customizando temas
-- Tabelas: `{gt}` e `{gtsummary}`
 
-Aula 03: RMarkdown avançado
+Aula 03:  Visualização e RMarkdown Avançado
 
-- Editando CSS
+- Mapas em ggplot2
+- Edição de CSS 
 - `{xaringan}` e `{xaringanExtra}`
-- Hacks e dicas práticas para relatórios Word, PDF e HTML
-- `{bookdown}`
-- `{htmlWidgets}`
+- Netlify
+
+
 
 Aula 04: Miscelânea
 
+- Tabelas: `{gt}` e `{gtsummary}`
+- Hacks e dicas práticas para relatórios Word, PDF e HTML
+- `{htmlWidgets}`
 - Templates legais da comunidade
 - Gráficos animados com `{gganimate}`
 - Grudando gráficos com `{patchwork}`
+
+
+
+Aula 05: Extra
+
+- `{bookdown}`
 - distill e blogdown
-- Netlify
 
 **Trabalho de conclusão**: fazer o #tidytuesday da semana ou um à sua escolha. Fazer não só a visualização, mas uma apresentação ou relatório
 

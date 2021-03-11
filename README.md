@@ -16,12 +16,17 @@ abaixo**.
 
 # Esqueleto do curso
 
-Aula 01: RMarkdown básico
+Aula 01: Introdução
 
 -   Ciclo da ciência de dados (mostrar que estamos em visualização +
     comunicação)
 -   Referências de rmarkdown (site, cheatsheet, livro yihui, vídeos)
 -   Showcase
+-   Instalação: executar os diferentes exemplos, para testar se todas as
+    dependências estão instaladas.
+
+Aula 02: RMarkdown básico e Visualização
+
 -   Sintaxe Markdown
 -   Chunks
 -   YAML
@@ -29,33 +34,33 @@ Aula 01: RMarkdown básico
     -   relatório (word, html, pdf, pagedown)
     -   apresentação (ppt, ioslides, beamer)
     -   flexdashboard
-
-Aula 02: Visualização
-
 -   Revisão ggplot2
     -   ggplot()
     -   aes()
     -   alguns geom\_\*()
     -   theme()
--   Mapas em ggplot2
 -   Customizando temas
--   Tabelas: `{gt}` e `{gtsummary}`
 
-Aula 03: RMarkdown avançado
+Aula 03: Visualização e RMarkdown Avançado
 
+-   Mapas em ggplot2
+-   Edição de CSS
 -   `{xaringan}` e `{xaringanExtra}`
--   Editando CSS
--   Hacks e dicas práticas para relatórios Word, PDF e HTML
--   `{bookdown}`
--   `{htmlWidgets}`
+-   Netlify
 
 Aula 04: Miscelânea
 
+-   Tabelas: `{gt}` e `{gtsummary}`
+-   Hacks e dicas práticas para relatórios Word, PDF e HTML
+-   `{htmlWidgets}`
 -   Templates legais da comunidade
 -   Gráficos animados com `{gganimate}`
 -   Grudando gráficos com `{patchwork}`
+
+Aula 05: Extra
+
+-   `{bookdown}`
 -   distill e blogdown
--   Netlify
 
 **Trabalho de conclusão**: fazer o \#tidytuesday da semana ou um à sua
 escolha. Fazer não só a visualização, mas uma apresentação ou relatório
@@ -65,6 +70,7 @@ escolha. Fazer não só a visualização, mas uma apresentação ou relatório
 -   Covid (é meio triste, mas tem tudo que precisamos)
 -   Dados de vacinação (deve ter alguma já)
 -   `{dados}` para exemplos mais simples
+-   Remedy
 
 **Pacotes necessários**:
 
@@ -84,10 +90,15 @@ install.packages(c(
   "officedown"
   "rticles",
   "prettydoc",
-  "ggthemes"
+  "ggthemes",
+  "flextable",
+  "patchwork",
+  "gt",
+  "gtsummary"
 ))
 
 # Pacotes instalados via GitHub
 install.packages("remotes")
 remotes::install_github("cienciadedatos/dados")
+remotes::install_github("ThinkR-open/remedy")
 ```
