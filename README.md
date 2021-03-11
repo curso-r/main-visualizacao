@@ -101,4 +101,5 @@ install.packages(c(
 install.packages("remotes")
 remotes::install_github("cienciadedatos/dados")
 remotes::install_github("ThinkR-open/remedy")
+devtools::install_github("hadley/emo")
 ```
