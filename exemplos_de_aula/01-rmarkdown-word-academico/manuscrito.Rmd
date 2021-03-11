@@ -1,0 +1,74 @@
+---
+title: "Titulo do trabalho"
+author: "Autores do trabalho"
+output: 
+  word_document:
+    reference_docx: template/modelo.docx
+bibliography: [referencias/packages.bib, referencias/referencias.bib]
+csl: template/associacao-brasileira-de-normas-tecnicas-usp-fmvz.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	fig.align = "center"
+)
+```
+
+
+**RESUMO**:
+
+Formas de referenciar no texto:
+
+[@R-knitr]
+
+@R-knitr
+
+-@R-knitr
+
+Lorem ipsum dolor sit amet [@r-core-team; @rstudio], consectetur adipiscing elit. Proin sit amet velit ante. Vestibulum pellentesque, metus ac pulvinar convallis, metus metus commodo libero, cursus eleifend massa tellus et tellus. Mauris laoreet porta diam. Praesent odio orci, pretium non pretium quis, ultricies at nisi. Integer tristique dapibus scelerisque. Integer vitae accumsan ex. Nullam nec vestibulum augue. Nam posuere fringilla quam et lacinia. Nulla accumsan consequat turpis id suscipit. Aenean at consequat nisl, ut accumsan mauris. Pellentesque vel faucibus nulla.
+
+
+
+**PALAVRAS-CHAVE**: Palavra chave 1, Palavra chave 2, Palavra chave 3.
+
+## Introdução
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet velit ante. Vestibulum pellentesque, metus ac pulvinar convallis, metus metus commodo libero, cursus eleifend massa tellus et tellus. Mauris laoreet porta diam. Praesent odio orci, pretium non pretium quis, ultricies at nisi. Integer tristique dapibus scelerisque. Integer vitae accumsan ex. Nullam nec vestibulum augue. Nam posuere fringilla quam et lacinia. Nulla accumsan consequat turpis id suscipit. Aenean at consequat nisl, ut accumsan mauris. Pellentesque vel faucibus nulla.
+
+
+## Materiais e métodos
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet velit ante. Vestibulum pellentesque, metus ac pulvinar convallis, metus metus commodo libero, cursus eleifend massa tellus et tellus. Mauris laoreet porta diam. Praesent odio orci, pretium non pretium quis, ultricies at nisi. Integer tristique dapibus scelerisque. Integer vitae accumsan ex. Nullam nec vestibulum augue. Nam posuere fringilla quam et lacinia. Nulla accumsan consequat turpis id suscipit. Aenean at consequat nisl, ut accumsan mauris. Pellentesque vel faucibus nulla.
+
+
+
+## Resultados e discussão
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet velit ante. Vestibulum pellentesque, metus ac pulvinar convallis, metus metus commodo libero, cursus eleifend massa tellus et tellus. Mauris laoreet porta diam. Praesent odio orci, pretium non pretium quis, ultricies at nisi. Integer tristique dapibus scelerisque. Integer vitae accumsan ex. Nullam nec vestibulum augue. Nam posuere fringilla quam et lacinia. Nulla accumsan consequat turpis id suscipit. Aenean at consequat nisl, ut accumsan mauris. Pellentesque vel faucibus nulla.
+
+
+
+## Conclusões
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet velit ante. Vestibulum pellentesque, metus ac pulvinar convallis, metus metus commodo libero, cursus eleifend massa tellus et tellus. Mauris laoreet porta diam. Praesent odio orci, pretium non pretium quis, ultricies at nisi. Integer tristique dapibus scelerisque. Integer vitae accumsan ex. Nullam nec vestibulum augue. Nam posuere fringilla quam et lacinia. Nulla accumsan consequat turpis id suscipit. Aenean at consequat nisl, ut accumsan mauris. Pellentesque vel faucibus nulla.
+
+
+
+## Referências bibligráficas
+
+```{r echo=FALSE}
+knitr::write_bib(c('knitr', 'rmarkdown'), 'referencias/packages.bib')
+```
+
+```{=html}
+<!-- This '<div id="refs"></div>' needs to 
+be here if you have appendix pages 
+otherwise you can remove it.-->
+```
+::: {#refs}
+:::
+
+## Anexo
