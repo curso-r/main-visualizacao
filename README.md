@@ -46,7 +46,6 @@ Aula 03: Visualização e RMarkdown Avançado
 -   Mapas em ggplot2
 -   Edição de CSS
 -   `{xaringan}` e `{xaringanExtra}`
--   Netlify
 
 Aula 04: Miscelânea
 
@@ -56,6 +55,7 @@ Aula 04: Miscelânea
 -   Templates legais da comunidade
 -   Gráficos animados com `{gganimate}`
 -   Grudando gráficos com `{patchwork}`
+-   Netlify
 
 Aula 05: Extra
 
