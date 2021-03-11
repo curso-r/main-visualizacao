@@ -521,6 +521,7 @@ class: middle, center
 
 ---
 
+## Pacote {xaringanExtra}
 - O pacote `xaringanExtra` oferece extensões para utilizar nas apresentações que fazemos com `xaringan`.
 
 - O pacote deve ser instalado através do GitHub:
@@ -530,7 +531,7 @@ class: middle, center
 remotes::install_github("gadenbuie/xaringanExtra")
 ```
 
-- O melhor lugar para saber mais é [a documentação](https://pkg.garrickadenbuie.com/xaringanExtra/#/)
+- O melhor lugar para saber mais é [a documentação](https://pkg.garrickadenbuie.com/xaringanExtra/#/) do pacote, e também acompanhando o autor no twitter: [Garrick Aden-Buie](https://twitter.com/grrrck)
 ---
 
 ## Outros pacotes
@@ -546,6 +547,8 @@ remotes::install_github("gadenbuie/xaringanExtra")
 - [metathis](https://pkg.garrickadenbuie.com/metathis/) - `r emo::ji("heavy_check_mark")` CRAN, `r emo::ji("heavy_check_mark")` GitHub
  
 - [xaringanExtra](https://pkg.garrickadenbuie.com/xaringanExtra/) - `r emo::ji("x")` CRAN, `r emo::ji("heavy_check_mark")` GitHub
+ 
+- [xaringanBuilder](https://github.com/jhelvy/xaringanBuilder) - `r emo::ji("x")` CRAN, `r emo::ji("heavy_check_mark")` GitHub
  
 - [countdown](https://pkg.garrickadenbuie.com/countdown/#1) - `r emo::ji("x")` CRAN, `r emo::ji("heavy_check_mark")` GitHub
  

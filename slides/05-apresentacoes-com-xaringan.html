@@ -14,15 +14,21 @@
     <script src="libs/mark.js/mark.min.js"></script>
     <link href="libs/xaringanExtra-search/search.css" rel="stylesheet" />
     <script src="libs/xaringanExtra-search/search.js"></script>
-    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":true,"autoSearch":true}) })</script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"top-left","caseSensitive":false,"showIcon":true,"autoSearch":true}) })</script>
     <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view/tile-view.js"></script>
     <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
     <script src="libs/shareon/shareon.min.js"></script>
     <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
     <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <script src="libs/fabric/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30}) })</script>
     <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
     <script src="libs/xaringanExtra_fit-screen/fit-screen.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
     <link rel="stylesheet" href="css/custom-intro.css" type="text/css" />
   </head>
   <body>
@@ -34,6 +40,7 @@ class: center, middle, inverse, title-slide
 ### <img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '20%'>
 
 ---
+
 
 
 
@@ -560,6 +567,7 @@ class: middle, center
 
 ---
 
+## Pacote {xaringanExtra}
 - O pacote `xaringanExtra` oferece extensões para utilizar nas apresentações que fazemos com `xaringan`.
 
 - O pacote deve ser instalado através do GitHub:
@@ -570,7 +578,7 @@ class: middle, center
 remotes::install_github("gadenbuie/xaringanExtra")
 ```
 
-- O melhor lugar para saber mais é [a documentação](https://pkg.garrickadenbuie.com/xaringanExtra/#/)
+- O melhor lugar para saber mais é [a documentação](https://pkg.garrickadenbuie.com/xaringanExtra/#/) do pacote, e também acompanhando o autor no twitter: [Garrick Aden-Buie](https://twitter.com/grrrck)
 ---
 
 ## Outros pacotes
@@ -586,6 +594,8 @@ remotes::install_github("gadenbuie/xaringanExtra")
 - [metathis](https://pkg.garrickadenbuie.com/metathis/) - ✔️ CRAN, ✔️ GitHub
  
 - [xaringanExtra](https://pkg.garrickadenbuie.com/xaringanExtra/) - ❌ CRAN, ✔️ GitHub
+ 
+- [xaringanBuilder](https://github.com/jhelvy/xaringanBuilder) - ❌ CRAN, ✔️ GitHub
  
 - [countdown](https://pkg.garrickadenbuie.com/countdown/#1) - ❌ CRAN, ✔️ GitHub
  
