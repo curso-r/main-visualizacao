@@ -1,0 +1,1 @@
+http://datageo.ambiente.sp.gov.br/geoserver/datageo/VWM_IQA_CETESB_2018_PTO/wfs?version=1.0.0&request=GetFeature&outputFormat=SHAPE-ZIP&typeName=VWM_IQA_CETESB_2018_PTO
