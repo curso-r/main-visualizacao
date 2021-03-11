@@ -1,0 +1,14 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+tabelas em word; 
+usando codigos latex no PDF
+pacote kableExtra
+usar _site.yml tbm
