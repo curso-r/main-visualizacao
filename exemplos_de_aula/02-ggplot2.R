@@ -90,7 +90,7 @@ grafico_base <- temperatura_por_mes %>%
 # Vamos explorar os componentes mais importantes do theme
 
 # Esses componentes tem vários subcomponentes, que podem ser consultados em help(theme)
-# o padrão é, por exemplo, theme(axis.text.x)
+# o padrão dos nomes é, por exemplo, theme(axis.text.x)
 
 # praticamente todos os componentes devem ser parametrizados como um
 
