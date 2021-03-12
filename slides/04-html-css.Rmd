@@ -16,11 +16,12 @@ knit: pagedown::chrome_print
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 
-knitr::opts_chunk$set(fig.align = "center",
-                      message = FALSE,
-                      warning = FALSE,
-                      echo = FALSE
-                      )
+knitr::opts_chunk$set(
+  fig.align = "center",
+  message = FALSE,
+  warning = FALSE,
+  echo = FALSE
+)
 ```
 
 ```{r echo=FALSE}
@@ -310,7 +311,7 @@ class:
 
 ## Referências 📖
 
-- [Mozzila Web Docs](https://developer.mozilla.org/pt-BR/docs/Learn/Getting_started_with_the_web)
+- [Mozilla Web Docs](https://developer.mozilla.org/pt-BR/docs/Learn/Getting_started_with_the_web)
 
 - [w3schools.com - HTML](https://www.w3schools.com/html/default.asp)
 

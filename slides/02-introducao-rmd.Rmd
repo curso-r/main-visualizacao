@@ -32,10 +32,7 @@ class: middle, center
 
 - O R Markdown é um pacote para criação de __relatórios automatizados__ utilizando as linguagens de programação R e de marcação Markdown. 
 
-
-
 > Linguagens de marcação utilizam marcadores (símbolos, tags, funções) para formatar um arquivo de texto simples. Os exemplos mais famosos de linguagem de marcação são o HTML e LaTeX.
-
 
 - A linguagem de marcação Markdown serve para construirmos e formatarmos diversos formatos de arquivos (PDF, HTML, Word, entre outros) a partir de um arquivo de texto com regras bem simples. 
 
