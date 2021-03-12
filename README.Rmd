@@ -23,66 +23,72 @@ Inscreva-se no curso: https://www.curso-r.com/cursos/visualizacao
 knitr::kable(CursoR:::listar_turmas_recentes("visualizacao"))
 ```
 
-# Esqueleto do curso
+# Plano de aula atual
 
-Aula 01: Introdução
+**Aula 01: Introdução**
 
-- Ciclo da ciência de dados (mostrar que estamos em visualização + comunicação)
-- Referências de rmarkdown (site, cheatsheet, livro yihui, vídeos)
-- Showcase
-- Instalação: executar os diferentes exemplos, para testar se todas as dependências estão instaladas.
+- Referências de RMarkdown
+- Showcase!
+    - PowerPoint
+    - Word
+    - Xaringan
+    - Paper
+- Instalação: 
+    - Executar todos os exemplos com os alunos.
 
+**Aula 02: RMarkdown básico e Visualização**
 
-Aula 02: RMarkdown básico e Visualização
-
-- Sintaxe Markdown
-- Chunks
-- YAML
+- Escrevendo em RMarkdown
+  - Sintaxe Markdown
+  - Chunks
+  - YAML
 - Principais saídas
   - relatório (word, html, pdf, pagedown)
   - apresentação (ppt, ioslides, beamer)
   - flexdashboard
-
 - Revisão ggplot2
     - ggplot()
     - aes()
     - alguns geom_*()
     - theme()
-
 - Customizando temas
 
-Aula 03:  Visualização e RMarkdown Avançado
+**Aula 03: Visualização e RMarkdown Avançado**
 
 - Mapas em ggplot2
 - Edição de CSS 
 - `{xaringan}` e `{xaringanExtra}`
 
+**Aula 04: Miscelânea**
 
-Aula 04: Miscelânea
+- Gramática de tabelas 
+    - `{gt}` 
+    - `{gtsummary}`
+- Gráficos que fazem voosh!
+    - `{leaflet}`
+    - `{highcharter}`
+    - `{plotly}`
+    - `{reactable}`
+- Mais ggplot2!
+    - Gráficos animados com `{gganimate}`
+    - Grudando gráficos com `{patchwork}`
+    - O pacote `{thematic}`
 
-- Tabelas: `{gt}` e `{gtsummary}`
-- Hacks e dicas práticas para relatórios Word, PDF e HTML
-- `{htmlWidgets}`
-- Templates legais da comunidade
-- Gráficos animados com `{gganimate}`
-- Grudando gráficos com `{patchwork}`
+**Aula 05: Aula Extra - Web**
+
+- Assuntos remanescentes das aulas anteriores
 - Netlify
-
-
-
-Aula 05: Extra
-
 - `{bookdown}`
+- `{pagedown}`
 - distill e blogdown
+- Mais RMarkdown!
+    - Hacks e dicas práticas para relatórios Word, PDF e HTML
+        - Remedy
+        - `_site.yml`
+        - Códigos LaTeX
+    - Templates legais da comunidade
 
 **Trabalho de conclusão**: fazer o #tidytuesday da semana ou um à sua escolha. Fazer não só a visualização, mas uma apresentação ou relatório
-
-**Opções de bases de dados para exemplos e exercícios**:
-
-- Covid (é meio triste, mas tem tudo que precisamos)
-- Dados de vacinação (deve ter alguma já)
-- `{dados}` para exemplos mais simples
-- Remedy
 
 **Pacotes necessários**:
 
@@ -110,9 +116,9 @@ install.packages(c(
 ))
 
 # Pacotes instalados via GitHub
-install.packages("remotes")
+if (!require(remotes)) install.packages("remotes")
 remotes::install_github("cienciadedatos/dados")
 remotes::install_github("ThinkR-open/remedy")
-devtools::install_github("hadley/emo")
+remotes::install_github("hadley/emo")
 ```
 
