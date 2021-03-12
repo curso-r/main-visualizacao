@@ -12,24 +12,27 @@ abaixo**.
 
 | Turma         | Material                                        | Github                                           |
 |:--------------|:------------------------------------------------|:-------------------------------------------------|
-| Março de 2021 | <https://curso-r.github.io/202103-visualizacao> | <https://github.com/curso-r/202103-visualizacao> |
+| março de 2021 | <https://curso-r.github.io/202103-visualizacao> | <https://github.com/curso-r/202103-visualizacao> |
 
-# Esqueleto do curso
+# Plano de aula atual
 
-Aula 01: Introdução
+**Aula 01: Introdução**
 
--   Ciclo da ciência de dados (mostrar que estamos em visualização +
-    comunicação)
--   Referências de rmarkdown (site, cheatsheet, livro yihui, vídeos)
--   Showcase
--   Instalação: executar os diferentes exemplos, para testar se todas as
-    dependências estão instaladas.
+-   Referências de RMarkdown
+-   Showcase!
+    -   PowerPoint
+    -   Word
+    -   Xaringan
+    -   Paper
+-   Instalação:
+    -   Executar todos os exemplos com os alunos.
 
-Aula 02: RMarkdown básico e Visualização
+**Aula 02: RMarkdown básico e Visualização**
 
--   Sintaxe Markdown
--   Chunks
--   YAML
+-   Escrevendo em RMarkdown
+    -   Sintaxe Markdown
+    -   Chunks
+    -   YAML
 -   Principais saídas
     -   relatório (word, html, pdf, pagedown)
     -   apresentação (ppt, ioslides, beamer)
@@ -41,65 +44,99 @@ Aula 02: RMarkdown básico e Visualização
     -   theme()
 -   Customizando temas
 
-Aula 03: Visualização e RMarkdown Avançado
+**Aula 03: Visualização e RMarkdown Avançado**
 
 -   Mapas em ggplot2
 -   Edição de CSS
 -   `{xaringan}` e `{xaringanExtra}`
 
-Aula 04: Miscelânea
+**Aula 04: Miscelânea**
 
--   Tabelas: `{gt}` e `{gtsummary}`
--   Hacks e dicas práticas para relatórios Word, PDF e HTML
--   `{htmlWidgets}`
--   Templates legais da comunidade
--   Gráficos animados com `{gganimate}`
--   Grudando gráficos com `{patchwork}`
+-   Gramática de tabelas
+    -   `{gt}`
+    -   `{gtsummary}`
+-   Gráficos que fazem voosh!
+    -   `{leaflet}`
+    -   `{highcharter}`
+    -   `{plotly}`
+    -   `{reactable}`
+    -   `{gganimate}`
+
+**Aula 05: Aula Extra - Web**
+
+-   Assuntos remanescentes das aulas anteriores
 -   Netlify
-
-Aula 05: Extra
-
 -   `{bookdown}`
 -   distill e blogdown
+-   Mais RMarkdown!
+    -   Hacks e dicas práticas para relatórios Word, PDF e HTML
+        -   Remedy
+        -   `_site.yml`
+        -   Códigos LaTeX
+    -   Templates legais da comunidade
 
 **Trabalho de conclusão**: fazer o \#tidytuesday da semana ou um à sua
 escolha. Fazer não só a visualização, mas uma apresentação ou relatório
 
-**Opções de bases de dados para exemplos e exercícios**:
-
--   Covid (é meio triste, mas tem tudo que precisamos)
--   Dados de vacinação (deve ter alguma já)
--   `{dados}` para exemplos mais simples
--   Remedy
-
 **Pacotes necessários**:
 
+Esse curso tem várias dependências. Separamos em três grupos de
+dependências:
+
+-   Principal: necessário para rodar o conteúdo das aulas
+-   Showcase: necessário para rodar o showcase da aula 1
+-   Misc: necessário para rodar as aulas 4 e 5 (miscelânea + extra)
+
 ``` r
-# Pacotes instalados via CRAN
-install.packages(c(
+# Principal
+principal <- c(
   "tidyverse",
-  "pagedown",
   "xaringan",
-  "bookdown",
   "flexdashboard",
   "xaringanthemer",
   "sf",
   "geobr",
-  "gganimate",
   "ggalt",
-  "officedown"
-  "rticles",
   "prettydoc",
   "ggthemes",
-  "flextable",
   "patchwork",
-  "gt",
-  "gtsummary"
-))
+  "fs"
+)
+install.packages(principal)
 
 # Pacotes instalados via GitHub
-install.packages("remotes")
+if (!require(remotes)) install.packages("remotes")
 remotes::install_github("cienciadedatos/dados")
-remotes::install_github("ThinkR-open/remedy")
-devtools::install_github("hadley/emo")
+remotes::install_github("hadley/emo")
+remotes::install_github("abjur/abjData")
+
+# esses pacotes são para os showcases funcionarem
+showcase <- c(
+  "pagedown",
+  "officedown",
+  "rticles",
+  "flextable",
+  ## não instale o webshot ainda; vamos instalar em aula
+  # "webshot",
+  "plotly",
+  "officedown"
+)
+install.packages(showcase)
+
+# esses pacotes são apenas para a aula de miscelânea.
+# se não conseguir instalar algum deles, não se preocupe!
+misc <- c(
+  "av", 
+  "transformr", 
+  "gifski",
+  "gganimate",
+  "leaflet",
+  "gt",
+  "gtsummary",
+  "bookdown",
+  "plotly",
+  "highcharter"
+)
+
+install.packages(misc)
 ```

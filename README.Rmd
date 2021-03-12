@@ -20,7 +20,7 @@ Inscreva-se no curso: https://www.curso-r.com/cursos/visualizacao
 **Acesse o material completo do curso escolhendo uma das turmas abaixo**.
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
-knitr::kable(CursoR:::listar_turmas_recentes("visualizacao"))
+knitr::kable(CursoRutils:::listar_turmas_recentes("visualizacao"))
 ```
 
 # Plano de aula atual
@@ -69,17 +69,13 @@ knitr::kable(CursoR:::listar_turmas_recentes("visualizacao"))
     - `{highcharter}`
     - `{plotly}`
     - `{reactable}`
-- Mais ggplot2!
-    - Gráficos animados com `{gganimate}`
-    - Grudando gráficos com `{patchwork}`
-    - O pacote `{thematic}`
+    - `{gganimate}`
 
 **Aula 05: Aula Extra - Web**
 
 - Assuntos remanescentes das aulas anteriores
 - Netlify
 - `{bookdown}`
-- `{pagedown}`
 - distill e blogdown
 - Mais RMarkdown!
     - Hacks e dicas práticas para relatórios Word, PDF e HTML
@@ -92,33 +88,65 @@ knitr::kable(CursoR:::listar_turmas_recentes("visualizacao"))
 
 **Pacotes necessários**:
 
+Esse curso tem várias dependências. Separamos em três grupos de dependências:
+
+- Principal: necessário para rodar o conteúdo das aulas
+- Showcase: necessário para rodar o showcase da aula 1
+- Misc: necessário para rodar as aulas 4 e 5 (miscelânea + extra)
+
 ```{r eval=FALSE, include=TRUE}
-# Pacotes instalados via CRAN
-install.packages(c(
+
+# Principal
+principal <- c(
   "tidyverse",
-  "pagedown",
   "xaringan",
-  "bookdown",
   "flexdashboard",
   "xaringanthemer",
   "sf",
   "geobr",
-  "gganimate",
   "ggalt",
-  "officedown"
-  "rticles",
   "prettydoc",
   "ggthemes",
-  "flextable",
   "patchwork",
-  "gt",
-  "gtsummary"
-))
+  "fs"
+)
+install.packages(principal)
 
 # Pacotes instalados via GitHub
 if (!require(remotes)) install.packages("remotes")
 remotes::install_github("cienciadedatos/dados")
-remotes::install_github("ThinkR-open/remedy")
 remotes::install_github("hadley/emo")
+remotes::install_github("abjur/abjData")
+
+# esses pacotes são para os showcases funcionarem
+showcase <- c(
+  "pagedown",
+  "officedown",
+  "rticles",
+  "flextable",
+  ## não instale o webshot ainda; vamos instalar em aula
+  # "webshot",
+  "plotly",
+  "officedown"
+)
+install.packages(showcase)
+
+# esses pacotes são apenas para a aula de miscelânea.
+# se não conseguir instalar algum deles, não se preocupe!
+misc <- c(
+  "av", 
+  "transformr", 
+  "gifski",
+  "gganimate",
+  "leaflet",
+  "gt",
+  "gtsummary",
+  "bookdown",
+  "plotly",
+  "highcharter"
+)
+
+install.packages(misc)
+
 ```
 

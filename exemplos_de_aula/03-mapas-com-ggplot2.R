@@ -1,9 +1,9 @@
 # Carregar pacotes -------------
-library(ggplot2)
 library(sf)
 library(geobr)
-library(magrittr)
+library(ggplot2)
 library(dplyr)
+library(fs)
 
 # O pacote {sf} (Simple Features for R) (Pebesma 2020, 2018) possibilita
 # trabalhar com bases de dados espaciais.
@@ -12,7 +12,6 @@ library(dplyr)
 ## Duas abordagens:
 # - Bases que são georreferenciadas
 # - Bases que não são georreferenciadas
-
 
 # Trabalhando com bases georreferenciadas -----------------
 
@@ -39,11 +38,10 @@ unzip("dados/shp/datageo.zip", exdir = "dados/shp/")
 fs::dir_ls("dados/shp")
 
 
-
 ## Importar os dados ----------------------------
 
 iqa_cetesb <-
-  sf::st_read(
+  st_read(
     "dados/shp/VWM_IQA_CETESB_2018_PTOPoint.shp",
     quiet = TRUE,
     options = "ENCODING=WINDOWS-1252"
@@ -52,7 +50,7 @@ iqa_cetesb <-
   janitor::clean_names()
 
 # explorar as colunas da base. EVITE usar o View()
-dplyr::glimpse(iqa_cetesb)
+glimpse(iqa_cetesb)
 
 ##  Exemplo de visualização ----------------------
 
@@ -122,10 +120,16 @@ estados %>%
   ggplot() +
   geom_sf()
 
-
 municipios %>%
   ggplot() +
   geom_sf()
+
+# simplificando o shapefile para plotar mais rapido
+municipios %>%
+  st_simplify(dTolerance = .01) %>% 
+  ggplot() +
+  geom_sf()
+
 
 ## Empilhando as bases -----------
 
@@ -142,10 +146,12 @@ estados %>%
   geom_sf()
 
 estados %>%
+  st_simplify(dTolerance = .01) %>% 
   group_by(name_region) %>%
   summarise() %>%
   ungroup() %>%
   ggplot() +
+  geom_sf() +
   theme_bw()
 
 
@@ -167,9 +173,22 @@ glimpse(dados_iqa_municipios)
 dados_iqa_filtrados <- dados_iqa_municipios %>%
   filter(name_muni == "São Paulo")
 
-
 glimpse(dados_iqa_filtrados)
 
+## Mapas temáticos
+
+# remotes::install_github("abjur/abjData")
+
+dados_idh_muni <- abjData::pnud_min %>% 
+  filter(ano == 2010) %>% 
+  mutate(code_muni = as.numeric(muni_id))
+
+municipios %>% 
+  filter(abbrev_state == "SP") %>% 
+  inner_join(dados_idh_muni, "code_muni") %>% 
+  ggplot(aes(fill = idhm)) +
+  geom_sf() +
+  theme_void()
 
 # Patchwork  ----------
 
@@ -199,7 +218,7 @@ gg_iqa_saopaulo <- ggplot() +
   coord_sf()
 
 
-# Fazer uma composição com patchkwork
+# Fazer uma composição com patchwork
 library(patchwork)
 
 (gg_estado + gg_brasil) / gg_iqa_saopaulo
