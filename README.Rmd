@@ -86,7 +86,7 @@ knitr::kable(CursoRutils:::listar_turmas_recentes("visualizacao"))
 
 **Trabalho de conclusão**: fazer o #tidytuesday da semana ou um à sua escolha. Fazer não só a visualização, mas uma apresentação ou relatório
 
-**Pacotes necessários**:
+## Pacotes necessários
 
 Esse curso tem várias dependências. Separamos em três grupos de dependências:
 

@@ -12,7 +12,7 @@ abaixo**.
 
 | Turma         | Material                                        | Github                                           |
 |:--------------|:------------------------------------------------|:-------------------------------------------------|
-| março de 2021 | <https://curso-r.github.io/202103-visualizacao> | <https://github.com/curso-r/202103-visualizacao> |
+| Março de 2021 | <https://curso-r.github.io/202103-visualizacao> | <https://github.com/curso-r/202103-visualizacao> |
 
 # Plano de aula atual
 
@@ -78,7 +78,7 @@ abaixo**.
 **Trabalho de conclusão**: fazer o \#tidytuesday da semana ou um à sua
 escolha. Fazer não só a visualização, mas uma apresentação ou relatório
 
-**Pacotes necessários**:
+## Pacotes necessários
 
 Esse curso tem várias dependências. Separamos em três grupos de
 dependências:
