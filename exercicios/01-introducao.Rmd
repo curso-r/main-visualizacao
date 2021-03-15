@@ -1,0 +1,12 @@
+---
+output: github_document
+---
+
+# Exercícios Aula 01
+
+1. Ler as seções [9.1 e 9.2 do livro](https://livro.curso-r.com/9-relatorios.html)
+
+2. Exercícios - [Markdown](https://livro.curso-r.com/9-1-markdown.html#exercicios)
+
+3. Rodar todos os exemplos da Aula 01
+

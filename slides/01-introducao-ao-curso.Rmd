@@ -145,12 +145,6 @@ Doutorando em Estatística pelo IME-USP. Secretário-geral da Associação Brasi
 </div>
 ]
 
-
-
-
-
-
-
 ---
 class: middle, center
 

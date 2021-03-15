@@ -10,7 +10,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-knit: pagedown::chrome_print      
+knit: pagedown::chrome_print
 ---
 
 ```{r, child="00-preamble.Rmd"}
@@ -20,13 +20,8 @@ knit: pagedown::chrome_print
 
 class: middle, center
 
-# `r blue("Gráficos com ggplot2")`
-
 ```{r, include=FALSE}
 library(tidyverse)
-imdb <- read_rds("../dados/imdb.rds")
-imdb <- imdb %>% mutate(lucro = receita - orcamento)
-
 options(width = 80)
 knitr::opts_chunk$set(
   fig.width = 8,
@@ -44,6 +39,8 @@ O pacote `ggplot2` segue duas filosofias que nos ajudam a entender o processo de
 1. Um gráfico estatístico é uma representação visual dos dados por meio de atributos estéticos (posição, cor, forma, tamanho, ...) de formas geométricas (pontos, linhas, barras, ...). [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).
 
 2. Um gráfico pode ser construído em camadas (um gráfico é a sobreposição de elementos visuais). [A layered grammar of graphics](https://vita.had.co.nz/papers/layered-grammar.html).
+
+---
 
 Nos exemplos a seguir, vamos utilizar as bases `clima` e `pinguins`, do pacote `dados`. Para a base `clima` vamos usar uma tabela de apoio chamada  `temperatura_por_mes`, que vai registrar as medições de temperatura ao longo dos dias.
 
@@ -124,7 +121,6 @@ temperatura_por_mes %>%
 ---
 <br><br>
 
-- 
 
 - Aqui nós invertemos o que vai aparecer no eixo `x` e o que vai aparecer no eixo `y`. Agora, no eixo `y`, que não é numérico, vamos colocar os aeroportos aonde as medições de temperatura foram feitas. Como o `y` é uma categoria, o `ggplot2` deixa elas com o mesmo espaçamento.
 
@@ -150,6 +146,7 @@ temperatura_por_mes %>%
 
 Além de simplesmente construir o gráfico, nós também podemos modificar outros aspectos da imagem, tais como a cor do fundo do canvas, a cor das bordas do gráfico, os títulos dos eixos etc. Para mexermos nos textos que aparecem ao redor do gráfico (fora do canvas), usamos a função `labs` e seus parâmetros. 
 
+---
 
 .tiny[
 ```{r gglabs}
@@ -263,12 +260,13 @@ A função `theme` aceita uma lista enorme de parâmetros estéticos, que se div
 Os parâmetros de cada um desses tipos devem ser definidos seguindo a um padrão específico. Vamos a alguns exemplos
 
 ---
-# Mudando a cor do eixo dos textos
+## Mudando a cor do eixo dos textos
 
 Quando queremos mudar a cor do textos dos eixos devemos usar a função `theme` com os parâmetros `axis.text.x` e `axis.text.y`. 
 
 Agora vem um novo elemento: para definir as características de *textos* usamos a função `element_text`, cujos parâmetros indicam características comuns de textos, tais como cor e tamanho.
 
+.tiny[
 ```{r}
 grafico_base +
   theme(
@@ -276,6 +274,7 @@ grafico_base +
     axis.text.y = element_text(color = 'red', size = 20)
   )
 ```
+]
 
 ---
 
@@ -290,7 +289,7 @@ grafico_base +
 ```
 
 ---
-# Mudando o tamanho e a cor do texto do título da legenda
+## Mudando o tamanho e a cor do texto do título da legenda
 
 ```{r}
 grafico_base +
@@ -300,7 +299,7 @@ grafico_base +
 ```
 
 ---
-# Mudando o tamanho e a cor do texto da legenda
+## Mudando o tamanho e a cor do texto da legenda
 
 ```{r}
 grafico_base +
@@ -310,7 +309,7 @@ grafico_base +
 ```
 
 ---
-# Mudando a cor do fundo do gráfico
+## Mudando a cor do fundo do gráfico
 
 Quando queremos mudar a cor do fundo do gráfico devemos usar a função `theme` com os parâmetros `panel.background`. 
 
@@ -336,7 +335,7 @@ grafico_base +
 
 
 ---
-# Mudando a cor do fundo e as bordas
+## Mudando a cor do fundo e as bordas
 
 ```{r}
 grafico_base +
@@ -348,15 +347,15 @@ grafico_base +
 
 ---
 
-# Mudando a cor do fundo, das bordas e aumentando o tamanho das bordas
+## Mudando a cor do fundo, das bordas e aumentando o tamanho das bordas
 
 ```{r, eval = FALSE}
 grafico_base +
-  theme(
-    panel.background = element_rect(fill = 'white',
-                                    color = 'gray',
-                                    size = 2)
-  )
+  theme(panel.background = element_rect(
+    fill = 'white',
+    color = 'gray',
+    size = 2
+  ))
 ```
 
 ---
@@ -365,15 +364,15 @@ grafico_base +
 
 ```{r, echo = FALSE}
 grafico_base +
-  theme(
-    panel.background = element_rect(fill = 'white',
-                                    color = 'gray',
-                                    size = 2)
-  )
+  theme(panel.background = element_rect(
+    fill = 'white',
+    color = 'gray',
+    size = 2
+  ))
 ```
 
 ---
-# Mudando a cor das linhas dos eixos
+## Mudando a cor das linhas dos eixos
 
 Você notou que no último gráfico as linhas dos eixos sumiram? Isso aconteceu porque a cor padrão das linhas dos eixos é branco. Quando alteramos a cor do fundo para branco, a cor do fundo e das linhas ficou igual e por isso não foi mais possível discernir uma da outra.
 
@@ -388,7 +387,7 @@ grafico_base +
 ```
 
 ---
-# Mudando a cor da linhas principais do eixo x
+## Mudando a cor da linhas principais do eixo x
 
 ```{r}
 grafico_base +
@@ -400,7 +399,7 @@ grafico_base +
 
 ---
 
-# Mudando a cor das linhas secundárias do eixo x
+## Mudando a cor das linhas secundárias do eixo x
 
 ```{r}
 grafico_base +
@@ -411,14 +410,14 @@ grafico_base +
 ```
 
 ---
-# Acabando com a diferença entre majors e minors
+## Acabando com a diferença entre majors e minors
 
 ```{r, eval = FALSE}
 grafico_base +
   theme(
-    panel.background = element_rect(fill = 'white',
-                                    color = 'gray',
-                                    size = 2),
+    panel.background = element_rect(
+      fill = 'white', color = 'gray', size = 2
+    ),
     panel.grid.major.x  = element_line(color = 'lightgray'),
     panel.grid.minor.x  = element_line(color = 'lightgray')
   )
@@ -429,9 +428,9 @@ grafico_base +
 ```{r, echo = FALSE}
 grafico_base +
   theme(
-    panel.background = element_rect(fill = 'white',
-                                    color = 'gray',
-                                    size = 2),
+    panel.background = element_rect(
+      fill = 'white', color = 'gray', size = 2
+    ),
     panel.grid.major.x  = element_line(color = 'lightgray'),
     panel.grid.minor.x  = element_line(color = 'lightgray')
   )
@@ -439,7 +438,7 @@ grafico_base +
 
 ---
 
-# Mais temas
+## Mais temas
 
 Mexendo na função `themes` nós podemos criar o theme que nós quisermos, mas você não necessariamente precisa partir do 0 nos seus gráficos. O pacote `ggthemes` tem vários temas prontos que basta você somar uma camada de temas, similar ao que já estávamos fazendo, e seu gráfico se transforma completamente.
 
@@ -449,7 +448,7 @@ O pacote `ggthemes` tem uma série de temas interessantes que você pode acessar
 
 ---
 
-# Aplicando o tema do FiveThirtyEight
+## Aplicando o tema do FiveThirtyEight
 
 ```{r}
 temperatura_por_mes %>% 
@@ -485,7 +484,7 @@ temperatura_por_mes %>%
 
 ---
 
-# Gráfico de barras
+## Gráfico de barras
 
 Até o momento exploramos bastante o gráfico de linhas, mas um tipo de gráfico muito usado para destacar a comparação entre valores para diferentes categorias, por exemplo, é o gráfico de barras:
 
@@ -515,7 +514,7 @@ pinguins %>%
 
 ---
 
-# Ordenando as barras
+## Ordenando as barras
 
 É muito comum que a gente ordene as barras da menor pra maior ou da menor pra maior, justamente para destacar ainda mais as discrepâncias nos dados. Para isso, usamos a função `fct_reorder` do pacote `forcats`, que nos ajuda a mexer com categorias. 
 
@@ -545,7 +544,7 @@ pinguins %>%
 
 ---
 
-# Comparando grupos e subgrupos
+## Comparando grupos e subgrupos
 
 Às vezes queremos comparar, ao mesmo tempo, grupos e subgrupos. Ou seja, no mesmo "x" vamos plotar várias barras. Aqui teremos três opções, que serão passadas para o parâmetro `position` do `geom_col`:
 
@@ -555,7 +554,7 @@ pinguins %>%
 
 ---
 
-# Barras empilhadas
+## Barras empilhadas
 
 ```{r}
 pinguins %>% 
@@ -567,7 +566,7 @@ pinguins %>%
 
 ---
 
-# Barras lado-a-lado
+## Barras lado-a-lado
 
 ```{r}
 pinguins %>% 
@@ -580,7 +579,7 @@ pinguins %>%
 
 ---
 
-# Barras empilhadas e normalizadas
+## Barras empilhadas e normalizadas
 
 ```{r}
 pinguins %>% 
@@ -593,13 +592,13 @@ pinguins %>%
 
 ---
 
-# Visualizando distribuições
+## Visualizando distribuições
 
 Ás vezes queremos visualizar distribuições, no sentido estatístico mesmo
 
 ---
 
-# Links úteis
+## Links úteis
 
 - Extensões do ggplot2: [https://exts.ggplot2.tidyverse.org/](https://exts.ggplot2.tidyverse.org/)
 

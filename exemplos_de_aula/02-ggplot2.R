@@ -32,10 +32,21 @@ temperatura_por_mes %>%
 p <- temperatura_por_mes %>% 
   ggplot()
 
+# Adicionando eixo X
+temperatura_por_mes %>% 
+  ggplot() +
+  aes(x = mes)
+
+# Adicionando eixo Y
+temperatura_por_mes %>% 
+  ggplot() +
+  aes(x = mes, y = temperatura_media)
+
 # Gráfico de dispersão da temperatura média do mês ao longo do tempo
 temperatura_por_mes %>% 
   ggplot() +
-  geom_line(aes(x = mes, y = temperatura_media, color = origem))
+  aes(x = mes, y = temperatura_media, color = origem) +
+  geom_line()
 
 # Mesma informação, apenas trocando os mapeamentos estétiticos
 temperatura_por_mes %>% 
@@ -55,7 +66,7 @@ ggsave("meu_grafico.png")
 temperatura_por_mes %>% 
   ggplot() +
   geom_line(aes(x = mes, y = origem, color = temperatura_media), size = 10) +
-# theme_bw() 
+  # theme_bw() 
   # theme_classic() 
   # theme_dark()
   theme_minimal()
@@ -84,15 +95,17 @@ grafico_base <- temperatura_por_mes %>%
     subtitle = "Receita vs Orçamento",
     x = "Mês",
     y = "Aeroporto mais próximo do ponto de medição",
-    color = "Temperatura média (ºC)"
+    color = "Temperatura média (ºC)",
+    caption = "Fonte: ASOS download from Iowa Environmental Mesonet"
   )
 
 # Vamos explorar os componentes mais importantes do theme
 
-# Esses componentes tem vários subcomponentes, que podem ser consultados em help(theme)
-# o padrão dos nomes é, por exemplo, theme(axis.text.x)
+# Esses componentes têm vários subcomponentes, que podem ser consultados 
+# em help(theme)
 
-# praticamente todos os componentes devem ser parametrizados como um
+# o padrão dos nomes é, por exemplo, theme(axis.text.x)
+# Praticamente todos os componentes devem ser parametrizados como um
 
 # (a) element_text, para componentes textuais como por exemplo axis.text.x , axis.text.y e legend.title
 
@@ -235,7 +248,6 @@ pinguins %>%
 
 # para esse tipo de operação usamos o pacote forcats
 library(forcats)
-
 
 # ordenando do maior para o menor
 pinguins %>% 
@@ -387,6 +399,115 @@ dia_estranho <- dados %>%
 dados %>% 
   ggplot(aes(x = dia_do_ano, y = temperatura)) + 
   geom_point() + 
-  ggalt::geom_encircle(data = dia_estranho, color = "red", s_shape = .1, expand = .01, size = 3)
+  ggalt::geom_encircle(
+    data = dia_estranho, 
+    color = "red", s_shape = .1, expand = .01, size = 3
+  )
 
-                       
+# Também é possível obter resultados similares usando gghighlight
+
+dados %>% 
+  mutate(dia_do_ano = as.Date(dia_do_ano)) %>% 
+  ggplot(aes(x = dia_do_ano, y = temperatura)) + 
+  geom_point() + 
+  gghighlight::gghighlight(
+    dia_do_ano == as.Date("2013-05-08") & temperatura < 20,
+    label_key = dia_do_ano,
+    label_params = list(size = 10)
+  ) +
+  geom_label(aes(label = dia_do_ano), vjust = -1)
+
+# cores -----------------------------------------------------------------------
+
+# Existem muitas, muitas paletas de cores para serem usadas.
+
+# No {ggplot2}, temos já implementadas as paletas viridis e ColorBrewer
+# Vamos mostrar alguns exemplos de cada
+
+ggplot(diamante, aes(quilate, preco)) +
+  geom_bin2d() +
+  # _c() vem de "continuo"
+  scale_fill_viridis_c(
+    alpha = .99, 
+    begin = .1, 
+    end = .9, 
+    direction = 1, 
+    option = "D"
+  ) +
+  scale_x_log10() + 
+  scale_y_log10() +
+  theme_minimal()
+
+# variaveis ordinais já vem em viridis
+diamante %>% 
+  ggplot(aes(corte, fill = cor)) +
+  geom_bar()
+
+diamante %>% 
+  dplyr::mutate(cor = factor(as.character(cor))) %>% 
+  ggplot(aes(corte, fill = cor)) +
+  geom_bar()
+
+diamante %>% 
+  dplyr::mutate(cor = factor(as.character(cor))) %>% 
+  ggplot(aes(corte, fill = cor)) +
+  scale_fill_viridis_d(option = "A") +
+  geom_bar()
+
+p_base <- diamante %>% 
+  ggplot(aes(corte, fill = cor)) +
+  geom_bar() +
+  theme_minimal()
+
+# ColorBrewer
+
+# sequencial
+p_base + scale_fill_brewer(palette = "BuPu")
+
+# divergente
+p_base + scale_fill_brewer(palette = "RdBu")
+
+# qualitativo
+p_base + scale_fill_brewer(palette = "Pastel1")
+
+
+scale_fill_brewer()
+
+## usando brewer para variáveis contínuas
+# scale_fill_distiller()
+# scale_fill_fermenter()
+
+ggplot(diamante, aes(quilate, preco)) +
+  geom_bin2d() +
+  scale_fill_distiller(palette = "RdBu") +
+  scale_x_log10() + 
+  scale_y_log10() +
+  theme_minimal()
+
+# veja a diferença na legenda
+ggplot(diamante, aes(quilate, preco)) +
+  geom_bin2d() +
+  scale_fill_fermenter(palette = "RdBu") +
+  scale_x_log10() + 
+  scale_y_log10() +
+  theme_minimal()
+
+# outros temas foram colocados nos exercícios!
+
+# Fazendo seu próprio esquema de cores ------------------------------------
+
+# O {thematic} é um novo pacote, lançado em 2021, para criar temas
+# Nós ainda não estudamos esse pacote o suficiente para colocar em aula,
+# Mas podemos trabalhar em uma live ou na aula extra.
+# 
+# https://rstudio.github.io/thematic/articles/auto.html#rmd
+
+library(bslib)
+library(thematic)
+
+bs_theme_preview(
+  bs_theme(bg = "#444444", fg = "#E4E4E4", primary = "#E39777")
+)
+
+
+

@@ -1,6 +1,5 @@
 library(sf)
 library(dplyr)
-library(tidyr)
 library(leaflet)
 library(plotly)
 library(highcharter)
@@ -10,6 +9,25 @@ library(reactable)
 # install.packages(c("gifski", "av"))
 library(gganimate)
 library(patchwork)
+
+# dados -------------------------------------------------------------------
+
+## codigos da aula de mapas
+iqa_cetesb <-
+  st_read(
+    "dados/shp/VWM_IQA_CETESB_2018_PTOPoint.shp",
+    quiet = TRUE,
+    options = "ENCODING=WINDOWS-1252"
+  ) %>%
+  # limpar o nome das colunas
+  janitor::clean_names()
+
+dados_idh_muni <- abjData::pnud_min %>% 
+  mutate(code_muni = as.numeric(muni_id))
+
+municipios <- geobr::read_municipality() %>% 
+  filter(abbrev_state %in% c("RS", "PR", "SC")) %>% 
+  inner_join(dados_idh_muni)
 
 # gt ----------------------------------------------------------------------
 
@@ -33,7 +51,7 @@ dados_summ <- municipios %>%
     gini = mean(gini),
     .groups = "drop"
   ) %>% 
-  pivot_wider(names_from = ano, values_from = c(pop, gini))
+  tidyr::pivot_wider(names_from = ano, values_from = c(pop, gini))
 
 dados_summ %>% 
   # cria tabela base
@@ -105,16 +123,6 @@ tbl_regression(modelo)
 
 ## Mapa de pontos
 
-#### codigo da aula de mapas
-iqa_cetesb <-
-  st_read(
-    "dados/shp/VWM_IQA_CETESB_2018_PTOPoint.shp",
-    quiet = TRUE,
-    options = "ENCODING=WINDOWS-1252"
-  ) %>%
-  # limpar o nome das colunas
-  janitor::clean_names()
-
 iqa_cetesb %>% 
   # adiciona leaflet vazio
   leaflet() %>% 
@@ -126,19 +134,12 @@ iqa_cetesb %>%
     clusterOptions = markerClusterOptions()
   )
 
-## mapa temático
-
-dados_idh_muni <- abjData::pnud_min %>% 
-  mutate(code_muni = as.numeric(muni_id))
-
-municipios <- geobr::read_municipality() %>% 
-  filter(abbrev_state %in% c("RS", "PR", "SC")) %>% 
-  inner_join(dados_idh_muni)
-
 ### transformador de numeros em cores
-pal <- colorNumeric("YlOrRd", municipios$idhm)
+pal <- colorNumeric("YlOrRd", filter(municipios, ano == 2010)$idhm)
 pal(0.7)
 pal(0.81)
+
+## mapa temático
 
 municipios %>% 
   filter(ano == 2010) %>% 
@@ -195,7 +196,6 @@ municipios %>%
   pull(gini) %>% 
   density() %>% 
   hchart()
-
 
 # reactable ---------------------------------------------------------------
 

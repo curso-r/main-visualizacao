@@ -4,6 +4,7 @@
     <title>Mais observações sobre gráficos com ggplot2</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
+    <script src="libs/header-attrs-2.7/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
@@ -68,8 +69,6 @@ class: center, middle, inverse, title-slide
 
 class: middle, center
 
-# `&lt;span style="color:#6495ed; font-weight: bold;"&gt;Gráficos com ggplot2&lt;/span&gt;`{=html}
-
 
 
 ---
@@ -80,6 +79,8 @@ O pacote `ggplot2` segue duas filosofias que nos ajudam a entender o processo de
 1. Um gráfico estatístico é uma representação visual dos dados por meio de atributos estéticos (posição, cor, forma, tamanho, ...) de formas geométricas (pontos, linhas, barras, ...). [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).
 
 2. Um gráfico pode ser construído em camadas (um gráfico é a sobreposição de elementos visuais). [A layered grammar of graphics](https://vita.had.co.nz/papers/layered-grammar.html).
+
+---
 
 Nos exemplos a seguir, vamos utilizar as bases `clima` e `pinguins`, do pacote `dados`. Para a base `clima` vamos usar uma tabela de apoio chamada  `temperatura_por_mes`, que vai registrar as medições de temperatura ao longo dos dias.
 
@@ -96,7 +97,7 @@ temperatura_por_mes &lt;- clima %&gt;%
 ```
 
 ```
-## `summarise()` regrouping output by 'origem' (override with `.groups` argument)
+## `summarise()` has grouped output by 'origem'. You can override using the `.groups` argument.
 ```
 
 Curiosidade: o `gg` em `ggplot` vem de *Grammar of Graphics*.
@@ -174,7 +175,6 @@ temperatura_por_mes %&gt;%
 ---
 &lt;br&gt;&lt;br&gt;
 
-- 
 
 - Aqui nós invertemos o que vai aparecer no eixo `x` e o que vai aparecer no eixo `y`. Agora, no eixo `y`, que não é numérico, vamos colocar os aeroportos aonde as medições de temperatura foram feitas. Como o `y` é uma categoria, o `ggplot2` deixa elas com o mesmo espaçamento.
 
@@ -203,6 +203,7 @@ temperatura_por_mes %&gt;%
 
 Além de simplesmente construir o gráfico, nós também podemos modificar outros aspectos da imagem, tais como a cor do fundo do canvas, a cor das bordas do gráfico, os títulos dos eixos etc. Para mexermos nos textos que aparecem ao redor do gráfico (fora do canvas), usamos a função `labs` e seus parâmetros. 
 
+---
 
 .tiny[
 
@@ -302,12 +303,13 @@ A função `theme` aceita uma lista enorme de parâmetros estéticos, que se div
 Os parâmetros de cada um desses tipos devem ser definidos seguindo a um padrão específico. Vamos a alguns exemplos
 
 ---
-# Mudando a cor do eixo dos textos
+## Mudando a cor do eixo dos textos
 
 Quando queremos mudar a cor do textos dos eixos devemos usar a função `theme` com os parâmetros `axis.text.x` e `axis.text.y`. 
 
 Agora vem um novo elemento: para definir as características de *textos* usamos a função `element_text`, cujos parâmetros indicam características comuns de textos, tais como cor e tamanho.
 
+.tiny[
 
 ```r
 grafico_base +
@@ -318,6 +320,7 @@ grafico_base +
 ```
 
 &lt;img src="03-ggplot2-alt_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 
@@ -326,7 +329,7 @@ grafico_base +
 &lt;img src="03-ggplot2-alt_files/figure-html/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 ---
-# Mudando o tamanho e a cor do texto do título da legenda
+## Mudando o tamanho e a cor do texto do título da legenda
 
 
 ```r
@@ -339,7 +342,7 @@ grafico_base +
 &lt;img src="03-ggplot2-alt_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 ---
-# Mudando o tamanho e a cor do texto da legenda
+## Mudando o tamanho e a cor do texto da legenda
 
 
 ```r
@@ -352,7 +355,7 @@ grafico_base +
 &lt;img src="03-ggplot2-alt_files/figure-html/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 ---
-# Mudando a cor do fundo do gráfico
+## Mudando a cor do fundo do gráfico
 
 Quando queremos mudar a cor do fundo do gráfico devemos usar a função `theme` com os parâmetros `panel.background`. 
 
@@ -376,7 +379,7 @@ grafico_base +
 
 
 ---
-# Mudando a cor do fundo e as bordas
+## Mudando a cor do fundo e as bordas
 
 
 ```r
@@ -391,16 +394,16 @@ grafico_base +
 
 ---
 
-# Mudando a cor do fundo, das bordas e aumentando o tamanho das bordas
+## Mudando a cor do fundo, das bordas e aumentando o tamanho das bordas
 
 
 ```r
 grafico_base +
-  theme(
-    panel.background = element_rect(fill = 'white',
-                                    color = 'gray',
-                                    size = 2)
-  )
+  theme(panel.background = element_rect(
+    fill = 'white',
+    color = 'gray',
+    size = 2
+  ))
 ```
 
 ---
@@ -410,7 +413,7 @@ grafico_base +
 &lt;img src="03-ggplot2-alt_files/figure-html/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 ---
-# Mudando a cor das linhas dos eixos
+## Mudando a cor das linhas dos eixos
 
 Você notou que no último gráfico as linhas dos eixos sumiram? Isso aconteceu porque a cor padrão das linhas dos eixos é branco. Quando alteramos a cor do fundo para branco, a cor do fundo e das linhas ficou igual e por isso não foi mais possível discernir uma da outra.
 
@@ -426,7 +429,7 @@ grafico_base +
 ```
 
 ---
-# Mudando a cor da linhas principais do eixo x
+## Mudando a cor da linhas principais do eixo x
 
 
 ```r
@@ -441,7 +444,7 @@ grafico_base +
 
 ---
 
-# Mudando a cor das linhas secundárias do eixo x
+## Mudando a cor das linhas secundárias do eixo x
 
 
 ```r
@@ -455,15 +458,15 @@ grafico_base +
 &lt;img src="03-ggplot2-alt_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 ---
-# Acabando com a diferença entre majors e minors
+## Acabando com a diferença entre majors e minors
 
 
 ```r
 grafico_base +
   theme(
-    panel.background = element_rect(fill = 'white',
-                                    color = 'gray',
-                                    size = 2),
+    panel.background = element_rect(
+      fill = 'white', color = 'gray', size = 2
+    ),
     panel.grid.major.x  = element_line(color = 'lightgray'),
     panel.grid.minor.x  = element_line(color = 'lightgray')
   )
@@ -475,7 +478,7 @@ grafico_base +
 
 ---
 
-# Mais temas
+## Mais temas
 
 Mexendo na função `themes` nós podemos criar o theme que nós quisermos, mas você não necessariamente precisa partir do 0 nos seus gráficos. O pacote `ggthemes` tem vários temas prontos que basta você somar uma camada de temas, similar ao que já estávamos fazendo, e seu gráfico se transforma completamente.
 
@@ -485,7 +488,7 @@ O pacote `ggthemes` tem uma série de temas interessantes que você pode acessar
 
 ---
 
-# Aplicando o tema do FiveThirtyEight
+## Aplicando o tema do FiveThirtyEight
 
 
 ```r
@@ -512,7 +515,7 @@ temperatura_por_mes %&gt;%
 
 ---
 
-# Gráfico de barras
+## Gráfico de barras
 
 Até o momento exploramos bastante o gráfico de linhas, mas um tipo de gráfico muito usado para destacar a comparação entre valores para diferentes categorias, por exemplo, é o gráfico de barras:
 
@@ -538,7 +541,7 @@ Este gráfico destaca o fato dos Pinguins-de-barbicha serem muito menos frequent
 
 ---
 
-# Ordenando as barras
+## Ordenando as barras
 
 É muito comum que a gente ordene as barras da menor pra maior ou da menor pra maior, justamente para destacar ainda mais as discrepâncias nos dados. Para isso, usamos a função `fct_reorder` do pacote `forcats`, que nos ajuda a mexer com categorias. 
 
@@ -564,7 +567,7 @@ A linha `mutate(especies = fct_reorder(especies, n))` transforma a coluna `espec
 
 ---
 
-# Comparando grupos e subgrupos
+## Comparando grupos e subgrupos
 
 Às vezes queremos comparar, ao mesmo tempo, grupos e subgrupos. Ou seja, no mesmo "x" vamos plotar várias barras. Aqui teremos três opções, que serão passadas para o parâmetro `position` do `geom_col`:
 
@@ -574,15 +577,14 @@ A linha `mutate(especies = fct_reorder(especies, n))` transforma a coluna `espec
 
 ---
 
-# Barras empilhadas
+## Barras empilhadas
 
 
 ```r
 pinguins %&gt;% 
   count(especies, sexo) %&gt;% 
   ggplot(aes(x = sexo, y = n,fill = especies)) + 
-  geom_col(position = 'dodge') +
-  # "dodge" significa "desviar"
+  geom_col() +
   ggthemes::theme_fivethirtyeight()
 ```
 
@@ -590,7 +592,7 @@ pinguins %&gt;%
 
 ---
 
-# Barras lado-a-lado
+## Barras lado-a-lado
 
 
 ```r
@@ -606,7 +608,7 @@ pinguins %&gt;%
 
 ---
 
-# Barras empilhadas e com relação ao valores relativos
+## Barras empilhadas e normalizadas
 
 
 ```r
@@ -614,7 +616,7 @@ pinguins %&gt;%
   count(especies, sexo) %&gt;% 
   ggplot(aes(x = sexo, y = n,fill = especies)) + 
   geom_col(position = 'fill') +
-  # "dodge" significa "desviar"
+  # "fill" significa "preencher"
   ggthemes::theme_fivethirtyeight()
 ```
 
@@ -622,13 +624,21 @@ pinguins %&gt;%
 
 ---
 
-# Links úteis
+## Visualizando distribuições
+
+Ás vezes queremos visualizar distribuições, no sentido estatístico mesmo
+
+---
+
+## Links úteis
 
 - Extensões do ggplot2: [https://exts.ggplot2.tidyverse.org/](https://exts.ggplot2.tidyverse.org/)
 
 - Seção de gráficos do R cookbook (ótima folha de cola): [http://www.cookbook-r.com/Graphs/](http://www.cookbook-r.com/Graphs/)
 
 - Temas do `ggthemes`: [https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/)
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

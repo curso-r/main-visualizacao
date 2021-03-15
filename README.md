@@ -12,7 +12,7 @@ abaixo**.
 
 | Turma         | Material                                        | Github                                           |
 |:--------------|:------------------------------------------------|:-------------------------------------------------|
-| Março de 2021 | <https://curso-r.github.io/202103-visualizacao> | <https://github.com/curso-r/202103-visualizacao> |
+| março de 2021 | <https://curso-r.github.io/202103-visualizacao> | <https://github.com/curso-r/202103-visualizacao> |
 
 # Plano de aula atual
 
