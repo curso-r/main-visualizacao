@@ -1,0 +1,52 @@
+---
+title: "Presentation Ninja"
+subtitle: "&#x2694;&#xFE0F; xaringan +<br/>&#x1F60E; xaringanthemer"  
+date: '`r format(Sys.Date(), "%d-%m-%Y")`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [xaringan-themer.css, custom.css]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono")
+)
+```
+
+## Meu Slide!!
+
+```{r echo=FALSE, fig.align='center', out.width="30%"}
+knitr::include_graphics("https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif")
+```
+
+---
+
+## Um gráfico!!
+
+```{r echo=FALSE, dpi = 300, out.width="60%", fig.align='center'}
+library(ggplot2)
+ggplot(diamonds) +
+  aes(cut, fill = cut) +
+  geom_bar(show.legend = FALSE) +
+  labs(
+    x = "Corte",
+    y = "Contagem",
+    title = "Um gráfico sobre diamantes"
+  ) +
+  theme_xaringan(background_color = "#FFFFFF") +
+  scale_xaringan_fill_discrete()
+```
+

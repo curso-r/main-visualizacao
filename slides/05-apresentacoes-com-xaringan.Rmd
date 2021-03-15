@@ -177,25 +177,46 @@ aparece
 aos poucos!
 
 
-
-
-
 ---
+class: 
 
+## Adicionando conteúdo na apresentação
 
-# Chunk de código
+- Atualiza a apresentação enquanto é editada:
 
-Para inserir um chunk, ou campo de código
-
-- O chunk deve ***iniciar e terminar*** por uma série de 3 crases ` ``` `
-
-- O chunk deve iniciar fornecendo os parâmetro entre `{}` <br>
-Se quiser ver o código e o resultado use echo = TRUE, <br>
-se quiser ver apenas o resultado use echo = FALSE.
-
-```{r, out.width="100%"}
-knitr::include_graphics("img/chunk-options.png")
+```{r echo=TRUE, eval=FALSE}
+xaringan::inf_mr()
 ```
+
+- Use **muito** o atalho para ir salvando seu arquivo: **CTRL + S**. Algumas coisas no preview só são atualizadas quando salvamos. 
+---
+class: 
+
+# .blue[Exercícios!  Vamos ao RStudio]
+
+
+```{r out.width="30%", fig.align='center'}
+knitr::include_graphics("https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif")
+```
+
+Exercícios: no arquivo: `exercicios/xaringan/exercicio1.Rmd`
+
+1. Crie dois slides:
+  - No primeiro slide, insira um subtítulo (usando markdown) escrito:  Meu slide!
+  - Adicione o gif acima no segundo slide. URL: https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif
+  - Renderize a apresentação (apertando o botão knit) e veja o resultado!
+  - No tempo restante, experimente adicionar conteúdo no seu primeiro slide usando marcações em markdown. 
+  
+```{r}
+countdown::countdown(
+  minutes = 3,
+  seconds = 00,
+  style = "background: floralwhite;",
+  top = 0
+)
+```
+
+
 
 
 
@@ -279,6 +300,37 @@ encoding: "UTF-8"
 <!--"There Ain’t No Such Thing As Plain Text." <br>
 [Joel Spolsky, 2003](https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/)
  If you have a string, in memory, in a file, or in an email message, you have to know what encoding it is in or you cannot interpret it or display it to users correctly." -->
+ 
+---
+class: 
+
+# .blue[Exercícios!  Vamos ao RStudio]
+
+
+```{r out.width="30%", fig.align='center'}
+knitr::include_graphics("https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif")
+```
+
+Exercícios: no arquivo: `exercicios/xaringan/exercicio1.Rmd`
+
+2. Agora vamos alterar os metadados da apresentação (YAML):
+
+  a. Adicione um título
+  
+  b. Adicione um subtítulo
+  
+  c. Adicione seu nome no campo de autoria
+  
+  d. Adicione a data
+
+```{r}
+countdown::countdown(
+  minutes = 3,
+  seconds = 00,
+  style = "background: floralwhite;",
+  top = 0
+)
+```
 
 ---
 class: 
@@ -319,16 +371,6 @@ output:
     lib_dir: libs
 ```
 
----
-class: 
-
-## Adicionando conteúdo na apresentação
-
-- Atualiza a apresentação enquanto é editada:
-
-```{r echo=TRUE, eval=FALSE}
-xaringan::inf_mr()
-```
 
 
 ---
@@ -401,7 +443,7 @@ encoding: "UTF-8"
 output:
   xaringan::moon_reader:
 {{   chakra: libs/remark-latest.min.js  }}
-{{   css: ["rladies", "rladies-fonts"]}}
+{{   css: [default, rladies, rladies-fonts]}}
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -409,6 +451,30 @@ output:
       countIncrementalSlides: false
 ---
 ```
+
+---
+class: 
+
+# .blue[Exercícios!  Vamos ao RStudio]
+
+
+```{r out.width="30%", fig.align='center'}
+knitr::include_graphics("https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif")
+```
+
+Exercícios: no arquivo: `exercicios/xaringan/exercicio3.Rmd`
+
+3. Agora vamos alterar o tema da apresentacao! O arquivo está com o tema chocolate. Vamos alterar para `middlebury` + `middlebury-fonts`
+
+```{r}
+countdown::countdown(
+  minutes = 3,
+  seconds = 00,
+  style = "background: floralwhite;",
+  top = 0
+)
+```
+
 
 ---
 class: 
@@ -467,8 +533,33 @@ output:
 
 ```
 
+---
+class: 
+
+# .blue[Exercícios!  Vamos ao RStudio]
 
 
+```{r out.width="30%", fig.align='center'}
+knitr::include_graphics("https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif")
+```
+
+Exercícios: no arquivo: `exercicios/xaringan/exercicio4.Rmd`
+
+4.a) No arquivo exercicio4.Rmd, existe um chunk que configura as opções do xaringanthemer. O argumento basecolor recebe uma cor em forma de hexadecimal (ex. `"#1c5253"`). Mude o basecolor para uma cor que você goste.
+
+4b) Veja no YAML: Essa apresentação está usando duas folhas de estilo: xaringan-themer.css e custom.css . Altere o estilo do subtítulo (##) no custom.css e veja o resultado!
+
+
+
+
+```{r}
+countdown::countdown(
+  minutes = 3,
+  seconds = 00,
+  style = "background: floralwhite;",
+  top = 0
+)
+```
 
 ---
 class: inverse, center, middle

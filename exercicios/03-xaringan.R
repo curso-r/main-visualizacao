@@ -33,37 +33,37 @@ fs::dir_create("exercicios_resolucao/xaringan/css")
 # das etapas abaixo. Veja como ficou o resultado, e caso ocorrer um erro, 
 # será mais fácil saber onde é necessário arrumar :)
 
-
-# 6. Adicione um slide e adicione um parágrafo que esteja marcado com markdown
-# Utilize negrito, itálico, links, texto formatado como código, etc.
-# Caso queira relembrar, leia este material: 
-# https://livro.curso-r.com/9-1-markdown.html  
-# Lembre-se que para delimitar os slides utilizamos:  ---
-  
-# 7. Adicione uma tabela a partir de um data.frame. 
-# (Você pode usar `mtcars`, por exemplo).
-# Utilize o pacote a sua escolha para formatar a tabela.
-
-# 8. Adicione duas imagens na sua apresentação:
-# Uma que esteja salva na pasta img que criamos, 
-# e outra que esteja na internet, utilizando a URL da imagem.
-
-# 9. Inclua um chunk de código em que a variável x recebe o valor 4, 
-# a variável y recebe o valor 6 e calcula a soma de x e y.
-
-# 10. Agora vamos alterar os metadados da apresentação (YAML):
+# 6. Agora vamos alterar os metadados da apresentação (YAML):
 # a. Adicione um título
 # b. Adicione um subtítulo
 # c. Adicione seu nome no campo de autoria
 # d. Adicione a data
 
 
-# 11. Para que a sua apresentação possa ser visualizada offline,
+# 7. Para que a sua apresentação possa ser visualizada offline,
 # salve a biblioteca `remark.js` e altere o chakra no YAML.
 # Confira a apresentação da aula para relembrar como fazer isso!
 
 
-## 12. Mude o estilo da sua apresentação! 
+## 8. Mude o estilo da sua apresentação! 
+
+# 9. Adicione um slide e adicione um parágrafo que esteja marcado com markdown
+# Utilize negrito, itálico, links, texto formatado como código, etc.
+# Caso queira relembrar, leia este material: 
+# https://livro.curso-r.com/9-1-markdown.html  
+# Lembre-se que para delimitar os slides utilizamos:  ---
+  
+# 10. Adicione uma tabela a partir de um data.frame. 
+# (Você pode usar `mtcars`, por exemplo).
+# Utilize o pacote a sua escolha para formatar a tabela.
+
+# 11. Adicione duas imagens na sua apresentação:
+# Uma que esteja salva na pasta img que criamos, 
+# e outra que esteja na internet, utilizando a URL da imagem.
+
+# 12. Inclua um chunk de código em que a variável x recebe o valor 4, 
+# a variável y recebe o valor 6 e calcula a soma de x e y.
+
 
 ## 13. (Opcional) Utilize alguma (ou mais de uma) extensão
 # utilizando o pacote xaringanExtra.
