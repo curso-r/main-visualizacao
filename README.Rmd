@@ -150,3 +150,9 @@ install.packages(misc)
 
 ```
 
+
+```{r echo=FALSE}
+materiais <- readr::read_lines("material.txt")
+zip::zip("material_do_curso.zip", materiais)
+```
+
