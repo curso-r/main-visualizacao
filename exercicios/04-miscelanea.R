@@ -1,8 +1,8 @@
-# 1. Faça o mapa desse exemplo:
+# 1. Faça o mapa desse exemplo mas usando leaflet e markers no lugar de pontos:
 
 # https://github.com/curso-r/main-visualizacao/blob/ddeec38aa31d181683a72af998f0835408c2c964/exemplos_de_aula/03-mapas-com-ggplot2.R#L136
 
-# mas usando leaflet e markers no lugar de pontos
+
 
 # 2. Explore o shiny do {reactable} e reproduza o código dos exemplos que achar mais legais
 
@@ -19,8 +19,7 @@ plotly::plot_ly(
   y = ~pop
 )
 
-# reproduza o gráfico da linha
+# reproduza o gráfico da linha abaixo usando essa sintaxe:
 
 # https://github.com/curso-r/main-visualizacao/blob/ddeec38aa31d181683a72af998f0835408c2c964/exemplos_de_aula/04-miscelanea.R#L168
 
-# usando essa sintaxe.
