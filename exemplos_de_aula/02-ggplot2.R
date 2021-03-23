@@ -1,7 +1,14 @@
 # Carregar pacotes --------------------------------------------------------
 
 library(tidyverse)
+
+# Se for necessário instalar o pacote dados, 
+# execute o código comentado abaixo!
+# install.packages("remotes")
+# remotes::install_github("cienciadedatos/dados")
 library(dados)
+
+glimpse(clima)
 
 temperatura_por_mes <- clima %>% 
   group_by(origem, mes = lubridate::floor_date(data_hora, "month")) %>% 
