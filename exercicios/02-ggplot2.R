@@ -36,7 +36,8 @@ tibble::tibble(
 # rodando apenas até a linha 128:
 # código: https://gist.github.com/lgelape/d854f7f23a900531e3fd4977d574e492#file-materia_engajamento_divulgadores-r-L128
 # 
-# b) [DESAFIO] https://www.washingtonpost.com/graphics/2018/lifestyle/sinclair-broadcasting/
+# b) [EXERCÍCIO CANCELADO - NÃO FAZER]
+# [DESAFIO] https://www.washingtonpost.com/graphics/2018/lifestyle/sinclair-broadcasting/
 # Nesse caso, siga o passo-a-passo da matéria.
 # código: https://r-journalism.com/posts/2018-07-17-sf-sinclair-map/map/
 # OBS: como é de 2018, pode ser que seja necessário adaptar.
