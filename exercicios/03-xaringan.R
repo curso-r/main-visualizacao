@@ -1,3 +1,12 @@
+# Caso não tenha lido esses capítulos,
+# leia antes de fazer os exercícios:
+
+# https://livro.curso-r.com/9-relatorios.html
+# https://livro.curso-r.com/9-1-markdown.html
+# https://livro.curso-r.com/9-2-r-markdown.html
+
+
+
 # Vamos criar uma apresentação usando o pacote xaringan!
 # Separamos em várias etapas para experimentar os conceitos
 # mostrados no curso.
