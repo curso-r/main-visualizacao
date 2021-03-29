@@ -36,8 +36,39 @@ tibble::tibble(
 # rodando apenas até a linha 128:
 # código: https://gist.github.com/lgelape/d854f7f23a900531e3fd4977d574e492#file-materia_engajamento_divulgadores-r-L128
 # 
+# O código abaixo serve para facilitar a importação dos dados.
+# Caso não tenha algum destes pacotes instalado, lembre-se de instalar.
+
+# Carregar pacotes
+library(ggplot2)
+library(magrittr) # Carregar o pipe %>%
+library(lubridate)
+library(googlesheets4)
+library(dplyr)
+
+# URL da base no google sheets - está no final da matéria
+url <- "https://docs.google.com/spreadsheets/d/1SRT77C0SnPEZucaeMSWQKngE9F7Vwb4irGwDgB7CxtM/edit?usp=sharing"
+
+# Importar a base usando a função read_sheet() do pacote googleshees4
+# Será necessário realizar a autenticação com a API do google
+# Ao executar essa função, acompanhe as mensagens do console.
+total_dia_brasileiros <- googlesheets4::read_sheet(url)
+
+# Veja a base importada
+dplyr::glimpse(total_dia_brasileiros)
+
+
+total_dia_brasileiros %>%
+  # transformar a coluna created_at em classe data
+  dplyr::mutate(created_at = lubridate::as_date(created_at)) %>% 
+  ggplot() +
+#  _____ # Comece por aqui :)
+
+
 # b) [EXERCÍCIO CANCELADO - NÃO FAZER]
 # [DESAFIO] https://www.washingtonpost.com/graphics/2018/lifestyle/sinclair-broadcasting/
 # Nesse caso, siga o passo-a-passo da matéria.
 # código: https://r-journalism.com/posts/2018-07-17-sf-sinclair-map/map/
 # OBS: como é de 2018, pode ser que seja necessário adaptar.
+
+
