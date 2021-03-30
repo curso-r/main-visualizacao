@@ -108,7 +108,8 @@ principal <- c(
   "prettydoc",
   "ggthemes",
   "patchwork",
-  "fs"
+  "fs",
+  "janitor"
 )
 install.packages(principal)
 

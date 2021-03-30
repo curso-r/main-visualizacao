@@ -9,6 +9,7 @@ library(reactable)
 # install.packages(c("gifski", "av"))
 library(gganimate)
 library(patchwork)
+library(gt)
 
 # dados -------------------------------------------------------------------
 
@@ -25,7 +26,7 @@ iqa_cetesb <-
 dados_idh_muni <- abjData::pnud_min %>% 
   mutate(code_muni = as.numeric(muni_id))
 
-municipios <- geobr::read_municipality() %>% 
+municipios <- readr::read_rds("dados/geobr/municipios_todos.rds") %>% 
   filter(abbrev_state %in% c("RS", "PR", "SC")) %>% 
   inner_join(dados_idh_muni)
 
