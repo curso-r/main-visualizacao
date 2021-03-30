@@ -1,0 +1,59 @@
+---
+title: ''
+output: html_document
+---
+
+# Oferecimento em Março/2021
+
+**Aula 01: Introdução**
+- Introdução ao curso.
+- Showcase!
+- Instalação: 
+    - Executar todos os exemplos com os alunos.
+
+**Aula 02: Visualização**
+- Revisão ggplot2
+
+- Customizando temas
+
+**Aula 03: Visualização e RMarkdown Avançado**
+
+- Escrevendo em RMarkdown
+- Principais saídas
+
+- Edição de CSS 
+- `{xaringan}` e `{xaringanExtra}`
+
+**Aula 04: Miscelânea**
+
+- Mapas em ggplot2
+
+
+- Gramática de tabelas 
+    - `{gt}` 
+    - `{gtsummary}`
+- Gráficos que fazem voosh!
+    - `{leaflet}`
+    - `{highcharter}`
+    - `{plotly}`
+    - `{reactable}`
+    - `{gganimate}`
+    
+**Aula 05: Extra**  
+
+- Gráficos que fazem voosh!
+    - `{highcharter}`
+    - `{reactable}`
+- ...
+    
+## Para o próximo curso:
+- Aula sobre mapas:
+    -  [ ] Acho interessante criar um slide para a aula de mapas, para a parte introdutoria, e colocar referencias
+    - [ ] mudar exemplo do summarize, esse nao fica bom
+    - [ ] adicionar um outro exemplo com join até estar completo
+    - [x] tirar patchwork dos mapas.
+    - [x] trocar o nome das variáveis entre essa aula e a aula de misc. Deixei `municipios` como `municipios_brasil` na aula de mapas.
+    - [ ] cuidado com coisas pesadas. testar a aula toda antes em outro pc
+    
+    
+- usar patchwork com os graficos comuns pois sao mais leves. 
