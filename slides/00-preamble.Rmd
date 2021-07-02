@@ -25,7 +25,7 @@ xaringanExtra::use_clipboard()
 ```
 
 ```{r xaringanExtra-search, echo=FALSE}
-xaringanExtra::use_search(show_icon = TRUE, position = "top-left")
+#xaringanExtra::use_search(show_icon = TRUE, position = "top-left")
 ```
 
 ```{r xaringan-tile-view, echo=FALSE}
@@ -38,7 +38,7 @@ xaringanExtra::use_share_again()
 
 
 ```{r xaringan-scribble, echo=FALSE}
-xaringanExtra::use_scribble()
+#xaringanExtra::use_scribble()
 ```
 
 ```{r xaringan-extra-styles, include=FALSE}
@@ -49,7 +49,7 @@ xaringanExtra::use_extra_styles(
 ```
 
 ```{r xaringan-fit-screen, echo=FALSE}
-xaringanExtra::use_fit_screen()
+#xaringanExtra::use_fit_screen()
 ```
 
 ```{r xaringan-panelset, echo=FALSE}

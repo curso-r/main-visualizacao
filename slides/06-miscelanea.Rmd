@@ -10,7 +10,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-# knit: pagedown::chrome_print
+knit: pagedown::chrome_print
 ---
 
 ```{r, child="00-preamble.Rmd"}
@@ -21,8 +21,6 @@ output:
 options(htmltools.preserve.raw = FALSE)
 library(tidyverse)
 ```
-
----
 
 ## Gráficos interativos e estáticos
 
@@ -214,5 +212,4 @@ leaflet(height = 300) %>%
 
 - [Documentação Highmaps](https://api.highcharts.com/highmaps/)
 
----
 <br><br>

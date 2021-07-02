@@ -207,14 +207,7 @@ Exercícios: no arquivo: `exercicios/xaringan/exercicio1.Rmd`
   - Renderize a apresentação (apertando o botão knit) e veja o resultado!
   - No tempo restante, experimente adicionar conteúdo no seu primeiro slide usando marcações em markdown. 
   
-```{r}
-countdown::countdown(
-  minutes = 3,
-  seconds = 00,
-  style = "background: floralwhite;",
-  top = 0
-)
-```
+
 
 
 
@@ -323,14 +316,7 @@ Exercícios: no arquivo: `exercicios/xaringan/exercicio1.Rmd`
   
   d. Adicione a data
 
-```{r}
-countdown::countdown(
-  minutes = 3,
-  seconds = 00,
-  style = "background: floralwhite;",
-  top = 0
-)
-```
+
 
 ---
 class: 
@@ -466,14 +452,6 @@ Exercícios: no arquivo: `exercicios/xaringan/exercicio3.Rmd`
 
 3. Agora vamos alterar o tema da apresentacao! O arquivo está com o tema chocolate. Vamos alterar para `middlebury` + `middlebury-fonts`
 
-```{r}
-countdown::countdown(
-  minutes = 3,
-  seconds = 00,
-  style = "background: floralwhite;",
-  top = 0
-)
-```
 
 
 ---
@@ -552,14 +530,6 @@ Exercícios: no arquivo: `exercicios/xaringan/exercicio4.Rmd`
 
 
 
-```{r}
-countdown::countdown(
-  minutes = 3,
-  seconds = 00,
-  style = "background: floralwhite;",
-  top = 0
-)
-```
 
 ---
 class: inverse, center, middle
