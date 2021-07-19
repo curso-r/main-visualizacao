@@ -3,13 +3,13 @@ library(dplyr)
 library(leaflet)
 library(plotly)
 library(highcharter)
-library(gtsummary)
+
 library(reactable)
 # para o gganimate funcionar perfeitamente, instale também
 # install.packages(c("gifski", "av"))
 library(gganimate)
 library(patchwork)
-library(gt)
+
 
 # dados -------------------------------------------------------------------
 
@@ -29,91 +29,6 @@ dados_idh_muni <- abjData::pnud_min %>%
 municipios <- readr::read_rds("dados/geobr/municipios_todos.rds") %>% 
   filter(abbrev_state %in% c("RS", "PR", "SC")) %>% 
   inner_join(dados_idh_muni)
-
-# gt ----------------------------------------------------------------------
-
-## O {gt} é um extenso trabalho para criar uma gramática de tabelas.
-## O gt assume que uma tabela possui os seguintes elementos:
-## - o cabeçalho
-## - o cantinho (que separa linhas e colunas) 
-## - rótulos das colunas (ou grupos de colunas)
-## - conteúdo 
-## - rodapé.
-## Geralmente os códigos do gt são mais longos, mas eles te dão controle
-## sobre o que você vai fazer.
-
-## tabela base
-
-dados_summ <- municipios %>% 
-  as_tibble() %>% 
-  group_by(ano, abbrev_state) %>% 
-  summarise(
-    pop = sum(pop),
-    gini = mean(gini),
-    .groups = "drop"
-  ) %>% 
-  tidyr::pivot_wider(names_from = ano, values_from = c(pop, gini))
-
-dados_summ %>% 
-  # cria tabela base
-  gt(rowname_col = "abbrev_state") %>% 
-  # adiciona headers
-  tab_header(
-    title = "População e GINI",
-    subtitle = "Região Sul, por ano censitário"
-  ) %>% 
-  # cantinho
-  tab_stubhead("Estado") %>% 
-  # rotulos das colunas
-  cols_label(
-    pop_1991 = "1991",
-    pop_2000 = "2000",
-    pop_2010 = "2010",
-    gini_1991 = "1991",
-    gini_2000 = "2000",
-    gini_2010 = "2010"
-  ) %>% 
-  # cria labels de colunas agrupadas
-  tab_spanner(
-    label = "População",
-    columns = starts_with("pop_")
-  ) %>% 
-  tab_spanner(
-    label = "Índice de Gini",
-    columns = starts_with("gini_")
-  ) %>% 
-  # edita colunas
-  fmt_number(
-    columns = starts_with("pop_"),
-    sep_mark = ".", 
-    dec_mark = ",", 
-    decimals = 0,
-    suffixing = "K"
-  ) %>% 
-  fmt_number(
-    columns = starts_with("gini_"),
-    sep_mark = ".", 
-    dec_mark = ",", 
-    decimals = 3
-  ) %>% 
-  # rodapé
-  tab_source_note(
-    "Fonte: Atlas do Desenvolvimento Humano (PNUD)"
-  )
-
-# gtsummary ---------------------------------------------------------------
-
-## O {gtsummary} é uma simplificação do {gt}, com coisas já pré programadas
-
-municipios %>% 
-  as_tibble() %>% 
-  select(abbrev_state, pop, gini) %>% 
-  tbl_summary(by = "abbrev_state")
-
-## tambem ajuda a fazer sumarios de regressao
-
-modelo <- lm(idhm ~ I(rdpc/1000) + gini, data = municipios)
-tbl_regression(modelo)
 
 # htmlwidgets =============================================================
 
