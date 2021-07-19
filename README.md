@@ -12,68 +12,8 @@ abaixo**.
 
 | Turma         | Material                                        | Github                                           |
 |:--------------|:------------------------------------------------|:-------------------------------------------------|
-| março de 2021 | <https://curso-r.github.io/202103-visualizacao> | <https://github.com/curso-r/202103-visualizacao> |
-
-# Plano de aula atual
-
-**Aula 01: Introdução**
-
--   Referências de RMarkdown
--   Showcase!
-    -   PowerPoint
-    -   Word
-    -   Xaringan
-    -   Paper
--   Instalação:
-    -   Executar todos os exemplos com os alunos.
-
-**Aula 02: RMarkdown básico e Visualização**
-
--   Escrevendo em RMarkdown
-    -   Sintaxe Markdown
-    -   Chunks
-    -   YAML
--   Principais saídas
-    -   relatório (word, html, pdf, pagedown)
-    -   apresentação (ppt, ioslides, beamer)
-    -   flexdashboard
--   Revisão ggplot2
-    -   ggplot()
-    -   aes()
-    -   alguns geom\_\*()
-    -   theme()
--   Customizando temas
-
-**Aula 03: Visualização e RMarkdown Avançado**
-
--   Mapas em ggplot2
--   Edição de CSS
--   `{xaringan}` e `{xaringanExtra}`
-
-**Aula 04: Miscelânea**
-
--   Gramática de tabelas
-    -   `{gt}`
-    -   `{gtsummary}`
--   Gráficos que fazem voosh!
-    -   `{leaflet}`
-    -   `{highcharter}`
-    -   `{plotly}`
-    -   `{reactable}`
-    -   `{gganimate}`
-
-**Aula 05: Aula Extra - Web**
-
--   Assuntos remanescentes das aulas anteriores
--   Netlify
--   `{bookdown}`
--   distill e blogdown
--   Mais RMarkdown!
-    -   Hacks e dicas práticas para relatórios Word, PDF e HTML
-        -   Remedy
-        -   `_site.yml`
-        -   Códigos LaTeX
-    -   Templates legais da comunidade
+| Julho de 2021 | <https://curso-r.github.io/202107-visualizacao> | <https://github.com/curso-r/202107-visualizacao> |
+| Março de 2021 | <https://curso-r.github.io/202103-visualizacao> | <https://github.com/curso-r/202103-visualizacao> |
 
 **Trabalho de conclusão**: fazer o \#tidytuesday da semana ou um à sua
 escolha. Fazer não só a visualização, mas uma apresentação ou relatório
@@ -100,14 +40,13 @@ principal <- c(
   "prettydoc",
   "ggthemes",
   "patchwork",
-  "fs"
+  "fs",
+  "janitor"
 )
 install.packages(principal)
 
 # Pacotes instalados via GitHub
 if (!require(remotes)) install.packages("remotes")
-remotes::install_github("cienciadedatos/dados")
-remotes::install_github("hadley/emo")
 remotes::install_github("abjur/abjData")
 
 # esses pacotes são para os showcases funcionarem
@@ -131,11 +70,10 @@ misc <- c(
   "gifski",
   "gganimate",
   "leaflet",
-  "gt",
-  "gtsummary",
   "bookdown",
   "plotly",
-  "highcharter"
+  "highcharter",
+  "ggspatial"
 )
 
 install.packages(misc)
