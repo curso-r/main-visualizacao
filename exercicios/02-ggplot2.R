@@ -63,12 +63,3 @@ total_dia_brasileiros %>%
   dplyr::mutate(created_at = lubridate::as_date(created_at)) %>% 
   ggplot() +
 #  _____ # Comece por aqui :)
-
-
-# b) [EXERCÍCIO CANCELADO - NÃO FAZER]
-# [DESAFIO] https://www.washingtonpost.com/graphics/2018/lifestyle/sinclair-broadcasting/
-# Nesse caso, siga o passo-a-passo da matéria.
-# código: https://r-journalism.com/posts/2018-07-17-sf-sinclair-map/map/
-# OBS: como é de 2018, pode ser que seja necessário adaptar.
-
-
