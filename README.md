@@ -74,7 +74,8 @@ misc <- c(
   "bookdown",
   "plotly",
   "highcharter",
-  "ggspatial"
+  "ggspatial",
+  "ggrepel"
 )
 
 install.packages(misc)
