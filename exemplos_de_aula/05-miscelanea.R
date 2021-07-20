@@ -3,32 +3,33 @@ library(dplyr)
 library(leaflet)
 library(plotly)
 library(highcharter)
-
 library(reactable)
 # para o gganimate funcionar perfeitamente, instale também
 # install.packages(c("gifski", "av"))
 library(gganimate)
 library(patchwork)
+library(ggrepel)
 
 
 # dados -------------------------------------------------------------------
 
 ## codigos da aula de mapas
-iqa_cetesb <-
-  st_read(
-    "dados/shp/VWM_IQA_CETESB_2018_PTOPoint.shp",
-    quiet = TRUE,
-    options = "ENCODING=WINDOWS-1252"
-  ) %>%
-  # limpar o nome das colunas
-  janitor::clean_names()
 
+# escolas de brasilia
+escolas_brasilia <- readr::read_rds("dados/geobr/escolas_brasilia.Rds")
+
+# IDH dos municipios
 dados_idh_muni <- abjData::pnud_min %>% 
   mutate(code_muni = as.numeric(muni_id))
 
-municipios <- readr::read_rds("dados/geobr/municipios_todos.rds") %>% 
-  filter(abbrev_state %in% c("RS", "PR", "SC")) %>% 
+# unir a base de municipios do geobr com a base de idh
+municipios <- readr::read_rds("dados/geobr/municipios_todos.rds") %>%
   inner_join(dados_idh_muni)
+
+# se quiser buscar esses dados com o pacote geobr, 
+# o código é o seguinte
+# municipios <- geobr::read_municipality()
+
 
 # htmlwidgets =============================================================
 
@@ -39,26 +40,35 @@ municipios <- readr::read_rds("dados/geobr/municipios_todos.rds") %>%
 
 ## Mapa de pontos
 
-iqa_cetesb %>% 
+escolas_brasilia %>%
   # adiciona leaflet vazio
-  leaflet() %>% 
+  leaflet() %>%
   # adiciona mapinha
-  addTiles() %>% 
+  addTiles() %>%
   # adiciona marcadores
   addMarkers(
-    popup = ~klocal,
+    popup = ~ name_school,
     clusterOptions = markerClusterOptions()
   )
+
+## mapa temático ---
 
 ### transformador de numeros em cores
 pal <- colorNumeric("YlOrRd", filter(municipios, ano == 2010)$idhm)
 pal(0.7)
 pal(0.81)
 
-## mapa temático
+
+# Sortear um estado para filtrar
+estado_para_filtrar <- municipios$abbrev_state %>%
+  unique() %>%
+  tibble::as_tibble() %>%
+  dplyr::sample_n(1) %>% 
+  dplyr::pull(value)
 
 municipios %>% 
-  filter(ano == 2010) %>% 
+  # filtrar para o ano de 2010, e apenas 1 estado
+  dplyr::filter(ano == 2010, abbrev_state == estado_para_filtrar) %>% 
   # adiciona mapa vazio
   leaflet() %>% 
   # adiciona mapinha
@@ -97,7 +107,7 @@ plotly::ggplotly(gg_idhm)
 ## uma sintaxe parecida com o ggplot2, com algumas adaptações.
 
 municipios %>% 
-  filter(ano == 2010) %>% 
+  filter(ano == 2010, abbrev_state == estado_para_filtrar) %>% 
   hchart("scatter", hcaes(x = gini, y = idhm, color = espvida))
 
 ## para graficos univariados, basta passar o vetor
@@ -118,7 +128,22 @@ municipios %>%
 ## {reactable} e {DT} são os melhores pacotes para fazer tabelas 
 ## interativas. Aqui, vamos mostrar o {reactable}
 
-dados_summ %>% 
+# tabela base
+
+dados_summ <- municipios %>% 
+  as_tibble() %>% 
+  group_by(ano, abbrev_state) %>% 
+  summarise(
+    pop = sum(pop),
+    gini = mean(gini),
+    .groups = "drop"
+  ) %>% 
+  tidyr::pivot_wider(
+    names_from = ano, 
+    values_from = c(pop, gini)
+  )
+# criando a tabela 
+dados_summ %>%
   reactable(
     columns = list(
       abbrev_state = colDef("Estado"),
@@ -131,11 +156,11 @@ dados_summ %>%
     ),
     columnGroups = list(
       colGroup(
-        name = "População", 
+        name = "População",
         columns = c("pop_1991", "pop_2000", "pop_2010")
       ),
       colGroup(
-        name = "Índice de Gini", 
+        name = "Índice de Gini",
         columns = c("gini_1991", "gini_2000", "gini_2010")
       )
     )
@@ -148,6 +173,8 @@ dados_summ %>%
 # geom_encircle é interessante para destacar pontos distantes da nuvem de pontos
 
 library(ggalt)
+# install.packages("remotes")
+# remotes::install_github("cienciadedatos/dados")
 library(dados)
 
 dados <- clima %>% 
@@ -168,16 +195,25 @@ dados %>%
 
 # Também é possível obter resultados similares usando gghighlight
 
-dados %>% 
-  mutate(dia_do_ano = as.Date(dia_do_ano)) %>% 
-  ggplot(aes(x = dia_do_ano, y = temperatura)) + 
-  geom_point() + 
-  gghighlight::gghighlight(
-    dia_do_ano == as.Date("2013-05-08") & temperatura < 20,
-    label_key = dia_do_ano,
-    label_params = list(size = 10)
-  ) +
-  geom_label(aes(label = dia_do_ano), vjust = -1)
+# dados %>% 
+#   mutate(dia_do_ano = as.Date(dia_do_ano)) %>% 
+#   ggplot(aes(x = dia_do_ano, y = temperatura)) + 
+#   geom_point() + 
+#   gghighlight::gghighlight(
+#     dia_do_ano == "2013-05-08" & temperatura < 20,
+#     label_key = dia_do_ano,
+#     label_params = list(size = 10)
+#   ) +
+#  geom_label(aes(label = dia_do_ano), vjust = -1)
+
+## ggrepel -------------------------
+
+mtcars %>% 
+  tibble::rownames_to_column() %>% 
+  ggplot(aes(disp, mpg)) +
+  geom_point() +
+  # geom_label(aes(label = rowname))
+  ggrepel::geom_label_repel(aes(label = rowname))
 
 
 # gganimate ---------------------------------------------------------------
@@ -186,6 +222,7 @@ dados %>%
 ## Geralmente é usado para substituir facets por animações
 
 anim <- municipios %>% 
+  filter(abbrev_state == estado_para_filtrar) %>% 
   mutate(ano = as.numeric(ano)) %>% 
   ggplot(aes(rdpc, espvida, size = sqrt(pop))) +
   geom_point() +
@@ -206,7 +243,7 @@ animate(
   duration = 10, 
   fps = 2, 
   detail = 1,
-  gifski_renderer("~/Downloads/gif.gif")
+  gifski_renderer("exemplos_de_aula/gif.gif")
 )
 
 ## salvar em video
@@ -217,14 +254,14 @@ animate(
   duration = 10, 
   fps = 2, 
   detail = 1,
-  av_renderer("~/Downloads/video.mp4")
+  av_renderer("exemplos_de_aula/video.mp4")
 )
 
 ## Mapa
 
 ### install.packages("transformr")
 anim <- municipios %>% 
-  filter(abbrev_state == "PR") %>% 
+  filter(abbrev_state == estado_para_filtrar) %>% 
   mutate(ano = as.numeric(ano)) %>% 
   ggplot(aes(fill = idhm)) +
   geom_sf(colour = "black", size = .1) +
