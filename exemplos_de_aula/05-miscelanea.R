@@ -143,6 +143,25 @@ dados_summ %>%
 
 # extensoes ggplot2 =======================================================
 
+# gghighlight --------------------------------------------
+
+dados <- clima %>% 
+filter(origem == "JFK") %>% 
+  group_by(dia_do_ano = lubridate::floor_date(data_hora, "day")) %>% 
+  summarise(temperatura = min(temperatura))
+
+
+dados %>% 
+  mutate(dia_do_ano = as.Date(dia_do_ano)) %>% 
+  ggplot(aes(x = dia_do_ano, y = temperatura)) + 
+  geom_point() + 
+  gghighlight::gghighlight(
+    dia_do_ano == as.Date("2013-05-08") & temperatura < 20,
+    label_key = dia_do_ano,
+    label_params = list(size = 10)
+  ) +
+  geom_label(aes(label = dia_do_ano), vjust = -1)
+
 # gganimate ---------------------------------------------------------------
 
 ## gganimate transforma um conjunto de gráficos em animações
