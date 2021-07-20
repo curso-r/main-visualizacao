@@ -1,0 +1,381 @@
+---
+title: "Temas em gráficos com ggplot2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,  message=FALSE, warning=FALSE, fig.align = "center", out.width = "90%")
+```
+
+## Carregar pacotes 
+
+```{r}
+library(tidyverse)
+```
+
+Se for necessário instalar o pacote dados, execute o código comentado abaixo!
+
+```{r}
+# install.packages("remotes")
+# remotes::install_github("cienciadedatos/dados")
+library(dados)
+```
+
+- Explorar a base: 
+
+```{r}
+glimpse(clima)
+```
+
+Criar uma base para ser usada ao longo do script: 
+
+```{r}
+temperatura_por_mes <- clima %>%
+  # cria uma coluna do mês, sem perder a classe data
+  mutate(mes = lubridate::floor_date(data_hora, "month"),
+         # converter de Fahrenheit para Celsius: ((F - 32) *5)/9
+         temperatura_celsius = ((temperatura - 32)*5)/9) %>% 
+  
+  # agrupa por origem e mês
+  group_by(origem, mes) %>%
+  # faz uma sumarização: temperatura média para cada combinação
+  # de mês e origem
+  summarise(temperatura_media = mean(temperatura_celsius, na.rm = TRUE)) %>%
+  # desagrupar a base final
+  ungroup() 
+```
+
+
+### Tema e labels 
+
+-  Temas prontos
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot() +
+  geom_line(aes(x = mes, y = origem, color = temperatura_media), size = 10) +
+  # theme_bw() 
+  # theme_classic() 
+  # theme_dark()
+  theme_minimal()
+```
+
+
+- A função theme()
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot() +
+  geom_line(aes(x = mes, y = origem, color = temperatura_media), size = 10) +
+  labs(
+    title = "Gráfico de dispersão",
+    subtitle = "Receita vs Orçamento",
+    x = "Mês",
+    y = "Aeroporto mais próximo do ponto de medição",
+    color = "Temperatura média (ºC)"
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5)
+  )
+```
+
+```{r}
+grafico_base <- temperatura_por_mes %>% 
+  ggplot() +
+  geom_line(aes(x = mes, y = origem, color = temperatura_media), size = 10) +
+  labs(
+    title = "Gráfico de dispersão",
+    subtitle = "Receita vs Orçamento",
+    x = "Mês",
+    y = "Aeroporto mais próximo do ponto de medição",
+    color = "Temperatura média (ºC)",
+    caption = "Fonte: ASOS download from Iowa Environmental Mesonet"
+  )
+
+grafico_base
+```
+
+Vamos explorar os componentes mais importantes do theme!
+
+- Esses componentes têm vários subcomponentes, que podem ser consultados em `help(theme)`
+
+- O padrão dos nomes é, por exemplo, `theme(axis.text.x)`. Praticamente todos os componentes devem ser parametrizados como um:
+
+   - (a) element_text, para componentes textuais como por exemplo axis.text.x , axis.text.y e legend.title. Exemplos:
+
+- mudando o tamanho e a cor dos textos dos eixos
+
+```{r}
+grafico_base +
+  theme(
+    axis.text = element_text(color = 'red', size = 20)
+  )
+```
+
+
+- mudando o tamanho e a cor do texto do título da legenda
+
+```{r}
+grafico_base +
+  theme(
+    legend.title = element_text(color = 'red', size = 20)
+  )
+```
+
+
+- mudando o tamanho e a cor do texto do texto da legenda
+
+```{r}
+grafico_base +
+  theme(
+    legend.text = element_text(color = 'red', size = 20)
+  )
+```
+
+  - (b) element_rect, para bordas e fundos, como panel.background. Exemplos: 
+
+- mudando a cor do fundo
+
+```{r}
+grafico_base +
+  theme(
+    panel.background = element_rect(fill = 'white')
+  )
+```
+
+
+- mudando a cor do fundo e as bordas
+
+```{r}
+grafico_base +
+  theme(
+    panel.background = element_rect(fill = 'white', color = 'gray')
+  )
+```
+
+
+- mudando a cor do fundo, das bordas e aumentando o tamanho das bordas
+
+```{r}
+grafico_base +
+  theme(
+    panel.background = element_rect(fill = 'white', color = 'gray', size = 2)
+  )
+```
+
+
+- por que as gradações de escala sumiram? porque a cor padrão do componente axis.ticks é branco. vamos ver como mexer nele:
+
+  - (c) element_line, para linhas como axis.line e axis.ticks e panel.grid
+
+- mudando a cor do fundo, das bordas, aumentando o tamanho das bordas e trocando a cor das gradações de escala 
+
+- mudando a cor das linhas principais dos eixos x e y
+
+```{r}
+grafico_base +
+  theme(
+    panel.background = element_rect(fill = 'white', color = 'gray', size = 2),
+    panel.grid  = element_line(color = 'gray')
+  )
+```
+
+
+- mudando a cor das linhas principais do eixo x
+
+```{r}
+grafico_base +
+  theme(
+    panel.background = element_rect(fill = 'white', color = 'gray', size = 2),
+    panel.grid.major.x  = element_line(color = 'gray')
+  )
+```
+
+
+-  mudando a cor das linhas secundárias do eixo x
+
+```{r}
+grafico_base +
+  theme(
+    panel.background = element_rect(fill = 'white', color = 'gray', size = 2),
+    panel.grid.major.x  = element_line(color = 'darkgray'),
+    panel.grid.minor.x  = element_line(color = 'lightgray')
+  )
+
+```
+
+- acabando com a diferença entre linhas major e minors
+
+```{r}
+grafico_base +
+  theme(
+    panel.background = element_rect(fill = 'white', color = 'gray', size = 2),
+    panel.grid.major.x  = element_line(color = 'lightgray'),
+    panel.grid.minor.x  = element_line(color = 'lightgray')
+  )
+```
+
+
+## Mais temas
+
+```{r}
+#install.packages("ggthemes")
+```
+
+
+### Tema do fivethirthyeight
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot() +
+  geom_line(aes(x = mes, y = origem, color = temperatura_media), size = 10) +
+  labs(
+    title = "Gráfico de dispersão",
+    subtitle = "Receita vs Orçamento",
+    x = "Mês",
+    y = "Aeroporto mais próximo do ponto de medição",
+    color = "Temperatura média (ºC)"
+  ) +
+  ggthemes::theme_fivethirtyeight()
+```
+
+
+### Tema da Google Docs
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot() +
+  geom_line(aes(x = mes, y = origem, color = temperatura_media), size = 10) +
+  labs(
+    title = "Gráfico de dispersão",
+    subtitle = "Receita vs Orçamento",
+    x = "Mês",
+    y = "Aeroporto mais próximo do ponto de medição",
+    color = "Temperatura média (ºC)"
+  ) +
+  ggthemes::theme_gdocs()
+```
+
+
+- Mais exemplos em: https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/
+
+
+## Cores
+
+Existem muitas, muitas paletas de cores para serem usadas.
+
+No {ggplot2}, temos já implementadas as paletas viridis e ColorBrewer. Vamos mostrar alguns exemplos de cada
+
+### Viridis
+
+```{r}
+ggplot(diamante, aes(quilate, preco)) +
+  geom_bin2d() +
+  # _c() vem de "continuo"
+  scale_fill_viridis_c(
+    alpha = .99, 
+    begin = .1, 
+    end = .9, 
+    direction = 1, 
+    option = "D"
+  ) +
+  scale_x_log10() + 
+  scale_y_log10() +
+  theme_minimal()
+
+```
+
+- variaveis ordinais já vem em viridis
+
+```{r}
+diamante %>% 
+  ggplot(aes(corte, fill = cor)) +
+  geom_bar()
+
+diamante %>% 
+  dplyr::mutate(cor = factor(as.character(cor))) %>% 
+  ggplot(aes(corte, fill = cor)) +
+  geom_bar()
+
+diamante %>% 
+  dplyr::mutate(cor = factor(as.character(cor))) %>% 
+  ggplot(aes(corte, fill = cor)) +
+  scale_fill_viridis_d(option = "A") +
+  geom_bar()
+
+p_base <- diamante %>% 
+  ggplot(aes(corte, fill = cor)) +
+  geom_bar() +
+  theme_minimal()
+```
+
+
+### ColorBrewer
+
+- sequencial
+
+```{r}
+p_base +
+  scale_fill_brewer(palette = "BuPu")
+```
+
+- divergente
+
+
+```{r}
+p_base + 
+  scale_fill_brewer(palette = "RdBu")
+
+```
+
+- qualitativo
+
+```{r}
+p_base + 
+  scale_fill_brewer(palette = "Pastel1")
+```
+
+
+
+### scale_fill_brewer()
+
+- usando brewer para variáveis contínuas: scale_fill_distiller() e  scale_fill_fermenter()
+
+```{r}
+ggplot(diamante, aes(quilate, preco)) +
+  geom_bin2d() +
+  scale_fill_distiller(palette = "RdBu") +
+  scale_x_log10() + 
+  scale_y_log10() +
+  theme_minimal()
+```
+
+
+- veja a diferença na legenda
+```{r}
+ggplot(diamante, aes(quilate, preco)) +
+  geom_bin2d() +
+  scale_fill_fermenter(palette = "RdBu") +
+  scale_x_log10() + 
+  scale_y_log10() +
+  theme_minimal()
+
+```
+
+## Fazendo seu próprio esquema de cores
+
+O {thematic} é um novo pacote, lançado em 2021, para criar temas: https://rstudio.github.io/thematic/articles/auto.html#rmd
+
+```{r}
+# library(bslib)
+# library(thematic)
+# 
+# bs_theme_preview(
+#   bs_theme(bg = "#444444", fg = "#E4E4E4", primary = "#E39777")
+# )
+```
+
+
+
+
