@@ -148,6 +148,7 @@ dados_summ %>%
 # geom_encircle é interessante para destacar pontos distantes da nuvem de pontos
 
 library(ggalt)
+library(dados)
 
 dados <- clima %>% 
   filter(origem == "JFK") %>% 
