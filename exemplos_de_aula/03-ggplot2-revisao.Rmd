@@ -1,0 +1,305 @@
+---
+title: "Revisão sobre ggplot2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,  message=FALSE, warning=FALSE, fig.align = "center", out.width = "90%")
+```
+
+## Carregar pacotes 
+
+```{r}
+library(tidyverse)
+```
+
+Se for necessário instalar o pacote dados, execute o código comentado abaixo!
+
+```{r}
+# install.packages("remotes")
+# remotes::install_github("cienciadedatos/dados")
+library(dados)
+```
+
+- Explorar a base: 
+
+```{r}
+glimpse(clima)
+```
+
+Criar uma base para ser usada ao longo do script: 
+
+```{r}
+temperatura_por_mes <- clima %>%
+  # cria uma coluna do mês, sem perder a classe data
+  mutate(mes = lubridate::floor_date(data_hora, "month"),
+         # converter de Fahrenheit para Celsius: ((F - 32) *5)/9
+         temperatura_celsius = ((temperatura - 32)*5)/9) %>% 
+  
+  # agrupa por origem e mês
+  group_by(origem, mes) %>%
+  # faz uma sumarização: temperatura média para cada combinação
+  # de mês e origem
+  summarise(temperatura_media = mean(temperatura_celsius, na.rm = TRUE)) %>%
+  # desagrupar a base final
+  ungroup() 
+```
+
+
+## Filosofia
+
+> Um gráfico estatístico é uma representação visual dos dados por meio de atributos estéticos (posição, cor, forma, tamanho, ...) de formas geométricas (pontos, linhas, barras, ...). *Leland Wilkinson, The Grammar of Graphics*
+
+> Layered grammar of graphics: cada elemento do gráfico pode ser representado por uma camada e um gráfico seria a sobreposição dessas camadas. *Hadley Wickham, A layered grammar of graphics*
+
+
+## Gráfico de linhas
+
+- Apenas o canvas
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot()
+```
+
+- Salvando em um objeto
+
+```{r}
+p <- temperatura_por_mes %>% 
+  ggplot()
+```
+
+-  Adicionando eixo X
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot() +
+  aes(x = mes)
+```
+
+- Adicionando eixo Y
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot() +
+  aes(x = mes, y = temperatura_media)
+```
+
+- Gráfico de dispersão da temperatura média do mês ao longo do tempo
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot() +
+  aes(x = mes, y = temperatura_media, color = origem) +
+  geom_line()
+```
+
+
+- Mesma informação, apenas trocando os mapeamentos estéticos
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot() +
+  geom_line(aes(x = mes, y = origem, color = temperatura_media), size = 10)
+```
+
+-  Salvando um gráfico em um arquivo
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot() +
+  geom_line(aes(x = mes, y = origem, color = temperatura_media), size = 10)
+
+ggsave("meu_grafico.png")
+```
+
+
+## Temas prontos e labels
+
+### Temas prontos
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot() +
+  geom_line(aes(x = mes, y = origem, color = temperatura_media), size = 10) +
+  # theme_bw() 
+  # theme_classic() 
+  # theme_dark()
+  theme_minimal()
+```
+
+### Labels
+
+```{r}
+# A função labs()
+temperatura_por_mes %>% 
+  ggplot() +
+  geom_line(aes(x = mes, y = origem, color = temperatura_media), size = 10) +
+  labs(
+    title = "Gráfico de dispersão",
+    subtitle = "Receita vs Orçamento",
+    x = "Mês",
+    y = "Aeroporto mais próximo do ponto de medição",
+    color = "Temperatura média (ºC)"
+  ) 
+
+```
+
+## Gráfico de barras
+
+
+```{r}
+# até agora exploramos bastante o geom_lines
+
+# vamos explorar outros geoms importantes:
+
+# para destacar uma comparação entre quantidade ou valores de diferentes grupos, por exemplo, uma alternativa interessante é a barra
+# geom_col
+
+pinguins %>% 
+  count(especie) %>% 
+  ggplot(aes(x = especie, y = n,fill = especie)) + 
+  geom_col()
+
+# no dataset pinguins, tem bem mais pinguins-de-adélia do que pinguins-de-barbicha
+
+# nesse tipo de gráfico é muito comum que a gente queira ordenar da maior barra para a menor barra, justamente
+# para destacar a comparação nessa dimensão
+
+# para esse tipo de operação usamos o pacote forcats
+library(forcats)
+
+# ordenando do maior para o menor
+pinguins %>% 
+  count(especie) %>% 
+  mutate(especie = fct_reorder(especie, n)) %>% 
+  ggplot(aes(x = especie, y = n,fill = especie)) + 
+  geom_col() 
+
+# ordenando do menor para o maior
+pinguins %>% 
+  count(especie) %>% 
+  mutate(especie = fct_reorder(especie, -n)) %>% 
+  ggplot(aes(x = especie, y = n,fill = especie)) + 
+  geom_col() 
+
+# às vezes queremos comparar, ao mesmo tempo, grupos e subgrupos. isso é, no mesmo "x" vão existir várias barras para serem plotadas
+
+# aqui temos duas opções:
+
+# empilhar (padrão);
+
+pinguins %>% 
+  count(especie, sexo) %>% 
+  ggplot(aes(x = sexo, y = n,fill = especie)) + 
+  geom_col() 
+
+# colocar lado a lado;
+
+pinguins %>% 
+  count(especie, sexo) %>% 
+  ggplot(aes(x = sexo, y = n,fill = especie)) + 
+  geom_col(position = 'dodge') 
+  # "dodge" significa "desviar"
+  
+
+# aqui podemos ver que não parece que há uma grande diferença entre o número de pinguis machos e fêmeas e nem da distribuição
+# de espécies em cada grupo
+
+# empilhar com relação aos valores relativos dentro de cada grupo:
+
+pinguins %>% 
+  count(especie, sexo) %>% 
+  ggplot(aes(x = sexo, y = n,fill = especie)) + 
+  geom_col(position = 'fill') 
+  # "fill" significa "preencher"
+```
+
+## Visualizando distribuições
+
+```{r}
+# Ás vezes queremos visualizar distribuições, no sentido estatístico mesmo
+
+# para isso utilizaros geoms como geom_histogram ou geom_density
+
+pinguins %>% 
+  ggplot(aes(x = comprimento_bico)) +
+  geom_histogram() 
+
+# ajeitando o gráfico fica:
+
+pinguins %>% 
+  ggplot(aes(x = comprimento_bico)) +
+  geom_histogram(fill = 'royalblue', color = 'white') +
+  theme_bw() +
+  labs(x = "Comprimento do bico (cm)",
+       y = "Contagem")
+
+# usando a densidade (que suaviza o histograma para desconsiderar os picos)
+
+pinguins %>% 
+  ggplot(aes(x = comprimento_bico)) +
+  geom_density(fill = 'royalblue', color = 'white') +
+  theme_bw() +
+  labs(x = "Comprimento do bico (cm)",
+       y = "Contagem")
+
+# podemos também usar essas funções para comparar grupos
+
+pinguins %>% 
+  ggplot(aes(x = comprimento_bico, fill = especie)) +
+  geom_histogram(color = 'white') +
+  theme_bw() +
+  labs(x = "Comprimento do bico (cm)",
+       y = "Contagem")
+
+# a sobreposição atrapalha um pouco a visualização por histograma
+
+# se quisermos suavizar a sobreposição a função geom_density parece adequada,
+# pois aceita um parâmetros de transparência, que se chama "alpha", pois o seu uso aqui cria um sombreado
+
+pinguins %>% 
+  ggplot(aes(x = comprimento_bico, fill = especie)) +
+  geom_density(color = 'white', alpha = .7) +
+  theme_bw() +
+  labs(x = "Comprimento do bico (cm)",
+       y = "Contagem")
+
+# o efeito não é tão legal no geom_histogram, porque é como se uma barra estivesse à frente da outra
+
+pinguins %>% 
+  ggplot(aes(x = comprimento_bico, fill = especie)) +
+  geom_histogram(color = 'white', alpha = .7) +
+  theme_bw() +
+  labs(x = "Comprimento do bico (cm)",
+       y = "Contagem")
+```
+
+## Gráfico de pontos
+```{r}
+
+# essa é a representação que dá destaque total ao valor numérico dos dados. é a representação "mais crua" dos dados.
+# a quantidade de tinta gasta por linha da base de dados é a menor possível
+
+# serve para destacar o formato da nuve de pontos formada por dados numéricos
+# só a nuvem em si não comunica nenhuma mensagem explicitamente. a intepretação fica a cargo de quem vê o gráfico
+
+clima %>% 
+  filter(origem == "JFK") %>% 
+  group_by(dia_do_ano = lubridate::floor_date(data_hora, "day")) %>%
+  summarise(temperatura = min(temperatura)) %>% 
+  ggplot(aes(x = dia_do_ano, y = temperatura)) + 
+  geom_point()
+
+# é interessante complementar um gráfico de pontos com algum elemento de destaque
+
+# geom_smooth é interessante para destacar tendências
+clima %>% 
+  filter(origem == "JFK") %>% 
+  group_by(dia_do_ano = lubridate::floor_date(data_hora, "day")) %>%
+  summarise(temperatura = min(temperatura)) %>% 
+  ggplot(aes(x = dia_do_ano, y = temperatura)) + 
+  geom_point() + 
+  geom_smooth()
+```
+
