@@ -31,7 +31,8 @@ fs::dir_create("exercicios_resolucao/xaringan/libs")
 
 fs::dir_create("exercicios_resolucao/xaringan/css")
 
-# 3. Crie um arquivo R Markdown com o template `Ninja presentation`,
+# 3. Crie um arquivo R Markdown com o template `Ninja Themed presentation`,
+# do pacote xaringanthemer,
 # e com o nome `index.html`, e salve na pasta que estamos salvando o exercicio
 # (a pasta exercicios_resolucao/xaringan/  )
 
