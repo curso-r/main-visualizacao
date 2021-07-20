@@ -1,3 +1,21 @@
+---
+title: "Miscelânea"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE,
+	fig.align = "center",
+	cache = TRUE
+)
+```
+
+## Carregar pacotes 
+
+```{r}
 library(sf)
 library(dplyr)
 library(leaflet)
@@ -9,37 +27,58 @@ library(reactable)
 library(gganimate)
 library(patchwork)
 library(ggrepel)
+```
 
 
-# dados -------------------------------------------------------------------
 
-## codigos da aula de mapas
+## Bases de dados
 
-# escolas de brasilia
-escolas_brasilia <- readr::read_rds("dados/geobr/escolas_brasilia.Rds")
+- códigos da aula de mapas!
 
-# IDH dos municipios
+- escolas de brasilia
+```{r}
+escolas_brasilia <- readr::read_rds("../dados/geobr/escolas_brasilia.Rds")
+```
+
+
+- IDH dos municipios
+
+```{r}
 dados_idh_muni <- abjData::pnud_min %>% 
   mutate(code_muni = as.numeric(muni_id))
+```
 
-# unir a base de municipios do geobr com a base de idh
-municipios <- readr::read_rds("dados/geobr/municipios_todos.rds") %>%
+
+- unir a base de municipios do geobr com a base de IDH
+
+```{r}
+municipios <- readr::read_rds("../dados/geobr/municipios_todos.rds") %>%
   inner_join(dados_idh_muni)
 
 # se quiser buscar esses dados com o pacote geobr, 
 # o código é o seguinte
 # municipios <- geobr::read_municipality()
+```
+
+- Sortear um estado para filtrar
+```{r}
+estado_para_filtrar <- municipios$abbrev_state %>%
+  unique() %>%
+  tibble::as_tibble() %>%
+  dplyr::sample_n(1) %>% 
+  dplyr::pull(value)
+```
 
 
-# htmlwidgets =============================================================
+## htmlwidgets
 
-# leaflet -----------------------------------------------------------------
+### leaflet
 
-## O leaflet ajuda a fazer mapas interativos, em uma sintaxe muito parecida
-## com o ggplot2. Você inicia com um mapa vazio e vai adicionando layers.
+O leaflet ajuda a fazer mapas interativos, em uma sintaxe muito parecida com o ggplot2. Você inicia com um mapa vazio e vai adicionando layers.
 
-## Mapa de pontos
+#### Mapa de pontos
 
+```{r}
 escolas_brasilia %>%
   # adiciona leaflet vazio
   leaflet() %>%
@@ -50,21 +89,16 @@ escolas_brasilia %>%
     popup = ~ name_school,
     clusterOptions = markerClusterOptions()
   )
+```
 
-## mapa temático ---
+#### Mapa temático
+
+```{r}
 
 ### transformador de numeros em cores
 pal <- colorNumeric("YlOrRd", filter(municipios, ano == 2010)$idhm)
 pal(0.7)
 pal(0.81)
-
-
-# Sortear um estado para filtrar
-estado_para_filtrar <- municipios$abbrev_state %>%
-  unique() %>%
-  tibble::as_tibble() %>%
-  dplyr::sample_n(1) %>% 
-  dplyr::pull(value)
 
 municipios %>% 
   # filtrar para o ano de 2010, e apenas 1 estado
@@ -81,53 +115,63 @@ municipios %>%
     fillColor = ~pal(idhm),
     fillOpacity = .8
   )
+```
 
-# plotly ------------------------------------------------------------------
+### plotly
 
-## https://plot.ly é uma empresa bem grande de visualização de dados.
-## Eles produzem ferramentas para R, python, JavaScript
-## e têm uma solução própria para fazer dashboards.
+ https://plot.ly é uma empresa bem grande de visualização de dados.
 
-## Para essa parte, vamos nos limitar ao ggplotly(), que é um transformador
-## de ggplot em plotly:
+Eles produzem ferramentas para R, python, JavaScript e têm uma solução própria para fazer dashboards.
 
+Para essa parte, vamos nos limitar ao ggplotly(), que é um transformador de ggplot em plotly:
+
+```{r}
 gg_idhm <- municipios %>% 
   ggplot(aes(x = gini, y = idhm, colour = espvida)) +
   geom_point() +
   facet_wrap(~ano)
 
 plotly::ggplotly(gg_idhm)
+```
 
-# highcharter -------------------------------------------------------------
 
-## https://www.highcharts.com também é uma grande empresa de visualização
-## O {highcharter} é uma adaptação do highcharts para R
-## Assim como no plotly, o highcharter tenta se aproximar da linguagem R
-## através do ggplot2. No entanto, a abordagem é diferente: é fornecida
-## uma sintaxe parecida com o ggplot2, com algumas adaptações.
+### highcharter
 
+https://www.highcharts.com também é uma grande empresa de visualização
+
+O {highcharter} é uma adaptação do highcharts para R.
+
+Assim como no plotly, o highcharter tenta se aproximar da linguagem R através do ggplot2. No entanto, a abordagem é diferente: é fornecida uma sintaxe parecida com o ggplot2, com algumas adaptações.
+
+```{r}
 municipios %>% 
   filter(ano == 2010, abbrev_state == estado_para_filtrar) %>% 
   hchart("scatter", hcaes(x = gini, y = idhm, color = espvida))
 
-## para graficos univariados, basta passar o vetor
 
-### histograma
+```
+
+- para graficos univariados, basta passar o vetor
+
+```{r}
+# histograma
 municipios %>% 
   pull(gini) %>% 
   hchart()
 
-### densidade
+# densidade
 municipios %>% 
   pull(gini) %>% 
   density() %>% 
   hchart()
+```
 
-# reactable ---------------------------------------------------------------
+### reactable
 
-## {reactable} e {DT} são os melhores pacotes para fazer tabelas 
-## interativas. Aqui, vamos mostrar o {reactable}
+{reactable} e {DT} são os melhores pacotes para fazer tabelas interativas. Aqui, vamos mostrar o {reactable}
 
+
+```{r}
 # tabela base
 
 dados_summ <- municipios %>% 
@@ -166,10 +210,13 @@ dados_summ %>%
     )
   )
 
-# extensoes ggplot2 =======================================================
+```
 
-# ggalt e gghighlight --------------------------------------------
+## Extensões do ggplot2
 
+### ggalt 
+
+```{r}
 # geom_encircle é interessante para destacar pontos distantes da nuvem de pontos
 
 library(ggalt)
@@ -193,8 +240,13 @@ dados %>%
     color = "red", s_shape = .1, expand = .01, size = 3
   )
 
-# Também é possível obter resultados similares usando gghighlight
+```
 
+###  gghighlight
+
+Também é possível obter resultados similares usando gghighlight
+ 
+```{r}
 # dados %>% 
 #   mutate(dia_do_ano = as.Date(dia_do_ano)) %>% 
 #   ggplot(aes(x = dia_do_ano, y = temperatura)) + 
@@ -206,21 +258,26 @@ dados %>%
 #   ) +
 #  geom_label(aes(label = dia_do_ano), vjust = -1)
 
-## ggrepel -------------------------
+```
 
+## ggrepel
+
+```{r}
 mtcars %>% 
   tibble::rownames_to_column() %>% 
   ggplot(aes(disp, mpg)) +
   geom_point() +
   # geom_label(aes(label = rowname))
   ggrepel::geom_label_repel(aes(label = rowname))
+```
 
+## gganimate
 
-# gganimate ---------------------------------------------------------------
+gganimate transforma um conjunto de gráficos em animações. Geralmente é usado para substituir facets por animações.
 
-## gganimate transforma um conjunto de gráficos em animações
-## Geralmente é usado para substituir facets por animações
+### Gráfico
 
+```{r}
 anim <- municipios %>% 
   filter(abbrev_state == estado_para_filtrar) %>% 
   mutate(ano = as.numeric(ano)) %>% 
@@ -231,11 +288,22 @@ anim <- municipios %>%
   # Aqui começa o gganimate
   labs(title = 'Ano: {frame_time}', x = 'Renda', y = 'Expectativa de vida') +
   transition_time(ano)
+```
 
-## mostrar o gif!
+
+- mostrar o gif!
+
+```{r}
 animate(anim, nframes = 20, width = 800, height = 400)
+```
 
-## salvar o gif
+
+- salvar o gif
+
+```{r eval=FALSE, include=TRUE}
+# criar a pasta para salvar o gif
+fs::dir_create("../output")
+
 animate(
   anim, 
   width = 800, height = 400, 
@@ -243,10 +311,14 @@ animate(
   duration = 10, 
   fps = 2, 
   detail = 1,
-  gifski_renderer("exemplos_de_aula/gif.gif")
+  gifski_renderer("../output/gif_ggplot.gif")
 )
+```
 
-## salvar em video
+
+- salvar em video
+
+```{r eval=FALSE, include=TRUE}
 animate(
   anim, 
   width = 800, height = 400, 
@@ -254,11 +326,15 @@ animate(
   duration = 10, 
   fps = 2, 
   detail = 1,
-  av_renderer("exemplos_de_aula/video.mp4")
+  av_renderer("../output/video_ggplot.mp4")
 )
+```
 
-## Mapa
 
+
+### Mapa
+
+```{r eval=FALSE, include=TRUE}
 ### install.packages("transformr")
 anim <- municipios %>% 
   filter(abbrev_state == estado_para_filtrar) %>% 
@@ -270,12 +346,21 @@ anim <- municipios %>%
   transition_time(ano) +
   enter_fade()
 
+```
+
+- Mostrar o gif!
+
+```{r eval=FALSE, include=TRUE}
 animate(
   anim, nframes = 20, fps = 8,
   width = 800, height = 400
 )
+```
 
-## Salvar o gif
+
+-  Salvar o gif
+
+```{r eval=FALSE, include=TRUE}
 animate(
   anim, 
   width = 800, height = 400, 
@@ -283,5 +368,7 @@ animate(
   duration = 5, 
   fps = 4, 
   detail = 1,
-  gifski_renderer("~/Downloads/gif.gif")
+  gifski_renderer("../output/gif_mapa.gif")
 )
+```
+
