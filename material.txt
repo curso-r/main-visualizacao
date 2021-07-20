@@ -1,3 +1,5 @@
 exemplos_de_aula
-dados
+dados/rodovias_df.Rds
+dados/geobr
+dados/imdb.rds
 visualizacao.Rproj
