@@ -245,6 +245,7 @@ ggplot() +
 ```{r}
 library(sf)
 library(geobr)
+library(magrittr)
 ```
 
 
@@ -266,30 +267,31 @@ Como buscar a base? Se quiser baixar, remova os comentários (#) dos códigos ab
 # Descompactar o zip
 # unzip("../dados/shp_rod/rodovias.zip", exdir = "../dados/shp_rod/")
 
+
+# Importar a base em arquivo .shp
+# rodovias <-
+#   st_read(
+#     "../dados/shp_rod/rodovias.shp",
+#     quiet = TRUE#,
+#     #options = "ENCODING=WINDOWS-1252"
+#   ) %>%
+#   # limpar o nome das colunas
+#   janitor::clean_names()
+
+# filtrar para DF
+
+# rodovias_df <- rodovias %>% 
+#   filter(sg_uf == "DF") 
+
 ```
 
 
+### Importar a base 
 
-
-### Importar a base em arquivo .shp (Trabalhando com bases georreferenciadas)
-
-```{r}
-rodovias <-
-  st_read(
-    "../dados/shp_rod/rodovias.shp",
-    quiet = TRUE#,
-    #options = "ENCODING=WINDOWS-1252"
-  ) %>%
-  # limpar o nome das colunas
-  janitor::clean_names()
-```
-
-
-- filtrar para DF
+Essa base foi gerada a partir do código no chunk anterior.
 
 ```{r}
-rodovias_df <- rodovias %>% 
-  filter(sg_uf == "DF") 
+rodovias_df <- readr::read_rds("../dados/rodovias_df.Rds")
 ```
 
 

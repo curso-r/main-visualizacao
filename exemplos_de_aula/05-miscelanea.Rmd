@@ -29,29 +29,23 @@ library(patchwork)
 library(ggrepel)
 ```
 
-
-
 ## Bases de dados
 
 - códigos da aula de mapas!
 
 - escolas de brasilia
+
 ```{r}
 escolas_brasilia <- readr::read_rds("../dados/geobr/escolas_brasilia.Rds")
 ```
-
 
 - IDH dos municipios
 
 ```{r}
 dados_idh_muni <- abjData::pnud_min %>% 
   mutate(code_muni = as.numeric(muni_id))
-```
 
-
-- unir a base de municipios do geobr com a base de IDH
-
-```{r}
+# unir a base de municipios do geobr com a base de IDH
 municipios <- readr::read_rds("../dados/geobr/municipios_todos.rds") %>%
   inner_join(dados_idh_muni)
 
@@ -60,15 +54,17 @@ municipios <- readr::read_rds("../dados/geobr/municipios_todos.rds") %>%
 # municipios <- geobr::read_municipality()
 ```
 
+
 - Sortear um estado para filtrar
+
 ```{r}
-estado_para_filtrar <- municipios$abbrev_state %>%
+estado_para_filtrar <- municipios %>%
+  dplyr::pull(abbrev_state) %>% 
   unique() %>%
-  tibble::as_tibble() %>%
-  dplyr::sample_n(1) %>% 
-  dplyr::pull(value)
+  sample(1)
 ```
 
+------------------------------------------------------------------
 
 ## htmlwidgets
 
@@ -147,8 +143,6 @@ Assim como no plotly, o highcharter tenta se aproximar da linguagem R através d
 municipios %>% 
   filter(ano == 2010, abbrev_state == estado_para_filtrar) %>% 
   hchart("scatter", hcaes(x = gini, y = idhm, color = espvida))
-
-
 ```
 
 - para graficos univariados, basta passar o vetor
@@ -169,7 +163,6 @@ municipios %>%
 ### reactable
 
 {reactable} e {DT} são os melhores pacotes para fazer tabelas interativas. Aqui, vamos mostrar o {reactable}
-
 
 ```{r}
 # tabela base
@@ -218,57 +211,69 @@ dados_summ %>%
 
 ```{r}
 # geom_encircle é interessante para destacar pontos distantes da nuvem de pontos
-
 library(ggalt)
-# install.packages("remotes")
-# remotes::install_github("cienciadedatos/dados")
-library(dados)
 
-dados <- clima %>% 
-  filter(origem == "JFK") %>% 
-  group_by(dia_do_ano = lubridate::floor_date(data_hora, "day")) %>% 
-  summarise(temperatura = min(temperatura))
+pontos_diferentes <- municipios %>% 
+  filter(uf_sigla == "RS", ano == 2010, pop > 1e6)
 
-dia_estranho <- dados %>% 
-  filter(dia_do_ano == as.Date("2013-05-08"))
-
-dados %>% 
-  ggplot(aes(x = dia_do_ano, y = temperatura)) + 
-  geom_point() + 
+gg_alt <- municipios %>% 
+  filter(uf_sigla == "RS", ano == 2010) %>% 
+  ggplot(aes(idhm_e, pop)) +
+  geom_point() +
   ggalt::geom_encircle(
-    data = dia_estranho, 
+    data = pontos_diferentes,
     color = "red", s_shape = .1, expand = .01, size = 3
   )
 
+gg_alt
 ```
 
-###  gghighlight
+### gghighlight
 
 Também é possível obter resultados similares usando gghighlight
  
 ```{r}
-# dados %>% 
-#   mutate(dia_do_ano = as.Date(dia_do_ano)) %>% 
-#   ggplot(aes(x = dia_do_ano, y = temperatura)) + 
-#   geom_point() + 
-#   gghighlight::gghighlight(
-#     dia_do_ano == "2013-05-08" & temperatura < 20,
-#     label_key = dia_do_ano,
-#     label_params = list(size = 10)
-#   ) +
-#  geom_label(aes(label = dia_do_ano), vjust = -1)
+gg_highlight <- municipios %>% 
+  filter(uf_sigla == "RS", ano == 2010) %>% 
+  ggplot(aes(idhm_e, pop)) +
+  geom_point() +
+  gghighlight::gghighlight(
+    pop > 1e6,
+    label_key = name_muni
+  )
 
+gg_highlight
 ```
 
-## ggrepel
+### ggrepel
 
 ```{r}
-mtcars %>% 
-  tibble::rownames_to_column() %>% 
-  ggplot(aes(disp, mpg)) +
+gg_repel <- municipios %>% 
+  filter(uf_sigla == "RR", ano == 2010) %>% 
+  ggplot(aes(idhm_e, idhm_l)) +
   geom_point() +
-  # geom_label(aes(label = rowname))
-  ggrepel::geom_label_repel(aes(label = rowname))
+  ggrepel::geom_label_repel(aes(label = name_muni))
+```
+### patchwork
+
+Na mesma linha
+
+```{r}
+gg_alt + gg_highlight
+```
+
+Na mesma coluna
+
+```{r}
+gg_alt / gg_highlight
+
+gg_alt + gg_highlight +
+  plot_layout(ncol = 1)
+```
+Expressões
+
+```{r}
+(gg_alt + gg_highlight) / gg_repel
 ```
 
 ## gganimate
@@ -287,16 +292,14 @@ anim <- municipios %>%
   scale_x_log10() +
   # Aqui começa o gganimate
   labs(title = 'Ano: {frame_time}', x = 'Renda', y = 'Expectativa de vida') +
-  transition_time(ano)
+  gganimate::transition_time(ano)
 ```
-
 
 - mostrar o gif!
 
 ```{r}
-animate(anim, nframes = 20, width = 800, height = 400)
+gganimate::animate(anim, nframes = 20, width = 800, height = 400)
 ```
-
 
 - salvar o gif
 
@@ -304,7 +307,8 @@ animate(anim, nframes = 20, width = 800, height = 400)
 # criar a pasta para salvar o gif
 fs::dir_create("../output")
 
-animate(
+# melhor se tiver o pacote {gifski} instalado
+gganimate::animate(
   anim, 
   width = 800, height = 400, 
   nframes = 20,
@@ -319,7 +323,8 @@ animate(
 - salvar em video
 
 ```{r eval=FALSE, include=TRUE}
-animate(
+# melhor se tiver o pacote {av} instalado
+gganimate::animate(
   anim, 
   width = 800, height = 400, 
   nframes = 20,
@@ -329,7 +334,6 @@ animate(
   av_renderer("../output/video_ggplot.mp4")
 )
 ```
-
 
 
 ### Mapa
