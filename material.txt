@@ -3,3 +3,4 @@ dados/rodovias_df.Rds
 dados/geobr
 dados/imdb.rds
 visualizacao.Rproj
+exercicios
