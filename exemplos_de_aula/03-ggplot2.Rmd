@@ -133,6 +133,47 @@ grafico_base +
   )
 ```
 
+- mudando a posição da legenda
+
+```{r}
+grafico_base +
+  theme(
+    legend.position = 'bottom'
+  )
+```
+
+- mudando a justificação da legenda
+
+```{r}
+grafico_base +
+  theme(
+    legend.position = 'bottom',
+    legend.justification = 'left'
+    # o valor padrão desse parâmetro é 'center'
+  )
+```
+
+- mudando a direção da legenda 
+
+```{r}
+grafico_base +
+  theme(
+    legend.position = 'bottom',
+    legend.justification = 'left',
+    legend.direction = 'vertical'
+  )
+```
+
+- a posição da legenda também pode ser um vetorzinho
+
+```{r}
+grafico_base +
+  theme(
+    legend.position = c(0, 1),
+    legend.justification = 'left',
+    legend.direction = 'vertical'
+  )
+```
   - (b) element_rect, para bordas e fundos, como panel.background. Exemplos: 
 
 - mudando a cor do fundo
@@ -216,7 +257,6 @@ grafico_base +
   )
 ```
 
-
 ## Mais temas
 
 ```{r}
@@ -257,6 +297,37 @@ temperatura_por_mes %>%
   ggthemes::theme_gdocs()
 ```
 
+### Tema com apenas a cor de fundo (legal para mapas)
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot() +
+  geom_line(aes(x = mes, y = origem, color = temperatura_media), size = 10) +
+  labs(
+    title = "Gráfico de dispersão",
+    subtitle = "Receita vs Orçamento",
+    x = "Mês",
+    y = "Aeroporto mais próximo do ponto de medição",
+    color = "Temperatura média (ºC)"
+  ) +
+  ggthemes::theme_solid()
+```
+
+### Tema HC
+
+```{r}
+temperatura_por_mes %>% 
+  ggplot() +
+  geom_point(aes(x = mes, y = origem, color = temperatura_media), size = 10) +
+  labs(
+    title = "Gráfico de dispersão",
+    subtitle = "Receita vs Orçamento",
+    x = "Mês",
+    y = "Aeroporto mais próximo do ponto de medição",
+    color = "Temperatura média (ºC)"
+  ) +
+  ggthemes::theme_hc()
+```
 
 - Mais exemplos em: https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/
 
@@ -321,7 +392,6 @@ p_base +
 ```
 
 - divergente
-
 
 ```{r}
 p_base + 
