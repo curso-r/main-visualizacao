@@ -150,7 +150,6 @@ a, a > code {
   background: #f0f0f0;
 }
 
-
 .huge .remark-code { /*Change made here*/
   font-size: 200% !important;
 }
@@ -159,9 +158,6 @@ a, a > code {
   font-size: 70% !important;
 }
 
-
-
-.blue{
-  color:#6495ed; 
-  font-weight: bold;
+.remark-slide-content code {
+    font-size: 16px;
 }
