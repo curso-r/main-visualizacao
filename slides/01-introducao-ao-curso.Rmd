@@ -11,7 +11,8 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
-      ratio: "4:3"
+      ratio: "16:11"
+knit: pagedown::chrome_print
 ---
 
 ```{r setup, include=FALSE}

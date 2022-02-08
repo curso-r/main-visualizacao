@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Visualização de dados</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Visualização de dados
+## Introdução ao curso
+### <img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '30%'>
+### fevereiro de 2022
+
+---
+
+
+
+
+class: middle, center
+
+# Sobre a Curso-R
+
+---
+
+## A empresa
+
+&lt;br&gt;
+
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/295643c6243701ae6a9bac3fb8ad467ff0ce3c84/d1785/img/logo/cursor1-41.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;img src="img/logo_r6.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Filosofia de código aberto!
+
+.pull-left[
+<h3>Livros</h3><a href="https://livro.curso-r.com/" target="_blank">
+<img src="img/hex-livro.png" width="100px"/>
+</a><a href="https://curso-r.github.io/zen-do-r/index.html" target="_blank">
+<img src="img/zen-do-r.png" width="100px" style="margin-left: 20px;"/>
+</a>
+
+&lt;br&gt;
+
+<h3>Lives</h3><a href="https://www.youtube.com/c/CursoR6" target="_blank">
+<img src="img/youtube.png" width="200px"/>
+</a>
+]
+
+.pull-right[
+<h3>Material dos cursos</h3><a href="https://github.com/curso-r" target="_blank">
+<img src="img/github.png" width="230px"/>
+</a>
+
+&lt;br&gt;
+
+<h3>Blog</h3><a href="https://blog.curso-r.com/" target="_blank">
+<img src="img/blog.png" width="400px"/>
+</a>
+]
+
+&lt;br&gt;
+
+.center[
+### [www.curso-r.com](https://www.curso-r.com)
+]
+
+
+---
+## Nossos cursos
+
+<div>
+<div class="pull-left">
+<div class="container center">
+<div class="card">
+<h2>Programação para Ciência de Dados</h2>
+<hr style="background-color:#3bb44a;"/>
+<p>
+<a href="https://loja.curso-r.com/introduc-o-a-programac-o-com-r.html">Introdução a programação com R</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/r-para-ciencia-de-dados-i.html">R para Ciência de Dados I</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/r-para-ciencia-de-dados-ii.html">R para Ciência de Dados II</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/pacotes.html">Pacotes</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/python-para-ciencia-de-dados-i.html">Python para quem usa R</a>
+</p>
+</div>
+</div>
+<br/>
+<div class="container center">
+<div class="card">
+<h2>Web scraping</h2>
+<hr style="background-color:#eeba30;"/>
+<p>
+<a href="https://loja.curso-r.com/web-scraping.html">Web scraping</a>
+</p>
+</div>
+</div>
+</div>
+<div class="pull-right">
+<div class="container center">
+<div class="card">
+<h2>Dashboards e Visualização de Dados</h2>
+<hr style="background-color:#ff6699;"/>
+<p>
+<a href="https://loja.curso-r.com/visualizac-o-de-dados.html">Visualização de dados</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/relatorios-e-apresentacoes-automaticas.html">Relatórios e apresentações</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/construindo-dashboards-i.html">Dashboards I</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/deploy-colocando-seu-trabalho-em-produc-o.html">Deploy</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/construindo-dashboards-ii.html">Dashboards II</a>
+</p>
+</div>
+</div>
+<br/>
+<div class="container center">
+<div class="card">
+<h2>Modelagem de Dados</h2>
+<hr style="background-color:#996699;"/>
+<p>
+<a href="https://loja.curso-r.com/modelos-lineares.html">Modelos Lineares</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/introduc-o-ao-machine-learning.html">Introdução ao Machine Learning</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/modelagem-de-series-temporais.html">Séries Temporais</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/modelagem-n-o-supervisionada.html">Não supervisionado</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+---
+class: middle, center
+
+# Sobre o curso
+
+---
+## Dinâmica curso
+
+- As aulas serão em maior parte expositivas.
+
+- As aulas terão uma seção teórica, de exposição de conceitos, e prática, de aplicação de conceitos.
+
+- O objetivo dos exercícios é gerar dúvidas. **Com exceção do trabalho final, nenhum exercício precisa ser entregue**.
+
+- O certificado será emitido mediante uma **entrega final**, a ser especificada nas últimas aulas do curso. 
+
+- Haverá monitoria para esclarecimento de dúvidas sempre 30 minutos antes do início das aulas.
+
+- Usaremos os últimos minutos de cada aula para tirar dúvidas do conteúdo apresentado. Não haverá plantão de dúvidas pós aula.
+
+- A gravação das aulas ficará disponível no Google Classroom por 1 ano após o final do curso.
+
+---
+## Dinâmica das aulas
+
+- Mande dúvidas e comentários no chat em qualquer momento.
+
+- Para falar, levante a mão.
+
+- Algumas dúvidas serão respondidas na hora. Outras serão respondidas mais tarde na própria aula ou em aulas futuras.
+
+- Só interrompa quem estiver falando em caso de emergência.
+
+---
+## Tire suas dúvidas
+
+- **Não fique com dúvida**.
+ 
+- Fora do horário de aula ou monitoria:
+    - envie suas perguntas gerais **sobre o curso** no Classroom.
+     
+    - envie preferencialmente suas perguntas **sobre R** no [nosso discourse](https://discourse.curso-r.com/).
+
+- Saber fazer a pergunta certa vai te ajudar bastante nos estudos de programação. [Veja aqui dicas de como fazer uma boa pergunta](https://discourse.curso-r.com/t/como-escrever-uma-boa-pergunta/542).
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:11"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

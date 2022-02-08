@@ -36,6 +36,11 @@ h1, h2, h3 {
 
   padding: 1em 4em 1em 4em;
 }
+
+.blue {
+  color: #0000ff
+}
+
 .remark-slide-content h1 {
     font-size: 45px;
 }

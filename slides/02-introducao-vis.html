@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Visualização de dados</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Visualização de dados
+## O poder do {ggplot2}
+### <img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '20%'>
+
+---
+
+
+
+
+
+
+# Objetivos de aprendizagem
+
+⬜ Compreender o papel da visualização em um projeto de ciência de dados.
+
+--
+
+⬜ Compreender as diferenças entre análise exploratória e análise descritiva.
+
+--
+
+⬜ Entender o funcionamento básico do pacote `{ggplot2}`.
+
+--
+
+⬜ Utilizar o `{ggplot2}` em um problema concreto.
+
+---
+
+# O que é visualização de dados?
+
+.pull-left[
+
+- É a representação de dados em gráficos, tabelas e diagramas que podem ser interpretados por pessoas.
+
+- É uma área interdisciplinar, misturando estatística, arte e comunicação.
+
+- É uma parte da área de *data storytelling*, que envolve organizar todos os resultados de uma análise de dados em uma ordem lógica para comunicar de forma efetiva com a audiência.
+
+]
+
+.pull-right[
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/dog_treats_pipe.jpg" alt="Ilustração de Allison Horst"  /&gt;
+&lt;p class="caption"&gt;Ilustração de Allison Horst&lt;/p&gt;
+&lt;/div&gt;
+
+Ilustração de [Allison Horst](https://www.allisonhorst.com)
+
+]
+
+---
+
+# Por quê fazer visualizações de dados?
+
+.pull-left[
+
+- Visualizações estão presentes na grande maioria dos projetos de ciência de dados.
+
+- É a parte mais acessível da ciência de dados do ponto de vista de quem lê. Mostrar uma visualização costuma ser mais efetivo do que a saída de um modelo.
+
+- É uma das partes mais difíceis de automatizar da ciência de dados. Uma carreira em *dataviz* dificilmente ficará obsoleta.
+
+]
+
+.pull-right[
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="https://blog.curso-r.com/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.png" alt="Blog da Curso-R"  /&gt;
+&lt;p class="caption"&gt;Blog da Curso-R&lt;/p&gt;
+&lt;/div&gt;
+
+Imagem do [blog da Curso-R](https://blog.curso-r.com/posts/2019-02-10-sf-miojo/)
+
+]
+
+---
+
+# Para quê servem as visualizações?
+
+.pull-left[
+
+- Uma base de dados contém toda a informação que precisamos.
+
+- No entanto, não somos capazes de tirar conclusões apenas olhando essas bases.
+
+- Por isso, é necessário resumir esses dados em estatísticas.
+
+- Nem sempre as estatísticas (os números) são úteis para uma comunicação efetiva... Por isso, faz sentido mostrá-las usando formas, cores e outros elementos que facilitam a absorção da informação pelas pessoas.
+
+- Para o [Hadley Wickham](https://hadley.nz), visualizar dados serve para .blue[***surpreender***].
+
+]
+
+.pull-right[
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/presenting_monster.png" alt="Imagem de Allison Horst"  /&gt;
+&lt;p class="caption"&gt;Imagem de Allison Horst&lt;/p&gt;
+&lt;/div&gt;
+
+Ilustração de [Allison Horst](https://www.allisonhorst.com)
+
+]
+
+
+
+---
+
+# Em que momentos utilizamos?
+
+
+
+
+&lt;img src="img/ciclo-ciencia-de-dados-vis.png" width="1277" style="display: block; margin: auto;" /&gt;
+
+---
+
+.pull-left[
+
+## Análise exploratória
+
+- É um trabalho de __investigação__ de dados
+- A ferramenta: precisa ser __rápida__ de programar
+- O objetivo é **aprender**
+
+&lt;img src="02-introducao-vis_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+--
+
+.pull-right[
+
+## Análise descritiva
+
+- É um trabalho de __otimização visual__
+- A ferramenta: precisa ser __customizável__
+- O objetivo é **comunicar**
+
+&lt;img src="02-introducao-vis_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+--
+
+.center[
+### O `{ggplot2}` permite fazer as duas coisas!
+]
+
+
+
+---
+
+# Gramática de gráficos *em camadas*
+
+O pacote `{ggplot2}` segue duas filosofias que nos ajudam a entender o processo de construção dos gráficos:
+
+1. Um gráfico estatístico é uma representação visual dos dados por meio de atributos estéticos (posição, cor, forma, tamanho, ...) de formas geométricas (pontos, linhas, barras, ...). [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).
+
+2. Um gráfico pode ser construído em camadas (um gráfico é a sobreposição de elementos visuais). [A layered grammar of graphics](https://vita.had.co.nz/papers/layered-grammar.html).
+
+---
+
+# Camadas
+
+Para construir um gráfico, começamos com o *canvas*. A função `ggplot()` cria a primeira camada do nosso gráfico: uma tela em branco (cinza).
+
+&lt;img src="02-introducao-vis_files/figure-html/unnamed-chunk-8-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Camadas
+
+.panelset[
+
+.panel[
+.panel-name[Canvas]
+
+&lt;img src="02-introducao-vis_files/figure-html/canvas-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[Canvas (R)]
+
+
+```r
+cars |&gt; 
+  ggplot()
+```
+
+&lt;img src="02-introducao-vis_files/figure-html/canvas-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[Eixos]
+
+&lt;img src="02-introducao-vis_files/figure-html/aes-mapping-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.panel[
+.panel-name[Eixos (R)]
+
+
+```r
+cars |&gt; 
+  ggplot() +
+  aes(x = speed, y = dist)
+```
+
+&lt;img src="02-introducao-vis_files/figure-html/aes-mapping-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[Geometria]
+
+&lt;img src="02-introducao-vis_files/figure-html/dispersao-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[Geometria (R)]
+
+
+```r
+cars |&gt; 
+  ggplot() +
+  aes(x = speed, y = dist) +
+  geom_point()
+```
+
+&lt;img src="02-introducao-vis_files/figure-html/dispersao-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+---
+
+# Camadas
+
+Depois, podemos trabalhar a estética com temas e detalhamentos.
+
+.panelset[
+.panel[
+.panel-name[Completo]
+
+&lt;img src="02-introducao-vis_files/figure-html/cars-completo-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+.panel[
+.panel-name[Completo (R)]
+
+
+```r
+ggplot(cars) +
+  aes(speed, dist) +
+  geom_point(colour = "darkblue") +
+  stat_smooth(
+    se = FALSE, colour = "lightgray", 
+    method = "loess", formula = "y ~ x"
+  ) +
+  theme_minimal(14) +
+  labs(
+    title = "A velocidade influencia na distância de parada?",
+    subtitle = "Distância necessária para parar o carro",
+    caption = paste(
+      "Fonte: Ezekiel, M. (1930) Methods of",
+      "Correlation Analysis. Wiley"),
+    x = "Velocidade", y = "Distância para parar"
+  )
+```
+
+&lt;img src="02-introducao-vis_files/figure-html/cars-completo-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+---
+
+# Curiosidade: por quê o `+`?
+
+O `{ggplot2}`, diferentemente dos outros pacotes do `tidyverse`, não usa o *pipe* (`%&gt;%` ou `|&gt;` depois do R 4.1). Isso acontece pois o `{ggplot2}` surgiu [antes que o autor tomasse conhecimento do pipe](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/comment/cvi19ly/?utm_source=share&amp;utm_medium=web2x&amp;context=3).
+
+&lt;iframe id="reddit-embed" src="https://www.redditmedia.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/cvi19ly/?depth=1&amp;amp;showmore=false&amp;amp;embed=true&amp;amp;showmedia=false" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" height="437" width="640" scrolling="no"&gt;&lt;/iframe&gt;
+
+---
+
+# Vamos ao R!
+
+&lt;img src="img/cat.gif" style="display: block; margin: auto;" /&gt;
+
+---
+
+# [Dúvidas?](https://www.rstudio.com/resources/cheatsheets/)
+
+&lt;img src="https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/data-visualization.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# [Qual gráfico escolher?](https://www.data-to-viz.com)
+
+&lt;img src="img/data-to-viz.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Gráficos bons e ruins
+
+.pull-left[
+
+### Gráficos para evitar
+
+- Barras que não começam no zero
+- [Gráficos de pizza](https://forum.abj.org.br/t/graficos-de-pizza-sao-ruins/41) (discutível!)
+- ...
+
+]
+
+--
+
+.pull-right[
+
+### Gráficos para tomar cuidado
+
+- Gráficos com dois eixos
+- Gráficos pouco conhecidos
+- ...
+
+]
+
+.center[
+
+### [Vamos montar uma lista aqui!](https://docs.google.com/document/d/12TOFqX1Ci-Yn8xPY9y5XT-GQYAju6ObzN-Fy55BbEYE/edit#)
+
+]
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:11"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
