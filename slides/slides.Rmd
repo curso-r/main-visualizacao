@@ -1,0 +1,1148 @@
+---
+title: "Visualização de dados"
+subtitle: "📑+😎"
+author: "<img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '30%'>"
+date: "`r paste(lubridate::month(Sys.Date(), label = TRUE, abbr = FALSE, locale = 'pt_BR.UTF-8'), 'de', lubridate::year(Sys.Date()))`"
+output:
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "css/xaringan-themer.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:11"
+# knit: pagedown::chrome_print
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(dados)
+options(htmltools.dir.version = FALSE)
+link <- function(href, ...) {
+  htmltools::a(
+    href = href,
+    target = "_blank",
+    ...
+  )
+}
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  fig.align='center'
+)
+xaringanExtra::use_panelset()
+```
+
+class: middle, center
+
+# Sobre a Curso-R
+
+---
+
+## A empresa
+
+<br>
+
+```{r, echo = FALSE, out.width="50%", fig.align="center"}
+knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/295643c6243701ae6a9bac3fb8ad467ff0ce3c84/d1785/img/logo/cursor1-41.png")
+```
+
+<br>
+<br>
+
+```{r, echo = FALSE, out.width="40%", fig.align="center"}
+knitr::include_graphics("img/logo_r6.png")
+```
+
+---
+
+## Filosofia de código aberto!
+
+.pull-left[
+```{r, echo = FALSE}
+htmltools::h3("Livros")
+
+link(
+  href = "https://livro.curso-r.com/",
+  htmltools::img(src = "img/hex-livro.png", width = "100px")
+)
+
+link(
+  href = "https://curso-r.github.io/zen-do-r/index.html",
+  htmltools::img(
+    src = "img/zen-do-r.png",
+    width = "100px",
+    style = "margin-left: 20px;"
+  )
+)
+```
+
+<br>
+
+```{r, echo = FALSE}
+htmltools::h3("Lives")
+link(
+  href = "https://www.youtube.com/c/CursoR6",
+  htmltools::img(src = "img/youtube.png", width = "200px")
+)
+```
+]
+
+.pull-right[
+```{r, echo = FALSE}
+htmltools::h3("Material dos cursos")
+link(
+  href = "https://github.com/curso-r",
+  htmltools::img(src = "img/github.png", width = "230px")
+)
+```
+
+<br>
+
+```{r, echo = FALSE}
+htmltools::h3("Blog")
+link(
+  href = "https://blog.curso-r.com/",
+  htmltools::img(src = "img/blog.png", width = "400px")
+)
+```
+]
+
+<br>
+
+.center[
+### [www.curso-r.com](https://www.curso-r.com)
+]
+
+
+---
+## Nossos cursos
+
+```{r, echo = FALSE}
+templatesR6::criar_slide_nossos_cursos()
+```
+
+---
+class: middle, center
+
+# Sobre o curso
+
+---
+## Dinâmica curso
+
+- As aulas serão em maior parte expositivas.
+
+- As aulas terão uma seção teórica, de exposição de conceitos, e prática, de aplicação de conceitos.
+
+- O objetivo dos exercícios é gerar dúvidas. **Com exceção do trabalho final, nenhum exercício precisa ser entregue**.
+
+- O certificado será emitido mediante uma **entrega final**, a ser especificada nas últimas aulas do curso. 
+
+- Haverá monitoria para esclarecimento de dúvidas sempre 30 minutos antes do início das aulas.
+
+- Usaremos os últimos minutos de cada aula para tirar dúvidas do conteúdo apresentado. Não haverá plantão de dúvidas pós aula.
+
+- A gravação das aulas ficará disponível no Google Classroom por 1 ano após o final do curso.
+
+---
+## Dinâmica das aulas
+
+- Mande dúvidas e comentários no chat em qualquer momento.
+
+- Para falar, levante a mão.
+
+- Algumas dúvidas serão respondidas na hora. Outras serão respondidas mais tarde na própria aula ou em aulas futuras.
+
+- Só interrompa quem estiver falando em caso de emergência.
+
+---
+## Tire suas dúvidas
+
+- **Não fique com dúvida**.
+ 
+- Fora do horário de aula ou monitoria:
+    - envie suas perguntas gerais **sobre o curso** no Classroom.
+     
+    - envie preferencialmente suas perguntas **sobre R** no [nosso discourse](https://discourse.curso-r.com/).
+
+- Saber fazer a pergunta certa vai te ajudar bastante nos estudos de programação. [Veja aqui dicas de como fazer uma boa pergunta](https://discourse.curso-r.com/t/como-escrever-uma-boa-pergunta/542).
+
+---
+class: middle, center, inverse
+
+# Introdução
+
+---
+# Objetivos de aprendizagem
+
+⬜ Compreender o papel da visualização em um projeto de ciência de dados.
+
+--
+
+⬜ Compreender as diferenças entre análise exploratória e análise descritiva.
+
+--
+
+⬜ Entender o funcionamento básico do pacote `{ggplot2}`.
+
+--
+
+⬜ Utilizar o `{ggplot2}` em um problema concreto.
+
+---
+
+# O que é visualização de dados?
+
+.pull-left[
+
+- É a representação de dados em gráficos, tabelas e diagramas que podem ser interpretados por pessoas.
+
+- É uma área interdisciplinar, misturando estatística, arte e comunicação.
+
+- É uma parte da área de *data storytelling*, que envolve organizar todos os resultados de uma análise de dados em uma ordem lógica para comunicar de forma efetiva com a audiência.
+
+]
+
+.pull-right[
+
+```{r, fig.cap="Ilustração de Allison Horst"}
+knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/dog_treats_pipe.jpg")
+```
+
+Ilustração de [Allison Horst](https://www.allisonhorst.com)
+
+]
+
+---
+
+# Por quê fazer visualizações de dados?
+
+.pull-left[
+
+- Visualizações estão presentes na grande maioria dos projetos de ciência de dados.
+
+- É a parte mais acessível da ciência de dados do ponto de vista de quem lê. Mostrar uma visualização costuma ser mais efetivo do que a saída de um modelo.
+
+- É uma das partes mais difíceis de automatizar da ciência de dados. Uma carreira em *dataviz* dificilmente ficará obsoleta.
+
+]
+
+.pull-right[
+
+```{r, fig.cap="Blog da Curso-R"}
+knitr::include_graphics("https://blog.curso-r.com/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.png")
+```
+
+Imagem do [blog da Curso-R](https://blog.curso-r.com/posts/2019-02-10-sf-miojo/)
+
+]
+
+---
+
+# Para quê servem as visualizações?
+
+.pull-left[
+
+- Uma base de dados contém toda a informação que precisamos.
+
+- No entanto, não somos capazes de tirar conclusões apenas olhando essas bases.
+
+- Por isso, é necessário resumir esses dados em estatísticas.
+
+- Nem sempre as estatísticas (os números) são úteis para uma comunicação efetiva... Por isso, faz sentido mostrá-las usando formas, cores e outros elementos que facilitam a absorção da informação pelas pessoas.
+
+- Para o [Hadley Wickham](https://hadley.nz), visualizar dados serve para .blue[***surpreender***].
+
+]
+
+.pull-right[
+
+```{r, fig.cap="Imagem de Allison Horst"}
+knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/presenting_monster.png")
+```
+
+Ilustração de [Allison Horst](https://www.allisonhorst.com)
+
+]
+
+
+
+---
+
+# Em que momentos utilizamos?
+
+```{r, eval=FALSE}
+img <- "img/ciclo-ciencia-de-dados.png" |> 
+  magick::image_read() |> 
+  magick::image_draw(xlim = c(0,1), ylim = c(0,1))
+rect(.65, .8, .95, .95, border = "red", lty = 1, lwd = 5)
+rect(.25, .15, .55, 0.05, border = "lightgreen", lty = 1, lwd = 5)
+dev.off()
+magick::image_write(img, "img/ciclo-ciencia-de-dados-vis.png")
+```
+
+
+```{r, echo=FALSE}
+knitr::include_graphics("img/ciclo-ciencia-de-dados-vis.png")
+```
+
+---
+
+.pull-left[
+
+## Análise exploratória
+
+- É um trabalho de __investigação__ de dados
+- A ferramenta: precisa ser __rápida__ de programar
+- O objetivo é **aprender**
+
+```{r, fig.width=6, fig.height=4}
+ggplot2::ggplot(cars) +
+  ggplot2::aes(speed, dist) +
+  ggplot2::geom_point()
+```
+
+
+]
+
+--
+
+.pull-right[
+
+## Análise descritiva
+
+- É um trabalho de __otimização visual__
+- A ferramenta: precisa ser __customizável__
+- O objetivo é **comunicar**
+
+```{r, fig.width=6, fig.height=4}
+ggplot2::ggplot(cars) +
+  ggplot2::aes(speed, dist) +
+  ggplot2::geom_point(colour = "darkblue") +
+  ggplot2::stat_smooth(
+    se = FALSE, colour = "lightgray", method="loess",
+    formula = "y~x"
+  ) +
+  ggplot2::theme_minimal(14) +
+  ggplot2::labs(
+    title = "A velocidade influencia na distância de parada?",
+    subtitle = "Distância necessária para parar o carro",
+    caption = "Fonte: Ezekiel, M. (1930) Methods of Correlation Analysis. Wiley",
+    x = "Velocidade",
+    y = "Distância para parar"
+  )
+```
+
+
+]
+
+--
+
+.center[
+### O `{ggplot2}` permite fazer as duas coisas!
+]
+
+
+
+---
+
+# Gramática de gráficos *em camadas*
+
+O pacote `{ggplot2}` segue duas filosofias que nos ajudam a entender o processo de construção dos gráficos:
+
+1. Um gráfico estatístico é uma representação visual dos dados por meio de atributos estéticos (posição, cor, forma, tamanho, ...) de formas geométricas (pontos, linhas, barras, ...). [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).
+
+2. Um gráfico pode ser construído em camadas (um gráfico é a sobreposição de elementos visuais). [A layered grammar of graphics](https://vita.had.co.nz/papers/layered-grammar.html).
+
+---
+
+# Camadas
+
+Para construir um gráfico, começamos com o *canvas*. A função `ggplot()` cria a primeira camada do nosso gráfico: uma tela em branco (cinza).
+
+```{r dpi=300, out.width="50%"}
+cars |> 
+  ggplot()
+```
+
+---
+
+# Camadas
+
+.panelset[
+
+.panel[
+.panel-name[Canvas]
+
+```{r canvas, dpi=300, out.width="40%"}
+cars |> 
+  ggplot()
+```
+
+]
+
+.panel[
+.panel-name[Canvas (R)]
+
+```{r, canvas, echo=TRUE, dpi=300, out.width="40%"}
+```
+
+]
+
+.panel[
+.panel-name[Eixos]
+
+```{r aes-mapping, dpi=300, out.width="40%"}
+cars |> 
+  ggplot() +
+  aes(x = speed, y = dist)
+```
+
+]
+
+
+.panel[
+.panel-name[Eixos (R)]
+
+```{r, aes-mapping, echo=TRUE, dpi=300, out.width="40%"}
+```
+
+]
+
+.panel[
+.panel-name[Geometria]
+
+```{r dispersao, dpi=300, out.width="40%"}
+cars |> 
+  ggplot() +
+  aes(x = speed, y = dist) +
+  geom_point()
+```
+
+]
+
+.panel[
+.panel-name[Geometria (R)]
+
+```{r, dispersao, echo=TRUE, dpi=300, out.width="40%"}
+```
+
+]
+]
+
+---
+
+# Camadas
+
+Depois, podemos trabalhar a estética com temas e detalhamentos.
+
+.panelset[
+.panel[
+.panel-name[Completo]
+
+```{r cars-completo, fig.width=9, fig.height=6, dpi=300}
+ggplot(cars) +
+  aes(speed, dist) +
+  geom_point(colour = "darkblue") +
+  stat_smooth(
+    se = FALSE, colour = "lightgray", 
+    method = "loess", formula = "y ~ x"
+  ) +
+  theme_minimal(14) +
+  labs(
+    title = "A velocidade influencia na distância de parada?",
+    subtitle = "Distância necessária para parar o carro",
+    caption = paste(
+      "Fonte: Ezekiel, M. (1930) Methods of",
+      "Correlation Analysis. Wiley"),
+    x = "Velocidade", y = "Distância para parar"
+  )
+```
+
+]
+.panel[
+.panel-name[Completo (R)]
+
+```{r, cars-completo, fig.width=9, fig.height=6, echo=TRUE}
+```
+
+]
+]
+
+---
+
+# Curiosidade: por quê o `+`?
+
+O `{ggplot2}`, diferentemente dos outros pacotes do `tidyverse`, não usa o *pipe* (`%>%` ou `|>` depois do R 4.1). Isso acontece pois o `{ggplot2}` surgiu [antes que o autor tomasse conhecimento do pipe](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/comment/cvi19ly/?utm_source=share&utm_medium=web2x&context=3).
+
+<iframe id="reddit-embed" src="https://www.redditmedia.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/cvi19ly/?depth=1&amp;showmore=false&amp;embed=true&amp;showmedia=false" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" height="437" width="640" scrolling="no"></iframe>
+
+---
+
+# Vamos ao R!
+
+```{r}
+knitr::include_graphics("img/cat.gif")
+```
+
+---
+
+# [Dúvidas?](https://www.rstudio.com/resources/cheatsheets/)
+
+```{r, out.width="75%"}
+knitr::include_graphics("https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/data-visualization.png")
+```
+
+---
+
+# [Qual gráfico escolher?](https://www.data-to-viz.com)
+
+```{r, out.width="90%"}
+knitr::include_graphics("img/data-to-viz.png")
+```
+
+
+---
+
+# Gráficos bons e ruins
+
+.pull-left[
+
+### Gráficos para evitar
+
+- Barras que não começam no zero
+- [Gráficos de pizza](https://forum.abj.org.br/t/graficos-de-pizza-sao-ruins/41) (discutível!)
+- ...
+
+]
+
+--
+
+.pull-right[
+
+### Gráficos para tomar cuidado
+
+- Gráficos com dois eixos
+- Gráficos pouco conhecidos
+- ...
+
+]
+
+--
+
+.center[
+
+### [Vamos montar uma lista aqui!](https://docs.google.com/document/d/12TOFqX1Ci-Yn8xPY9y5XT-GQYAju6ObzN-Fy55BbEYE/edit#)
+
+]
+
+
+---
+class: middle, center, inverse
+
+# Otimização Visual
+
+---
+# Objetivos de aprendizagem
+
+⬜ Discutir os principais aspectos visuais a serem considerados em um gráfico estatístico
+
+--
+
+⬜ Compreender como modificar um `ggplot` para comunicar resultados de maneira eficiente.
+
+--
+
+⬜ Otimizar um gráfico que utilizamos na aula anterior.
+
+---
+
+# O que é otimização visual?
+
+- É o ato de trabalhar em uma visualização aprimorar a comunicação.
+
+- Pode envolver alterações nas cores, fontes, elementos geométricos, entre outros, a partir de um gráfico exploratório.
+
+- Não é uma ciência exata, mas recolhe elementos da ciência para aumentar a probabilidade de sucesso da visualização.
+
+---
+
+# Recursos pré-atentativos
+
+- Uma propriedade visual pré-atentativa é processada pelo nosso [cérebro antes de uma ação consciente](https://www.interaction-design.org/literature/article/preattentive-visual-properties-and-how-to-use-them-in-information-visualization).
+
+- Como isso esse processamento é muito rápido, trata-se de uma oportunidade para tornar visualizações mais amigáveis e diretamente interpretadas.
+
+- Segundo [Colin Ware](https://en.wikipedia.org/wiki/Colin_Ware), existem 4 propriedades pré-atentativas que podemos explorar:
+    - Cor
+    - Forma
+    - Movimento
+    - Posicionamento
+    
+- O objetivo dos recursos pré-atentativos é __<span style="color:blue;">chamar a atenção</span>__.
+
+---
+
+# Recursos pré-atentativos
+
+- Uma propriedade visual pré-atentativa é processada pelo nosso [cérebro antes de uma ação consciente](https://www.interaction-design.org/literature/article/preattentive-visual-properties-and-how-to-use-them-in-information-visualization).
+
+- Como isso esse processamento é muito rápido, trata-se de uma oportunidade para tornar visualizações mais amigáveis e diretamente interpretadas.
+
+- Segundo [Colin Ware](https://en.wikipedia.org/wiki/Colin_Ware), existem 4 propriedades pré-atentativas que podemos explorar:
+    - __Cor__
+    - __Forma__
+    - Movimento
+    - Posicionamento
+    
+- O objetivo dos recursos pré-atentativos é __<span style="color:blue;">chamar a atenção</span>__.
+
+
+---
+class: middle, center
+
+# Cor
+
+---
+
+# Cores do zero: HCL vs RGB
+
+- HCL (hue, chroma, luminance) é vantajoso pois é mais intuitivo de criar do que RGB, já que o HCL tem apenas um eixo de cores (*hue*), enquanto RGB é uma composição de três (*red*, *green*, *blue*)
+
+- O pacote `{colorspace}` permite usar HCL para definir uma cor/paleta: experimente `colorspace::hcl_color_picker()`
+
+- [Nesse site](https://color.adobe.com/create/color-wheel), também é possível criar algumas paletas
+
+```{r, out.width="70%"}
+knitr::include_graphics("img/hcl.png")
+```
+
+---
+
+# Paletas de cores prontas
+
+- __Escalas qualitativas__: utilizado para variáveis nominais (sexo, cor/raça)
+
+- __Escalas divergentes__: utilizado para variáveis que têm um centro neutro (favorável/neutro/desfavorável, correlação)
+
+- __Escalas sequenciais__: utilizado para variáveis ordinais (faixa etária, renda)
+
+- __Viridis__: útil para comunicar com pessoas com daltonismo
+
+---
+
+# Paletas de cores no {ggplot2}
+
+- `scale_*_brewer()`: utilizada para variáveis discretas. Possui três tipos: divergente, qualitativa e sequencial.
+
+- `scale_*_distiller()`: utilizada para variáveis contínuas. Interpola as cores do *brewer* para lidar com todos os valores.
+
+- `scale_*_fermenter()`: utilizada para variáveis contínuas, que são transformadas em discretas (binned).
+
+- `scale_*_viridis_[cdb]`: Escala viridis para variáveis `c`ontínuas, `d`iscretas ou `b`inned.
+
+- `scale_*_manual()`: inclui um conjunto de cores manualmente.
+
+---
+
+# Paletas de outros pacotes
+
+- [`{ggthemr}`](https://github.com/Mikata-Project/ggthemr) tem um monte de paletas, mas está um pouco desatualizado.
+
+- [`{hrbrthemes}`](https://github.com/hrbrmstr/hrbrthemes) contém uma lista de temas escolhidos pelo Bob Rudis.
+
+- [`{ghibli}`](https://ewenme.github.io/ghibli/) tem paletas de cores relacionadas ao Studio Ghibli
+
+- [`{paletteer}`](https://github.com/EmilHvitfeldt/paletteer) tem uma coleção de cores de vários outros pacotes de paletas.
+
+---
+
+# Qual visualização é melhor?
+
+.pull-left[
+
+```{r, fig.width=5, fig.height=4, dpi = 300}
+notas_pixar <- dados::pixar_avalicao_publico |> 
+  dplyr::count(nota_cinema_score) |> 
+  dplyr::mutate(
+    nota = forcats::fct_explicit_na(nota_cinema_score, "(vazio)"),
+    nota = forcats::fct_relevel(nota, c("A-", "A", "A+", "(vazio)"))
+  )
+notas_pixar |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(nota, n) +
+  ggplot2::geom_col(width = .5) +
+  ggplot2::scale_y_continuous(limits = c(0, 15)) +
+  ggplot2::labs(title = "A maioria dos filmes da pixar tem nota 'A'") +
+  ggplot2::theme_minimal(12)
+```
+
+]
+
+
+.pull-right[
+
+```{r, fig.width=5, fig.height=4, dpi = 300}
+notas_pixar |> 
+  dplyr::mutate(cor = dplyr::case_when(
+    nota == "A" ~ "b",
+    TRUE ~ "a"
+  )) |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(nota, n, fill = cor) +
+  ggplot2::geom_col(width = .5, show.legend = FALSE) +
+  ggplot2::scale_y_continuous(limits = c(0, 15)) +
+  ggplot2::scale_fill_manual(values = c("gray30", "tomato")) +
+  ggplot2::labs(title = "A maioria dos filmes da pixar tem nota 'A'") +
+  ggplot2::theme_minimal(12)
+```
+
+]
+
+---
+
+# É subjetivo...
+
+```{r}
+knitr::include_graphics("img/same-picture.jpg")
+```
+
+
+---
+class: middle, center
+
+# Forma
+
+---
+
+# Formas
+
+- Geralmente queremos contrastar formas para chamar a atenção...
+
+--
+
+- Sem com isso fazer uma bagunça visual.
+
+--
+
+- A ideia é utilizar apenas um elemento, como tamanho, forma, largura, marcações, angulações, etc. para mostrar o contraste.
+
+
+---
+
+# Exemplos
+
+
+```{r warning=FALSE, fig.width=9, fig.height=6, dpi=300}
+p_size <- notas_pixar |> 
+  dplyr::mutate(tipo = dplyr::case_when(
+    nota == "A" ~ "b",
+    TRUE ~ "a"
+  )) |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(nota, n, size = tipo) +
+  ggplot2::geom_segment(ggplot2::aes(xend = nota, yend = 0), size = .5) +
+  ggplot2::geom_point() +
+  ggplot2::scale_y_continuous(limits = c(0, 15)) +
+  ggplot2::scale_size_discrete(range = c(3, 6)) +
+  ggplot2::theme_minimal(12) +
+  ggplot2::theme(legend.position = "none")
+
+
+p_shape <- notas_pixar |> 
+  dplyr::mutate(tipo = dplyr::case_when(
+    nota == "A" ~ "b",
+    TRUE ~ "a"
+  )) |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(nota, n, shape = tipo) +
+  ggplot2::geom_segment(ggplot2::aes(xend = nota, yend = 0), size = .5) +
+  ggplot2::geom_point(size = 6) +
+  ggplot2::scale_shape_manual(values = c(1, 16)) +
+  ggplot2::scale_y_continuous(limits = c(0, 15)) +
+  ggplot2::theme_minimal(12) +
+  ggplot2::theme(legend.position = "none")
+
+p_mark <- notas_pixar |> 
+  dplyr::mutate(tipo = dplyr::case_when(
+    nota == "A" ~ "b",
+    TRUE ~ "a"
+  )) |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(nota, n, shape = tipo) +
+  ggplot2::geom_segment(ggplot2::aes(xend = nota, yend = 0), size = .5) +
+  ggplot2::geom_point(size = 6) +
+  ggplot2::scale_shape_manual(values = c(1, 13)) +
+  ggplot2::scale_y_continuous(limits = c(0, 15)) +
+  ggplot2::theme_minimal(12) +
+  ggplot2::theme(legend.position = "none")
+
+p_bar <- notas_pixar |> 
+  dplyr::mutate(tipo = dplyr::case_when(
+    nota == "A" ~ "b",
+    TRUE ~ "a"
+  )) |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(nota, n) +
+  ggplot2::geom_col(width = c(.8, .5,.5,.5)) +
+  ggplot2::scale_y_continuous(limits = c(0, 15)) +
+  ggplot2::theme_minimal(12)
+
+patchwork::wrap_plots(p_size, p_shape, p_mark, p_bar)
+
+```
+
+---
+
+# Princípios Gestalt
+
+- __Gestalt__ é uma área ampla da psicologia que não vamos aprofundar.
+
+- Está ligada à ideia de que, em uma visualização, o todo é maior do que a soma das partes.
+
+- Dois princípios Gestalt aplicáveis em visualização de dados são a nossa capacidade de:
+    - Completar figuras
+    - Agrupar objetos
+
+- Ou seja, podemos criar visualizações que ativam essas capacidades.
+
+---
+
+# Qual visualização é melhor?
+
+.pull-left[
+
+
+```{r, fig.height=4, fig.width=6, dpi = 300}
+dados::pinguins |> 
+  tidyr::drop_na() |> 
+  ggplot2::ggplot() +
+  ggplot2::aes(
+    x = comprimento_bico, 
+    y = profundidade_bico, 
+    shape = especie
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::theme_minimal(12) +
+  ggplot2::labs() +
+  ggplot2::theme(legend.position = "bottom")
+
+```
+
+]
+
+.pull-right[
+
+
+```{r, fig.height=4, fig.width=6, dpi = 300}
+dados::pinguins |> 
+  tidyr::drop_na() |> 
+  ggplot2::ggplot(ggplot2::aes(
+    x = comprimento_bico, 
+    y = profundidade_bico, 
+    shape = especie,
+    group = especie
+  )) +
+  ggplot2::geom_point() +
+  ggplot2::theme_minimal(12) +
+  ggplot2::theme(legend.position = "bottom") +
+  ggplot2::stat_ellipse(
+    type = "norm", 
+    geom = "polygon",
+    alpha = .05,
+    level = .95,
+    colour = "transparent"
+  )
+```
+
+]
+
+---
+
+# Vamos ao R!
+
+```{r}
+knitr::include_graphics("img/cat.gif")
+```
+
+---
+class: inverse, middle, center
+
+# Extensões do ggplot2
+
+---
+
+# Objetivos de aprendizagem
+
+⬜ Conhecer extensões do `{ggplot2}`
+
+⬜ Experimentar extensões separadamente
+
+⬜ Estudar um exemplo juntando várias extensões.
+
+---
+
+# O que é uma extensão?
+
+- O `{ggplot2}` é maravilhoso, mas não possui todos os gráficos possíveis.
+
+- Por isso, pessoas do mundo todo desenvolvem extensões para a comunidade usar, que vão desde pacotes com novos temas/cores, geometrias eixos até a [possibilidade de desenhar gatinhos em barras](https://coolbutuseless.github.io/package/ggpattern/index.html)
+
+- A equipe do tidyverse mantém uma [lista curada de extensões do `{ggplot2}`](https://exts.ggplot2.tidyverse.org/gallery/)
+
+---
+
+# Vamos ao R!
+
+```{r}
+knitr::include_graphics("img/cat.gif")
+```
+
+---
+
+# Como criar uma extensão?
+
+- A [edição mais recente](https://ggplot2-book.org/extensions.html) do livro do `{ggplot2}` possui um tutorial de como criar extensões para o pacote.
+
+- ⚠️  Cuidado! Criar extensões do `{ggplot2}` não é fácil. Trata-se de um pacote complexo, exigindo bastante conhecimento de elementos internos do R.
+
+- Uma forma legal de estudar extensões é olhando o código de pacotes. Recomendamos as extensões do [Thomas Lin Pedersen](https://github.com/thomasp85), já que ele é o mantenedor atual do `{ggplot2}` e, portanto, conhece muito bem as melhores práticas para criar extensões.
+
+---
+class: inverse, middle, center
+
+# Interatividade
+
+---
+
+# Objetivos de aprendizagem
+
+⬜ Conhecer a diferença entre visualizações estáticas e dinâmicas
+
+⬜ Experimentar algumas visualizações
+
+⬜ Cobrir temas que não foram abordados no curso e encerrar.
+
+---
+
+## Gráficos interativos e estáticos
+
+- Gráficos interativos têm o poder de engajar mais, por conta do efeito *voosh*. Todo ser humano gosta de interagir com aquilo que está analisando.
+
+- No entanto, isso vem com um custo: não são todos os documentos capazes de processar visualizações dinâmicas. Em particular, PDF, Word e PPT não rodam esses conteúdos.
+
+- Vamos visitar tanto o mundo estático quanto dinâmico, para que você saiba por onde começar quando receber um novo desafio.
+
+---
+# Vamos ao R!
+
+```{r}
+knitr::include_graphics("img/cat.gif")
+```
+
+---
+
+## htmlwidgets
+
+`htmlwidgets` são bibliotecas de visualização JavaScript encapsuladas em pacotes de R. Elas nos permitem usar diversas ferramentas JavaScript diretamente do R, adicionando algumas poucas linhas de código em nosso script.
+
+Usando `htmlwidgets`, conseguimos construir tabelas, gráficos, mapas e muito outras visualizações interativas e naturalmente bonitas.
+
+[Clique aqui](https://www.htmlwidgets.org/index.html) para acessar uma lista completa de todos os `htmlwidgets` disponíveis.
+
+---
+## Tabelas com reactable
+
+O pacote `reactable` nos permite criar tabelas interativas baseadas na biblioteca [React Table](https://github.com/tannerlinsley/react-table). 
+
+[Clique aqui](https://glin.github.io/reactable/) para acessar o tutorial completo do pacote `{reactable}`.
+
+---
+<br><br>
+
+A interatividade dos `htmlwidgets` não depende de uma sessão R rodando por trás. Você pode utilizá-los em qualquer documento `.html`.
+
+```{r, results='asis'}
+reactable::reactable(mtcars, compact = TRUE, defaultPageSize = 4, 
+                     striped = TRUE)
+```
+
+
+---
+## Pacotes alternativos para tabelas
+
+A seguir, uma lista de pacotes/funções alternativos que trazem soluções para visualização de tabelas.
+
+- `knitr::kable()`: não é um htmlwidget (não possui interatividade), mas é uma solução para formatar tabelas quando não precisamos que elas sejam interativas. Funciona em conjunto com o pacote `{kableExtra}`.
+
+- `{flextable}`: também não é interativo, é um excelente pacote para editar tabelas. Funciona quando trabalhamos com relatórios em Word, e também integra bem com o pacote `{DT}`.
+
+- `DT::datatable()`: outro htmlwidget para criar tabelas interativas. Funciona tal como o `reactable()`, mas um pouco mais burocrático para formatar as tabelas. Baseado na biblioteca JavaScript [DataTables](http://datatables.net/).
+
+#### Tutoriais
+
+- [Tutorial kable e kableExtra](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
+
+- [Tutorial flextable](https://ardata-fr.github.io/flextable-book/)
+
+- [Tutorial DT](https://rstudio.github.io/DT/)
+
+---
+## Gráficos com plotly
+
+O pacote `plotly` nos permite criar gráficos interativos baseados na biblioteca [Plotly](https://plotly.com/) (construída em [D3](https://d3js.org/)). 
+
+Embora seja possível criar um plotly do zero usando a função `plot_ly()`, um jeito muito eficiente de utilizar essa biblioteca é criar um ggplot e então utilizar a função `ggplotly()`. Veja o exemplo a seguir.
+
+#### Tutoriais
+
+- [Tutorial plotly](https://plotly.com/r/)
+
+- [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com/)
+
+---
+<br><br>
+
+.pull-left[
+
+```{r echo=TRUE, eval=FALSE}
+gg <- ggplot(mtcars) +
+  aes(wt, mpg) +
+  geom_point()
+plotly::ggplotly(
+  p = gg, 
+  height = 400
+)
+```
+
+]
+
+.pull-right[
+
+```{r}
+gg <- ggplot(mtcars) +
+  aes(wt, mpg) +
+  geom_point()
+plotly::ggplotly(
+  p = gg, 
+  height = 400
+)
+```
+
+
+]
+
+
+---
+## Pacotes alternativos
+
+A seguir, uma lista de pacotes/funções alternativos que trazem soluções para visualização de gráficos.
+
+- `highcharter::highcharter()`: pacote gráfico baseado na biblioteca JavaScript [Highcharts](https://www.highcharts.com/). A biblioteca Highcharts é gratuita apenas para fins educacionais e não lucrativos (exceto órgãos governamentais). Para outros usos, você pode precisar de uma licença. **[avançado]**
+
+- Procure por pacotes para tipos específicos de gráficos na [galeria de htmlwidgets](http://gallery.htmlwidgets.org/).
+
+#### Tutoriais
+
+- [Tutorial highcharter](http://jkunst.com/highcharter/)
+
+- [Documentação Highcharts](https://api.highcharts.com/highcharts/)
+
+---
+## Mapas com leaflet
+
+O pacote `{leaflet}` nos permite criar mapas interativos baseados na biblioteca  JavaScript open-source [Leaflet](https://leafletjs.com/).
+
+Para criar um mapa leaflet, utilizamos a função `leaflet::leaflet()` e diversas funções auxiliares para caracterizar nosso mapa. Um tutorial de como utilizar o `leaflet` se encontra [aqui](http://rstudio.github.io/leaflet/).
+
+A seguir, mostramos um exemplo simples de como criar um mapa leaflet.
+
+---
+<br><br>
+
+
+```{r echo=TRUE}
+library(leaflet)
+
+leaflet(height = 300) %>%
+  addTiles() %>%  # Adiciona a camada gráfica do OpenStreetMap (padrão)
+  addMarkers(
+    lng = -46.6623969, lat = -23.5581664, 
+    popup = "A Curso-R morava aqui antes da pandemia. Agora ela mora no mundo todo!"
+  )
+```
+
+---
+## Pacotes alternativos
+
+- `highcharter::hcmap()`: variação do `highcharter` para mapas, baseada na biblioteca JavaScript [Highcharts](https://www.highcharts.com/maps/demo). **[avançado]**
+
+- [`{tmap}`](https://github.com/mtennekes/tmap): Pacote focado em mapas temáticos.
+
+#### Tutoriais
+
+- [Construindo mapas com o highcharter](http://jkunst.com/highcharter/highmaps.html)
+
+- [Documentação Highmaps](https://api.highcharts.com/highmaps/)
+
+- [Documentação do tmap](https://github.com/mtennekes/tmap)
+
+
+---
+## Referências e material extra
+
+.pull-left[
+
+#### htmlwidgets
+
+- [Galeria htmlwidgets](http://gallery.htmlwidgets.org/)
+
+#### reactable
+
+- [A biblioteca React Table](https://github.com/tannerlinsley/react-table)
+- [Tutorial reactable](https://glin.github.io/reactable/)
+
+#### DT
+
+- [Tutorial DT](https://rstudio.github.io/DT/)
+
+#### plotly
+
+- [Tutorial plotly](https://plotly.com/r/)
+
+- [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com/)
+
+]
+
+.pull-right[
+
+#### highcharter/highcharts
+
+- [Tutorial highcharter](http://jkunst.com/highcharter/)
+
+- [Biblioteca Highcharts](https://www.highcharts.com/)
+
+- [Galeria Highcharts](https://www.highcharts.com/demo)
+
+- [Documentação Highcharts](https://api.highcharts.com/highcharts/)
+
+#### leaflet
+
+- [Biblioteca Leaflet](https://leafletjs.com/)
+
+- [Tutorial Leaflet](http://rstudio.github.io/leaflet/)
+
+#### highmaps
+
+- [Galeria Highmaps](https://www.highcharts.com/maps/demo)
+
+- [Documentação Highmaps](https://api.highcharts.com/highmaps/)
+
+
+]
+
+---
+class: middle, center, inverse
+
+# Fim!
+
