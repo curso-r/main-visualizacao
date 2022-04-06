@@ -39,9 +39,8 @@ O curso de visualização de dados possui 4 aulas, de 3 horas cada, totalizando 
       - live coding de análise exploratória
 2. Análise explicativa
     - Teoria:
-      - coerência visual
       - otimização visual
-      - recursos pré-atentativos
+      - recursos pré-atentativos e gestalt
       - temas do ggplot2
           - ggthemes
           - hrbrthemes
