@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Visualização de dados</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/core-js/shim.min.js"></script>
+    <script src="libs/react/react.min.js"></script>
+    <script src="libs/react/react-dom.min.js"></script>
+    <script src="libs/reactwidget/react-tools.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/reactable-binding/reactable.js"></script>
+    <script src="libs/plotly-binding/plotly.js"></script>
+    <script src="libs/typedarray/typedarray.min.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="libs/plotly-main/plotly-latest.min.js"></script>
+    <link href="libs/leaflet/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet/leaflet.js"></script>
+    <link href="libs/leafletfix/leafletfix.css" rel="stylesheet" />
+    <script src="libs/proj4/proj4.min.js"></script>
+    <script src="libs/Proj4Leaflet/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding/leaflet.js"></script>
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Visualização de dados
+## 📑+😎
+### <img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '30%'>
+### abril de 2022
+
+---
+
+
+
+
+class: middle, center
+
+# Sobre a Curso-R
+
+---
+
+## A empresa
+
+&lt;br&gt;
+
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/295643c6243701ae6a9bac3fb8ad467ff0ce3c84/d1785/img/logo/cursor1-41.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;img src="img/logo_r6.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Filosofia de código aberto!
+
+.pull-left[
+<h3>Livros</h3><a href="https://livro.curso-r.com/" target="_blank">
+<img src="img/hex-livro.png" width="100px"/>
+</a><a href="https://curso-r.github.io/zen-do-r/index.html" target="_blank">
+<img src="img/zen-do-r.png" width="100px" style="margin-left: 20px;"/>
+</a>
+
+&lt;br&gt;
+
+<h3>Lives</h3><a href="https://www.youtube.com/c/CursoR6" target="_blank">
+<img src="img/youtube.png" width="200px"/>
+</a>
+]
+
+.pull-right[
+<h3>Material dos cursos</h3><a href="https://github.com/curso-r" target="_blank">
+<img src="img/github.png" width="230px"/>
+</a>
+
+&lt;br&gt;
+
+<h3>Blog</h3><a href="https://blog.curso-r.com/" target="_blank">
+<img src="img/blog.png" width="400px"/>
+</a>
+]
+
+&lt;br&gt;
+
+.center[
+### [www.curso-r.com](https://www.curso-r.com)
+]
+
+
+---
+## Nossos cursos
+
+<div>
+<div class="pull-left">
+<div class="container center">
+<div class="card">
+<h2>Programação para Ciência de Dados</h2>
+<hr style="background-color:#3bb44a;"/>
+<p>
+<a href="https://loja.curso-r.com/introduc-o-a-programac-o-com-r.html">Introdução a programação com R</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/r-para-ciencia-de-dados-i.html">R para Ciência de Dados I</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/r-para-ciencia-de-dados-ii.html">R para Ciência de Dados II</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/pacotes.html">Pacotes</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/python-para-ciencia-de-dados-i.html">Python para quem usa R</a>
+</p>
+</div>
+</div>
+<br/>
+<div class="container center">
+<div class="card">
+<h2>Web scraping</h2>
+<hr style="background-color:#eeba30;"/>
+<p>
+<a href="https://loja.curso-r.com/web-scraping.html">Web scraping</a>
+</p>
+</div>
+</div>
+</div>
+<div class="pull-right">
+<div class="container center">
+<div class="card">
+<h2>Dashboards e Visualização de Dados</h2>
+<hr style="background-color:#ff6699;"/>
+<p>
+<a href="https://loja.curso-r.com/visualizac-o-de-dados.html">Visualização de dados</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/relatorios-e-apresentacoes-automaticas.html">Relatórios e apresentações</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/construindo-dashboards-i.html">Dashboards I</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/deploy-colocando-seu-trabalho-em-produc-o.html">Deploy</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/construindo-dashboards-ii.html">Dashboards II</a>
+</p>
+</div>
+</div>
+<br/>
+<div class="container center">
+<div class="card">
+<h2>Modelagem de Dados</h2>
+<hr style="background-color:#996699;"/>
+<p>
+<a href="https://loja.curso-r.com/modelos-lineares.html">Modelos Lineares</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/introduc-o-ao-machine-learning.html">Introdução ao Machine Learning</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/modelagem-de-series-temporais.html">Séries Temporais</a>
+</p>
+<p>
+<a href="https://loja.curso-r.com/modelagem-n-o-supervisionada.html">Não supervisionado</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+---
+class: middle, center
+
+# Sobre o curso
+
+---
+## Dinâmica curso
+
+- As aulas serão em maior parte expositivas.
+
+- As aulas terão uma seção teórica, de exposição de conceitos, e prática, de aplicação de conceitos.
+
+- O objetivo dos exercícios é gerar dúvidas. **Com exceção do trabalho final, nenhum exercício precisa ser entregue**.
+
+- O certificado será emitido mediante uma **entrega final**, a ser especificada nas últimas aulas do curso. 
+
+- Haverá monitoria para esclarecimento de dúvidas sempre 30 minutos antes do início das aulas.
+
+- Usaremos os últimos minutos de cada aula para tirar dúvidas do conteúdo apresentado. Não haverá plantão de dúvidas pós aula.
+
+- A gravação das aulas ficará disponível no Google Classroom por 1 ano após o final do curso.
+
+---
+## Dinâmica das aulas
+
+- Mande dúvidas e comentários no chat em qualquer momento.
+
+- Para falar, levante a mão.
+
+- Algumas dúvidas serão respondidas na hora. Outras serão respondidas mais tarde na própria aula ou em aulas futuras.
+
+- Só interrompa quem estiver falando em caso de emergência.
+
+---
+## Tire suas dúvidas
+
+- **Não fique com dúvida**.
+ 
+- Fora do horário de aula ou monitoria:
+    - envie suas perguntas gerais **sobre o curso** no Classroom.
+     
+    - envie preferencialmente suas perguntas **sobre R** no [nosso discourse](https://discourse.curso-r.com/).
+
+- Saber fazer a pergunta certa vai te ajudar bastante nos estudos de programação. [Veja aqui dicas de como fazer uma boa pergunta](https://discourse.curso-r.com/t/como-escrever-uma-boa-pergunta/542).
+
+---
+class: middle, center, inverse
+
+# Introdução
+
+---
+# Objetivos de aprendizagem
+
+⬜ Compreender o papel da visualização em um projeto de ciência de dados.
+
+--
+
+⬜ Compreender as diferenças entre análise exploratória e análise descritiva.
+
+--
+
+⬜ Entender o funcionamento básico do pacote `{ggplot2}`.
+
+--
+
+⬜ Utilizar o `{ggplot2}` em um problema concreto.
+
+---
+
+# O que é visualização de dados?
+
+.pull-left[
+
+- É a representação de dados em gráficos, tabelas e diagramas que podem ser interpretados por pessoas.
+
+- É uma área interdisciplinar, misturando estatística, arte e comunicação.
+
+- É uma parte da área de *data storytelling*, que envolve organizar todos os resultados de uma análise de dados em uma ordem lógica para comunicar de forma efetiva com a audiência.
+
+]
+
+.pull-right[
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/dog_treats_pipe.jpg" alt="Ilustração de Allison Horst"  /&gt;
+&lt;p class="caption"&gt;Ilustração de Allison Horst&lt;/p&gt;
+&lt;/div&gt;
+
+Ilustração de [Allison Horst](https://www.allisonhorst.com)
+
+]
+
+---
+
+# Por quê fazer visualizações de dados?
+
+.pull-left[
+
+- Visualizações estão presentes na grande maioria dos projetos de ciência de dados.
+
+- É a parte mais acessível da ciência de dados do ponto de vista de quem lê. Mostrar uma visualização costuma ser mais efetivo do que a saída de um modelo.
+
+- É uma das partes mais difíceis de automatizar da ciência de dados. Uma carreira em *dataviz* dificilmente ficará obsoleta.
+
+]
+
+.pull-right[
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="https://blog.curso-r.com/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.png" alt="Blog da Curso-R"  /&gt;
+&lt;p class="caption"&gt;Blog da Curso-R&lt;/p&gt;
+&lt;/div&gt;
+
+Imagem do [blog da Curso-R](https://blog.curso-r.com/posts/2019-02-10-sf-miojo/)
+
+]
+
+---
+
+# Para quê servem as visualizações?
+
+.pull-left[
+
+- Uma base de dados contém toda a informação que precisamos.
+
+- No entanto, não somos capazes de tirar conclusões apenas olhando essas bases.
+
+- Por isso, é necessário resumir esses dados em estatísticas.
+
+- Nem sempre as estatísticas (os números) são úteis para uma comunicação efetiva... Por isso, faz sentido mostrá-las usando formas, cores e outros elementos que facilitam a absorção da informação pelas pessoas.
+
+- Para o [Hadley Wickham](https://hadley.nz), visualizar dados serve para .blue[***surpreender***].
+
+]
+
+.pull-right[
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/presenting_monster.png" alt="Imagem de Allison Horst"  /&gt;
+&lt;p class="caption"&gt;Imagem de Allison Horst&lt;/p&gt;
+&lt;/div&gt;
+
+Ilustração de [Allison Horst](https://www.allisonhorst.com)
+
+]
+
+
+
+---
+
+# Em que momentos utilizamos?
+
+
+
+
+&lt;img src="img/ciclo-ciencia-de-dados-vis.png" width="1277" style="display: block; margin: auto;" /&gt;
+
+---
+
+.pull-left[
+
+## Análise exploratória
+
+- É um trabalho de __investigação__ de dados
+- A ferramenta: precisa ser __rápida__ de programar
+- O objetivo é **aprender**
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+--
+
+.pull-right[
+
+## Análise descritiva
+
+- É um trabalho de __otimização visual__
+- A ferramenta: precisa ser __customizável__
+- O objetivo é **comunicar**
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+--
+
+.center[
+### O `{ggplot2}` permite fazer as duas coisas!
+]
+
+
+
+---
+
+# Gramática de gráficos *em camadas*
+
+O pacote `{ggplot2}` segue duas filosofias que nos ajudam a entender o processo de construção dos gráficos:
+
+1. Um gráfico estatístico é uma representação visual dos dados por meio de atributos estéticos (posição, cor, forma, tamanho, ...) de formas geométricas (pontos, linhas, barras, ...). [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447).
+
+2. Um gráfico pode ser construído em camadas (um gráfico é a sobreposição de elementos visuais). [A layered grammar of graphics](https://vita.had.co.nz/papers/layered-grammar.html).
+
+---
+
+# Camadas
+
+Para construir um gráfico, começamos com o *canvas*. A função `ggplot()` cria a primeira camada do nosso gráfico: uma tela em branco (cinza).
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-15-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Camadas
+
+.panelset[
+
+.panel[
+.panel-name[Canvas]
+
+&lt;img src="slides_files/figure-html/canvas-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[Canvas (R)]
+
+
+```r
+cars |&gt; 
+  ggplot()
+```
+
+&lt;img src="slides_files/figure-html/canvas-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[Eixos]
+
+&lt;img src="slides_files/figure-html/aes-mapping-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.panel[
+.panel-name[Eixos (R)]
+
+
+```r
+cars |&gt; 
+  ggplot() +
+  aes(x = speed, y = dist)
+```
+
+&lt;img src="slides_files/figure-html/aes-mapping-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[Geometria]
+
+&lt;img src="slides_files/figure-html/dispersao-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.panel[
+.panel-name[Geometria (R)]
+
+
+```r
+cars |&gt; 
+  ggplot() +
+  aes(x = speed, y = dist) +
+  geom_point()
+```
+
+&lt;img src="slides_files/figure-html/dispersao-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+---
+
+# Camadas
+
+Depois, podemos trabalhar a estética com temas e detalhamentos.
+
+.panelset[
+.panel[
+.panel-name[Completo]
+
+&lt;img src="slides_files/figure-html/cars-completo-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+.panel[
+.panel-name[Completo (R)]
+
+
+```r
+ggplot(cars) +
+  aes(speed, dist) +
+  geom_point(colour = "darkblue") +
+  stat_smooth(
+    se = FALSE, colour = "lightgray", 
+    method = "loess", formula = "y ~ x"
+  ) +
+  theme_minimal(14) +
+  labs(
+    title = "A velocidade influencia na distância de parada?",
+    subtitle = "Distância necessária para parar o carro",
+    caption = paste(
+      "Fonte: Ezekiel, M. (1930) Methods of",
+      "Correlation Analysis. Wiley"),
+    x = "Velocidade", y = "Distância para parar"
+  )
+```
+
+&lt;img src="slides_files/figure-html/cars-completo-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+---
+
+# Curiosidade: por quê o `+`?
+
+O `{ggplot2}`, diferentemente dos outros pacotes do `tidyverse`, não usa o *pipe* (`%&gt;%` ou `|&gt;` depois do R 4.1). Isso acontece pois o `{ggplot2}` surgiu [antes que o autor tomasse conhecimento do pipe](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/comment/cvi19ly/?utm_source=share&amp;utm_medium=web2x&amp;context=3).
+
+&lt;iframe id="reddit-embed" src="https://www.redditmedia.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/cvi19ly/?depth=1&amp;amp;showmore=false&amp;amp;embed=true&amp;amp;showmedia=false" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" height="437" width="640" scrolling="no"&gt;&lt;/iframe&gt;
+
+---
+
+# Vamos ao R!
+
+&lt;img src="img/cat.gif" style="display: block; margin: auto;" /&gt;
+
+---
+
+# [Dúvidas?](https://www.rstudio.com/resources/cheatsheets/)
+
+&lt;img src="https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/data-visualization.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# [Qual gráfico escolher?](https://www.data-to-viz.com)
+
+&lt;img src="img/data-to-viz.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Gráficos bons e ruins
+
+.pull-left[
+
+### Gráficos para evitar
+
+- Barras que não começam no zero
+- [Gráficos de pizza](https://forum.abj.org.br/t/graficos-de-pizza-sao-ruins/41) (discutível!)
+- ...
+
+]
+
+--
+
+.pull-right[
+
+### Gráficos para tomar cuidado
+
+- Gráficos com dois eixos
+- Gráficos pouco conhecidos
+- ...
+
+]
+
+--
+
+.center[
+
+### [Vamos montar uma lista aqui!](https://docs.google.com/document/d/12TOFqX1Ci-Yn8xPY9y5XT-GQYAju6ObzN-Fy55BbEYE/edit#)
+
+]
+
+
+---
+class: middle, center, inverse
+
+# Otimização Visual
+
+---
+# Objetivos de aprendizagem
+
+⬜ Discutir os principais aspectos visuais a serem considerados em um gráfico estatístico
+
+--
+
+⬜ Compreender como modificar um `ggplot` para comunicar resultados de maneira eficiente.
+
+--
+
+⬜ Otimizar um gráfico que utilizamos na aula anterior.
+
+---
+
+# O que é otimização visual?
+
+- É o ato de trabalhar em uma visualização aprimorar a comunicação.
+
+- Pode envolver alterações nas cores, fontes, elementos geométricos, entre outros, a partir de um gráfico exploratório.
+
+- Não é uma ciência exata, mas recolhe elementos da ciência para aumentar a probabilidade de sucesso da visualização.
+
+---
+
+# Recursos pré-atentativos
+
+- Uma propriedade visual pré-atentativa é processada pelo nosso [cérebro antes de uma ação consciente](https://www.interaction-design.org/literature/article/preattentive-visual-properties-and-how-to-use-them-in-information-visualization).
+
+- Como isso esse processamento é muito rápido, trata-se de uma oportunidade para tornar visualizações mais amigáveis e diretamente interpretadas.
+
+- Segundo [Colin Ware](https://en.wikipedia.org/wiki/Colin_Ware), existem 4 propriedades pré-atentativas que podemos explorar:
+    - Cor
+    - Forma
+    - Movimento
+    - Posicionamento
+    
+- O objetivo dos recursos pré-atentativos é __&lt;span style="color:blue;"&gt;chamar a atenção&lt;/span&gt;__.
+
+---
+
+# Recursos pré-atentativos
+
+- Uma propriedade visual pré-atentativa é processada pelo nosso [cérebro antes de uma ação consciente](https://www.interaction-design.org/literature/article/preattentive-visual-properties-and-how-to-use-them-in-information-visualization).
+
+- Como isso esse processamento é muito rápido, trata-se de uma oportunidade para tornar visualizações mais amigáveis e diretamente interpretadas.
+
+- Segundo [Colin Ware](https://en.wikipedia.org/wiki/Colin_Ware), existem 4 propriedades pré-atentativas que podemos explorar:
+    - __Cor__
+    - __Forma__
+    - Movimento
+    - Posicionamento
+    
+- O objetivo dos recursos pré-atentativos é __&lt;span style="color:blue;"&gt;chamar a atenção&lt;/span&gt;__.
+
+
+---
+class: middle, center
+
+# Cor
+
+---
+
+# Cores do zero: HCL vs RGB
+
+- HCL (hue, chroma, luminance) é vantajoso pois é mais intuitivo de criar do que RGB, já que o HCL tem apenas um eixo de cores (*hue*), enquanto RGB é uma composição de três (*red*, *green*, *blue*)
+
+- O pacote `{colorspace}` permite usar HCL para definir uma cor/paleta: experimente `colorspace::hcl_color_picker()`
+
+- [Nesse site](https://color.adobe.com/create/color-wheel), também é possível criar algumas paletas
+
+&lt;img src="img/hcl.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Paletas de cores prontas
+
+- __Escalas qualitativas__: utilizado para variáveis nominais (sexo, cor/raça)
+
+- __Escalas divergentes__: utilizado para variáveis que têm um centro neutro (favorável/neutro/desfavorável, correlação)
+
+- __Escalas sequenciais__: utilizado para variáveis ordinais (faixa etária, renda)
+
+- __Viridis__: útil para comunicar com pessoas com daltonismo
+
+---
+
+# Paletas de cores no {ggplot2}
+
+- `scale_*_brewer()`: utilizada para variáveis discretas. Possui três tipos: divergente, qualitativa e sequencial.
+
+- `scale_*_distiller()`: utilizada para variáveis contínuas. Interpola as cores do *brewer* para lidar com todos os valores.
+
+- `scale_*_fermenter()`: utilizada para variáveis contínuas, que são transformadas em discretas (binned).
+
+- `scale_*_viridis_[cdb]`: Escala viridis para variáveis `c`ontínuas, `d`iscretas ou `b`inned.
+
+- `scale_*_manual()`: inclui um conjunto de cores manualmente.
+
+---
+
+# Paletas de outros pacotes
+
+- [`{ggthemr}`](https://github.com/Mikata-Project/ggthemr) tem um monte de paletas, mas está um pouco desatualizado.
+
+- [`{hrbrthemes}`](https://github.com/hrbrmstr/hrbrthemes) contém uma lista de temas escolhidos pelo Bob Rudis.
+
+- [`{ghibli}`](https://ewenme.github.io/ghibli/) tem paletas de cores relacionadas ao Studio Ghibli
+
+- [`{paletteer}`](https://github.com/EmilHvitfeldt/paletteer) tem uma coleção de cores de vários outros pacotes de paletas.
+
+---
+
+# Qual visualização é melhor?
+
+.pull-left[
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.pull-right[
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# É subjetivo...
+
+&lt;img src="img/same-picture.jpg" width="1067" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: middle, center
+
+# Forma
+
+---
+
+# Formas
+
+- Geralmente queremos contrastar formas para chamar a atenção...
+
+--
+
+- Sem com isso fazer uma bagunça visual.
+
+--
+
+- A ideia é utilizar apenas um elemento, como tamanho, forma, largura, marcações, angulações, etc. para mostrar o contraste.
+
+
+---
+
+# Exemplos
+
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Princípios Gestalt
+
+- __Gestalt__ é uma área ampla da psicologia que não vamos aprofundar.
+
+- Está ligada à ideia de que, em uma visualização, o todo é maior do que a soma das partes.
+
+- Dois princípios Gestalt aplicáveis em visualização de dados são a nossa capacidade de:
+    - Completar figuras
+    - Agrupar objetos
+
+- Ou seja, podemos criar visualizações que ativam essas capacidades.
+
+---
+
+# Qual visualização é melhor?
+
+.pull-left[
+
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Vamos ao R!
+
+&lt;img src="img/cat.gif" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse, middle, center
+
+# Extensões do ggplot2
+
+---
+
+# Objetivos de aprendizagem
+
+⬜ Conhecer extensões do `{ggplot2}`
+
+⬜ Experimentar extensões separadamente
+
+⬜ Estudar um exemplo juntando várias extensões.
+
+---
+
+# O que é uma extensão?
+
+- O `{ggplot2}` é maravilhoso, mas não possui todos os gráficos possíveis.
+
+- Por isso, pessoas do mundo todo desenvolvem extensões para a comunidade usar, que vão desde pacotes com novos temas/cores, geometrias eixos até a [possibilidade de desenhar gatinhos em barras](https://coolbutuseless.github.io/package/ggpattern/index.html)
+
+- A equipe do tidyverse mantém uma [lista curada de extensões do `{ggplot2}`](https://exts.ggplot2.tidyverse.org/gallery/)
+
+---
+
+# Vamos ao R!
+
+&lt;img src="img/cat.gif" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Como criar uma extensão?
+
+- A [edição mais recente](https://ggplot2-book.org/extensions.html) do livro do `{ggplot2}` possui um tutorial de como criar extensões para o pacote.
+
+- ⚠️  Cuidado! Criar extensões do `{ggplot2}` não é fácil. Trata-se de um pacote complexo, exigindo bastante conhecimento de elementos internos do R.
+
+- Uma forma legal de estudar extensões é olhando o código de pacotes. Recomendamos as extensões do [Thomas Lin Pedersen](https://github.com/thomasp85), já que ele é o mantenedor atual do `{ggplot2}` e, portanto, conhece muito bem as melhores práticas para criar extensões.
+
+---
+class: inverse, middle, center
+
+# Interatividade
+
+---
+
+# Objetivos de aprendizagem
+
+⬜ Conhecer a diferença entre visualizações estáticas e dinâmicas
+
+⬜ Experimentar algumas visualizações
+
+⬜ Cobrir temas que não foram abordados no curso e encerrar.
+
+---
+
+## Gráficos interativos e estáticos
+
+- Gráficos interativos têm o poder de engajar mais, por conta do efeito *voosh*. Todo ser humano gosta de interagir com aquilo que está analisando.
+
+- No entanto, isso vem com um custo: não são todos os documentos capazes de processar visualizações dinâmicas. Em particular, PDF, Word e PPT não rodam esses conteúdos.
+
+- Vamos visitar tanto o mundo estático quanto dinâmico, para que você saiba por onde começar quando receber um novo desafio.
+
+---
+# Vamos ao R!
+
+&lt;img src="img/cat.gif" style="display: block; margin: auto;" /&gt;
+
+---
+
+## htmlwidgets
+
+`htmlwidgets` são bibliotecas de visualização JavaScript encapsuladas em pacotes de R. Elas nos permitem usar diversas ferramentas JavaScript diretamente do R, adicionando algumas poucas linhas de código em nosso script.
+
+Usando `htmlwidgets`, conseguimos construir tabelas, gráficos, mapas e muito outras visualizações interativas e naturalmente bonitas.
+
+[Clique aqui](https://www.htmlwidgets.org/index.html) para acessar uma lista completa de todos os `htmlwidgets` disponíveis.
+
+---
+## Tabelas com reactable
+
+O pacote `reactable` nos permite criar tabelas interativas baseadas na biblioteca [React Table](https://github.com/tannerlinsley/react-table). 
+
+[Clique aqui](https://glin.github.io/reactable/) para acessar o tutorial completo do pacote `{reactable}`.
+
+---
+&lt;br&gt;&lt;br&gt;
+
+A interatividade dos `htmlwidgets` não depende de uma sessão R rodando por trás. Você pode utilizá-los em qualquer documento `.html`.
+
+<div id="htmlwidget-c31e6bc5b1c094b69f49" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c31e6bc5b1c094b69f49">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"mpg":[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],"cyl":[6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],"disp":[160,160,108,258,360,225,360,146.7,140.8,167.6,167.6,275.8,275.8,275.8,472,460,440,78.7,75.7,71.1,120.1,318,304,350,400,79,120.3,95.1,351,145,301,121],"hp":[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],"drat":[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92,3.92,3.07,3.07,3.07,2.93,3,3.23,4.08,4.93,4.22,3.7,2.76,3.15,3.73,3.08,4.08,4.43,3.77,4.22,3.62,3.54,4.11],"wt":[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],"qsec":[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3,18.9,17.4,17.6,18,17.98,17.82,17.42,19.47,18.52,19.9,20.01,16.87,17.3,15.41,17.05,18.9,16.7,16.9,14.5,15.5,14.6,18.6],"vs":[0,0,1,1,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,0,1],"am":[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1],"gear":[4,4,4,3,3,3,3,4,4,4,4,3,3,3,3,3,3,4,4,4,3,3,3,3,3,4,5,5,5,5,5,4],"carb":[4,4,1,1,2,1,4,2,2,4,4,3,3,3,4,4,4,1,2,1,1,2,2,4,2,1,2,2,4,6,8,2]},"columns":[{"accessor":".rownames","name":"","type":"character","sortable":false,"filterable":false,"rowHeader":true},{"accessor":"mpg","name":"mpg","type":"numeric"},{"accessor":"cyl","name":"cyl","type":"numeric"},{"accessor":"disp","name":"disp","type":"numeric"},{"accessor":"hp","name":"hp","type":"numeric"},{"accessor":"drat","name":"drat","type":"numeric"},{"accessor":"wt","name":"wt","type":"numeric"},{"accessor":"qsec","name":"qsec","type":"numeric"},{"accessor":"vs","name":"vs","type":"numeric"},{"accessor":"am","name":"am","type":"numeric"},{"accessor":"gear","name":"gear","type":"numeric"},{"accessor":"carb","name":"carb","type":"numeric"}],"defaultPageSize":4,"paginationType":"numbers","showPageInfo":true,"minRows":1,"striped":true,"compact":true,"dataKey":"6409f477c58a0118835a99d4b0c7f170"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+
+
+---
+## Pacotes alternativos para tabelas
+
+A seguir, uma lista de pacotes/funções alternativos que trazem soluções para visualização de tabelas.
+
+- `knitr::kable()`: não é um htmlwidget (não possui interatividade), mas é uma solução para formatar tabelas quando não precisamos que elas sejam interativas. Funciona em conjunto com o pacote `{kableExtra}`.
+
+- `{flextable}`: também não é interativo, é um excelente pacote para editar tabelas. Funciona quando trabalhamos com relatórios em Word, e também integra bem com o pacote `{DT}`.
+
+- `DT::datatable()`: outro htmlwidget para criar tabelas interativas. Funciona tal como o `reactable()`, mas um pouco mais burocrático para formatar as tabelas. Baseado na biblioteca JavaScript [DataTables](http://datatables.net/).
+
+#### Tutoriais
+
+- [Tutorial kable e kableExtra](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
+
+- [Tutorial flextable](https://ardata-fr.github.io/flextable-book/)
+
+- [Tutorial DT](https://rstudio.github.io/DT/)
+
+---
+## Gráficos com plotly
+
+O pacote `plotly` nos permite criar gráficos interativos baseados na biblioteca [Plotly](https://plotly.com/) (construída em [D3](https://d3js.org/)). 
+
+Embora seja possível criar um plotly do zero usando a função `plot_ly()`, um jeito muito eficiente de utilizar essa biblioteca é criar um ggplot e então utilizar a função `ggplotly()`. Veja o exemplo a seguir.
+
+#### Tutoriais
+
+- [Tutorial plotly](https://plotly.com/r/)
+
+- [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com/)
+
+---
+&lt;br&gt;&lt;br&gt;
+
+.pull-left[
+
+
+```r
+gg &lt;- ggplot(mtcars) +
+  aes(wt, mpg) +
+  geom_point()
+plotly::ggplotly(
+  p = gg, 
+  height = 400
+)
+```
+
+]
+
+.pull-right[
+
+<div id="htmlwidget-849ed0c435b8aaeaa6e8" style="width:504px;height:400px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-849ed0c435b8aaeaa6e8">{"x":{"data":[{"x":[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],"y":[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],"text":["wt: 2.620<br />mpg: 21.0","wt: 2.875<br />mpg: 21.0","wt: 2.320<br />mpg: 22.8","wt: 3.215<br />mpg: 21.4","wt: 3.440<br />mpg: 18.7","wt: 3.460<br />mpg: 18.1","wt: 3.570<br />mpg: 14.3","wt: 3.190<br />mpg: 24.4","wt: 3.150<br />mpg: 22.8","wt: 3.440<br />mpg: 19.2","wt: 3.440<br />mpg: 17.8","wt: 4.070<br />mpg: 16.4","wt: 3.730<br />mpg: 17.3","wt: 3.780<br />mpg: 15.2","wt: 5.250<br />mpg: 10.4","wt: 5.424<br />mpg: 10.4","wt: 5.345<br />mpg: 14.7","wt: 2.200<br />mpg: 32.4","wt: 1.615<br />mpg: 30.4","wt: 1.835<br />mpg: 33.9","wt: 2.465<br />mpg: 21.5","wt: 3.520<br />mpg: 15.5","wt: 3.435<br />mpg: 15.2","wt: 3.840<br />mpg: 13.3","wt: 3.845<br />mpg: 19.2","wt: 1.935<br />mpg: 27.3","wt: 2.140<br />mpg: 26.0","wt: 1.513<br />mpg: 30.4","wt: 3.170<br />mpg: 15.8","wt: 2.770<br />mpg: 19.7","wt: 3.570<br />mpg: 15.0","wt: 2.780<br />mpg: 21.4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":25.2054794520548,"r":7.30593607305936,"b":39.1598173515982,"l":37.2602739726027},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.31745,5.61955],"tickmode":"array","ticktext":["2","3","4","5"],"tickvals":[2,3,4,5],"categoryorder":"array","categoryarray":["2","3","4","5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"wt","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[9.225,35.075],"tickmode":"array","ticktext":["10","15","20","25","30","35"],"tickvals":[10,15,20,25,30,35],"categoryorder":"array","categoryarray":["10","15","20","25","30","35"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"mpg","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","height":400,"barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"35da55eac613":{"x":{},"y":{},"type":"scatter"}},"cur_data":"35da55eac613","visdat":{"35da55eac613":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+
+]
+
+
+---
+## Pacotes alternativos
+
+A seguir, uma lista de pacotes/funções alternativos que trazem soluções para visualização de gráficos.
+
+- `highcharter::highcharter()`: pacote gráfico baseado na biblioteca JavaScript [Highcharts](https://www.highcharts.com/). A biblioteca Highcharts é gratuita apenas para fins educacionais e não lucrativos (exceto órgãos governamentais). Para outros usos, você pode precisar de uma licença. **[avançado]**
+
+- Procure por pacotes para tipos específicos de gráficos na [galeria de htmlwidgets](http://gallery.htmlwidgets.org/).
+
+#### Tutoriais
+
+- [Tutorial highcharter](http://jkunst.com/highcharter/)
+
+- [Documentação Highcharts](https://api.highcharts.com/highcharts/)
+
+---
+## Mapas com leaflet
+
+O pacote `{leaflet}` nos permite criar mapas interativos baseados na biblioteca  JavaScript open-source [Leaflet](https://leafletjs.com/).
+
+Para criar um mapa leaflet, utilizamos a função `leaflet::leaflet()` e diversas funções auxiliares para caracterizar nosso mapa. Um tutorial de como utilizar o `leaflet` se encontra [aqui](http://rstudio.github.io/leaflet/).
+
+A seguir, mostramos um exemplo simples de como criar um mapa leaflet.
+
+---
+&lt;br&gt;&lt;br&gt;
+
+
+
+```r
+library(leaflet)
+
+leaflet(height = 300) %&gt;%
+  addTiles() %&gt;%  # Adiciona a camada gráfica do OpenStreetMap (padrão)
+  addMarkers(
+    lng = -46.6623969, lat = -23.5581664, 
+    popup = "A Curso-R morava aqui antes da pandemia. Agora ela mora no mundo todo!"
+  )
+```
+
+<div id="htmlwidget-bdf6595e082dff4018d1" style="width:504px;height:300px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bdf6595e082dff4018d1">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-23.5581664,-46.6623969,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"A Curso-R morava aqui antes da pandemia. Agora ela mora no mundo todo!",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-23.5581664,-23.5581664],"lng":[-46.6623969,-46.6623969]}},"evals":[],"jsHooks":[]}</script>
+
+---
+## Pacotes alternativos
+
+- `highcharter::hcmap()`: variação do `highcharter` para mapas, baseada na biblioteca JavaScript [Highcharts](https://www.highcharts.com/maps/demo). **[avançado]**
+
+- [`{tmap}`](https://github.com/mtennekes/tmap): Pacote focado em mapas temáticos.
+
+#### Tutoriais
+
+- [Construindo mapas com o highcharter](http://jkunst.com/highcharter/highmaps.html)
+
+- [Documentação Highmaps](https://api.highcharts.com/highmaps/)
+
+- [Documentação do tmap](https://github.com/mtennekes/tmap)
+
+
+---
+## Referências e material extra
+
+.pull-left[
+
+#### htmlwidgets
+
+- [Galeria htmlwidgets](http://gallery.htmlwidgets.org/)
+
+#### reactable
+
+- [A biblioteca React Table](https://github.com/tannerlinsley/react-table)
+- [Tutorial reactable](https://glin.github.io/reactable/)
+
+#### DT
+
+- [Tutorial DT](https://rstudio.github.io/DT/)
+
+#### plotly
+
+- [Tutorial plotly](https://plotly.com/r/)
+
+- [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com/)
+
+]
+
+.pull-right[
+
+#### highcharter/highcharts
+
+- [Tutorial highcharter](http://jkunst.com/highcharter/)
+
+- [Biblioteca Highcharts](https://www.highcharts.com/)
+
+- [Galeria Highcharts](https://www.highcharts.com/demo)
+
+- [Documentação Highcharts](https://api.highcharts.com/highcharts/)
+
+#### leaflet
+
+- [Biblioteca Leaflet](https://leafletjs.com/)
+
+- [Tutorial Leaflet](http://rstudio.github.io/leaflet/)
+
+#### highmaps
+
+- [Galeria Highmaps](https://www.highcharts.com/maps/demo)
+
+- [Documentação Highmaps](https://api.highcharts.com/highmaps/)
+
+
+]
+
+---
+class: middle, center, inverse
+
+# Fim!
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:11"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
