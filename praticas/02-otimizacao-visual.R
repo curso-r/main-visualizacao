@@ -1,11 +1,13 @@
-library(ggplot2)
-library(dplyr)
+library(tidyverse)
+library(dados)
+
 imagem <- "https://wallpaperaccess.com/full/11836.jpg"
-vader <-  dados::dados_starwars |>
+
+vader <-  dados_starwars |>
   mutate(vader = if_else(nome == "Darth Vader", TRUE, NA)) |>
-  tidyr::drop_na(vader)
-grafico <-
-  dados::dados_starwars |>
+  drop_na(vader)
+
+grafico <- dados_starwars |>
   ggplot() +
   geom_point(
     aes(x = massa, y = altura),
@@ -59,23 +61,24 @@ grafico <-
       family = "Star Jedi"
     )
   )
-grafico_final <- ggimage::ggbackground(gg = grafico,
-                                       background = imagem) 
-ggsave(filename = "../../static/images/posts/conteudo/desafio-3/grafico.png",
-       plot = grafico_final, width = 10, height = 6, dpi = 600)
-# fonte Star Jedi: https://www.dafont.com/pt/star-jedi.font
 
+grafico_final <- ggimage::ggbackground(
+  gg = grafico,
+  background = imagem
+) 
+
+ggsave(
+  filename = "output/grafico.png",
+  plot = grafico_final, width = 10, height = 6, dpi = 600
+)
+# fonte Star Jedi: https://www.dafont.com/pt/star-jedi.font
 
 #' Author: FeJu
 #' Subject: Gráfico do Storytelling with data
 
-library(tidyverse)
-library(magrittr)
-
 # Import -----------------------------------------------------------------------
 
 url0 <- "https://raw.githubusercontent.com/adamribaudo/storytelling-with-data-ggplot/master/data/FIG0921-26.csv"
-
 da_raw <- read_csv(url0)
 
 # Tidy -------------------------------------------------------------------------
@@ -91,7 +94,7 @@ da_tidy <- da_raw %>%
   janitor::clean_names() %>%
   mutate(
     ano = as.integer(ano),
-    perc_funders = readr::parse_number(perc_funders)/100
+    perc_funders = parse_number(perc_funders)/100
   )
 
 funcao_para_iterar <- function(tipo_painel, dados = da_tidy) {
@@ -103,23 +106,12 @@ funcao_para_iterar <- function(tipo_painel, dados = da_tidy) {
 }
 
 
-#
-# realce_health <- da_tidy %>%
-#   mutate(
-#     realce = if_else(category == "Health", 1, 0),
-#     painel = "Health"
-#   )
-#
-# realce_education <- da_tidy %>%
-#   mutate(
-#     realce = if_else(category == "Education", 1, 0),
-#     painel = "Education"
-#   )
-
 # Visualize --------------------------------------------------------------------
 
-da_visualizar <- purrr::map_dfr(unique(da_tidy$category),
-                                funcao_para_iterar)
+da_visualizar <- map_dfr(
+  unique(da_tidy$category),
+  funcao_para_iterar
+)
 
 tab <- da_visualizar %>%
   mutate(
@@ -132,7 +124,7 @@ tab <- da_visualizar %>%
       ano == max(ano) ~ -0.3,
       TRUE ~ NA_real_
     ),
-    painel = stringr::str_wrap(painel, 5)
+    painel = str_wrap(painel, 5)
   )
 
 tab %>%

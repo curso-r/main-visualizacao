@@ -51,7 +51,6 @@ O curso de visualização de dados possui 4 aulas, de 3 horas cada, totalizando 
     - ggrepel
     - ggridges
     - ggalt
-    - geom_sf
     - gganimate
     - ggtext
     - Dinâmica: definição e exemplo para cada pacote
@@ -60,6 +59,7 @@ O curso de visualização de dados possui 4 aulas, de 3 horas cada, totalizando 
     - plotly
     - highcharter
     - reactable
+    - coisas que faltaram das últimas aulas
     - Dinâmica: definição e exemplo para cada pacote
 
 Conteúdos extras:
@@ -76,23 +76,49 @@ Esse curso tem várias dependências. Separamos em três grupos de dependências
 
 ```{r eval=FALSE, include=TRUE}
 
-# Principal
-principal <- c(
+# 
+
+# Aula01
+aula01 <- c(
   "tidyverse",
-  "sf",
-  "geobr",
-  "ggalt",
+  "dados"
+)
+install.packages(aula01)
+
+# Aula02
+aula02 <- c(
   "ggthemes",
   "patchwork",
-  "plotly"
+  "ggimage"
 )
-install.packages(principal)
+
+
+# Aula03
+
+aula03 <- c(
+  "sf",
+  "ggalt",
+  "ggrepel",
+  "ggridges",
+  "ggalt",
+  "gganimate",
+  "ggtext"
+)
+
+# Aula04
+
+aula04 <- c(
+  "plotly",
+  "reactable",
+  "leaflet",
+  "highcharter",
+  "sf",
+  "geobr"
+)
 
 # Pacotes instalados via GitHub
 if (!require(remotes)) install.packages("remotes")
 remotes::install_github("abjur/abjData")
-remotes::install_github("cienciadedatos/dados")
-
 
 # esses pacotes são apenas para a aula de miscelânea.
 # se não conseguir instalar algum deles, não se preocupe!
