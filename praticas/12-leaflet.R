@@ -7,7 +7,7 @@ library(abjData) # remotes::install_github("abjur/abjData")
 
 dados_geobr <- geobr::read_municipality("SC")
 ## Se a internet não contribuir, rode
-# dados_geobr <- readr::read_rds("https://github.com/curso-r/main-visualizacao/raw/curso-visualizacao/dados/geobr/dados_geobr.rds")
+# dados_geobr <- readr::read_rds("dados/geobr/dados_geobr.rds")
 
 dados_com_pnud <- dados_geobr |> 
   mutate(muni_id = as.character(code_muni)) |> 

@@ -7,13 +7,9 @@ library(abjData) # remotes::install_github("abjur/abjData")
 
 ## ---------------------------------------------------------
 # geobr::read_country() # importa a delimitação do Brasil
-
 # geobr::read_state() # importa a delimitação dos estados do Brasil
-
 # geobr::read_state("DF") # importa a delimitação de um Estado específico, usando a sigla
-
 # geobr::read_municipality() # importa a delimitação de todos os municípios do Brasil. É uma base mais pesada!
-
 # geobr::read_municipality(code_muni = 3550308) # importa a delimitação de um município específico, usando o código do IBGE do município.
 
 
@@ -21,7 +17,7 @@ library(abjData) # remotes::install_github("abjur/abjData")
 
 dados_geobr <- geobr::read_municipality("SC")
 ## Se a internet não contribuir, rode
-# dados_geobr <- readr::read_rds("dados/dados_geobr/dados_geobr.rds")
+# dados_geobr <- readr::read_rds("dados/geobr/dados_geobr.rds")
 
 dados_com_pnud <- dados_geobr |> 
   mutate(muni_id = as.character(code_muni)) |> 
