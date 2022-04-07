@@ -1,61 +1,51 @@
 library(tidyverse)
-
-filme <- "Bohemian Rhapsody"
-id_planilha <- "1sJDpzYH_sMYuYHqkmZeJGIq_TEXGDjboYdSoew7UjZ8"
-
-da_raw <- googlesheets4::read_sheet(
-  id_planilha, sheet = filme
-)
-
-da_tidy <- da_raw |>
-  janitor::clean_names() |>
-  dplyr::transmute(
-    id,
-    start = as.numeric(start),
-    end = as.numeric(end),
-    truth_level = as.character(truth_level)
+library(dados)
+  
+# vamos fazer um bd de pokemons
+pokemons <- c("pikachu", "bulbasaur", "squirtle", "charmander")
+infos_pokemon <- function(pokemon) {
+  u <- paste0("https://pokeapi.co/api/v2/pokemon/", pokemon)
+  r <- httr::GET(u)
+  j <- httr::content(r)
+  tibble::tibble(
+    pokemon = pokemon,
+    attack = j$stats[[1]]$base_stat,
+    img = j$sprites$front_default
   )
+}
 
-percentual <- da_tidy |>
-  dplyr::filter(
-    !truth_level %in% c("-", "UNKNOWN")
-  ) |>
-  dplyr::summarise(
-    res = mean(truth_level %in% c("TRUE", "TRUE-ISH"))
-  ) |>
-  dplyr::pull(res) |>
-  scales::percent(accuracy = .1)
+da_pokemon <- purrr::map_dfr(pokemons, infos_pokemon) |> 
+  mutate(pokemon = fct_reorder(pokemon, attack)) |> 
+  arrange(pokemon)
 
-# o grafico é a partir daqui
-
-da_tidy |>
-  dplyr::filter(truth_level != "-") |>
-  dplyr::mutate(truth_level = forcats::lvls_reorder(
-    truth_level, c(3, 4, 2, 1, 5)
-  )) |>
+gg_base <- da_pokemon |>
   ggplot() +
-  geom_rect(
-    mapping = aes(
-      xmin = start, xmax = end,
-      ymin = 0, ymax = 1,
-      fill = truth_level
-    ),
-    colour = "white",
-    size = .05,
+  geom_segment(
+    aes(x = 0, xend = attack, y = pokemon, yend = pokemon)
+  ) +
+  geom_point(
+    aes(x = attack, y = pokemon, colour = pokemon), 
+    size = 7,
     show.legend = FALSE
   ) +
-  scale_fill_manual(values = c(
-    "#42A5F5","#8BC8F9","#F386AA", "#EC407A","#D3D3D3"
-  )) +
-  labs(
-    title = stringr::str_glue(
-      "<strong style='color:#6D8Cd6;'>{percentual}</strong>",
-      " <strong style='color:black;'>{filme}</strong>",
-      " <span style='color:#444444;font-size:10px'>2018</span>"
-    )
+  scale_colour_manual(
+    values = rev(c("darkgreen", "royalblue", "red", "gold"))
   ) +
-  theme_void() +
-  theme(
-    plot.title = ggtext::element_markdown(colour = "black", size = 11)
-  )
+  theme_minimal(16)
 
+gg_base
+
+gg_base +
+  labs(
+    title = "Pokémon!!",
+    x = "Poder de ataque"
+  ) +
+  scale_y_discrete(
+    name = NULL,
+    labels = glue::glue("<img src='{da_pokemon$img}'>")
+  ) +
+  theme(
+    plot.title = element_text(family = "Pokemon Hollow", size = 50),
+    axis.title = element_text(family = "Pokemon Hollow", size = 20),
+    axis.text.y = ggtext::element_markdown()
+  )

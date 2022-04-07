@@ -62,19 +62,13 @@ grafico <- dados_starwars |>
     )
   )
 
-grafico_final <- ggimage::ggbackground(
+ggimage::ggbackground(
   gg = grafico,
   background = imagem
 ) 
 
-ggsave(
-  filename = "output/grafico.png",
-  plot = grafico_final, width = 10, height = 6, dpi = 600
-)
 # fonte Star Jedi: https://www.dafont.com/pt/star-jedi.font
 
-#' Author: FeJu
-#' Subject: Gráfico do Storytelling with data
 
 # Import -----------------------------------------------------------------------
 
@@ -84,7 +78,7 @@ da_raw <- read_csv(url0)
 # Tidy -------------------------------------------------------------------------
 
 # queremos chegar em uma tabela que tem as seguintes colunas
-# categoria, ano,
+# categoria, ano, percentual
 
 da_tidy <- da_raw %>%
   pivot_longer(
@@ -169,3 +163,4 @@ tab %>%
   ) +
   scale_color_viridis_d(begin = .5) +
   coord_cartesian(clip = "off")
+

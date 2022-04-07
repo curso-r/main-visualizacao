@@ -1,24 +1,8 @@
-## ----setup, include=FALSE---------------------------------
-knitr::opts_chunk$set(
-  echo = TRUE,
-  message = FALSE,
-  warning = FALSE,
-  fig.align = "center",
-  cache = TRUE
-)
-
-
 ## ---------------------------------------------------------
 library(sf)
 library(geobr)
-library(ggplot2)
-library(dplyr)
-# remotes::install_github("abjur/abjData")
-library(abjData)
-
-
-## ---------------------------------------------------------
-knitr::kable(geobr::list_geobr())
+library(tidyverse)
+library(abjData) # remotes::install_github("abjur/abjData")
 
 
 ## ---------------------------------------------------------
@@ -34,177 +18,73 @@ knitr::kable(geobr::list_geobr())
 
 
 ## ---------------------------------------------------------
-estados <- readr::read_rds("../dados/geobr/estados.Rds")
 
-# Como obter essa mesma base?
-# estados <- geobr::read_state()
+dados_geobr <- geobr::read_municipality("SC")
+## Se a internet não contribuir, rode
+# dados_geobr <- readr::read_rds("dados/dados_geobr/dados_geobr.rds")
 
+dados_com_pnud <- dados_geobr |> 
+  mutate(muni_id = as.character(code_muni)) |> 
+  inner_join(pnud_min, by = "muni_id") |> 
+  filter(ano == 2010)
 
-
-## ---------------------------------------------------------
-estado_df <- readr::read_rds("../dados/geobr/estado_df.Rds")
-
-# Como obter essa mesma base?
-# estado_df <- geobr::read_state("DF")
-
-
-
-## ---------------------------------------------------------
-class(estados)
-
-
-## ---------------------------------------------------------
-estados %>%
+dados_com_pnud %>%
   ggplot() +
   geom_sf()
 
-
-
-## ---------------------------------------------------------
 ggplot() +
-  geom_sf(data = estados) +
-  geom_sf(data = estado_df, fill = "blue") +
+  geom_sf(data = dados_com_pnud, fill = "royalblue") +
   theme_bw()
 
 
 ## ---------------------------------------------------------
-glimpse(estados)
-
-
-## ---------------------------------------------------------
-estados %>% 
-  filter(name_region == "Nordeste") %>% 
+dados_com_pnud %>% 
+  filter(substr(name_muni, 1, 1) %in% c("A", "Á")) %>% 
   ggplot() +
-  geom_sf() 
-
-
-## ---------------------------------------------------------
-class(abjData::pnud_uf)
-
-pnud_uf_sf <- estados %>% 
-  left_join(abjData::pnud_uf, by = c("code_state" = "uf")) 
-
-class(pnud_uf_sf)
-
+  geom_sf(data = dados_com_pnud) +
+  geom_sf(fill = "royalblue") +
+  ggrepel::geom_label_repel(
+    aes(x = lon, y = lat, label = muni_nm), 
+    size = 3,
+    colour = "black",
+    alpha = .8
+  )
 
 ## ---------------------------------------------------------
-# glimpse(pnud_uf_sf)
-
-pnud_uf_sf  %>% 
+dados_com_pnud  %>% 
   ggplot(aes(fill = idhm)) +
   geom_sf() +
   theme_void()
 
-
-## ---------------------------------------------------------
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-
-
-## ---------------------------------------------------------
-escolas_brasilia <- readr::read_rds("../dados/geobr/escolas_brasilia.Rds")
-
-# Como obter essa mesma base?
-# escolas <- geobr::read_schools()
-# escolas_brasilia <- escolas %>% 
-#   filter(abbrev_state == "DF", name_muni == "Brasília") 
-
-
-## ---------------------------------------------------------
-municipio_brasilia <- readr::read_rds("../dados/geobr/municipio_brasilia.Rds")
-
-# Como obter essa mesma base?
-# municipio_brasilia <- geobr::read_municipality(5300108)
-
-
-## ---------------------------------------------------------
-ggplot() +
-  geom_sf(data = municipio_brasilia) +
-  geom_sf(data = escolas_brasilia) 
-
-
-## ---------------------------------------------------------
-ggplot() +
-  geom_sf(data = municipio_brasilia) +
-  geom_sf(data = escolas_brasilia, aes(color = government_level)) 
-
-
-## ---------------------------------------------------------
-ggplot() +
-  geom_sf(data = municipio_brasilia) +
-  geom_sf(data = escolas_brasilia, aes(color = government_level)) + 
-  facet_wrap(~ government_level)
-
-
-## ---------------------------------------------------------
-ggplot() +
-  geom_sf(data = municipio_brasilia) +
-  geom_sf(data = escolas_brasilia, aes(color = government_level), show.legend = FALSE) + 
-  facet_wrap(~ government_level) +
-  theme_void() + 
-  labs(title = "Escolas em Brasília \n") + 
-  theme(plot.title = element_text(hjust = 0.5))
-
-
-## ---------------------------------------------------------
-library(sf)
-library(geobr)
-library(magrittr)
-
-
 ## ---------------------------------------------------------
 
-# Link que disponibiliza a base
-# u_shp <- "https://www.gov.br/infraestrutura/pt-br/centrais-de-conteudo/rodovias-zip"
+# alguns detalhamentos com o {ggspatial}
+dados_com_pnud  %>% 
+  ggplot(aes(fill = idhm)) +
+  geom_sf(colour = "black", size = .1) +
+  scale_fill_viridis_b(option = "A", begin = .1, end = .9) +
+  theme_void() +
+  ggspatial::annotation_scale() +
+  ggspatial::annotation_north_arrow(location = "br")
 
-# Cirar a pasta para baixar o arquivo
-# dir.create("../dados/shp_rod")
+# animado
 
-# Fazer o download do arquivo zip
-# httr::GET(u_shp,
-#           httr::write_disk("../dados/shp_rod/rodovias.zip"),
-#           httr::progress())
-
-# Descompactar o zip
-# unzip("../dados/shp_rod/rodovias.zip", exdir = "../dados/shp_rod/")
-
-
-# Importar a base em arquivo .shp
-# rodovias <-
-#   st_read(
-#     "../dados/shp_rod/rodovias.shp",
-#     quiet = TRUE#,
-#     #options = "ENCODING=WINDOWS-1252"
-#   ) %>%
-#   # limpar o nome das colunas
-#   janitor::clean_names()
-
-# filtrar para DF
-
-# rodovias_df <- rodovias %>% 
-#   filter(sg_uf == "DF") 
+dados_com_pnud_anos <- dados_geobr |> 
+  mutate(muni_id = as.character(code_muni)) |> 
+  inner_join(pnud_min, by = "muni_id") |> 
+  mutate(ano = as.numeric(ano))
 
 
+library(gganimate)
+anim <- dados_com_pnud_anos  %>% 
+  ggplot(aes(fill = idhm)) +
+  geom_sf(colour = "black", size = .1) +
+  scale_fill_viridis_b(option = "A", begin = .1, end = .9) +
+  theme_void() +
+  ggspatial::annotation_scale() +
+  ggspatial::annotation_north_arrow(location = "br") +
+  labs(title = "Ano: {frame_time}") +
+  gganimate::transition_time(ano) +
+  gganimate::enter_fade()
 
-## ---------------------------------------------------------
-rodovias_df <- readr::read_rds("../dados/rodovias_df.Rds")
-
-
-## ---------------------------------------------------------
-ggplot() +
-  geom_sf(data = rodovias_df)
-
-
-## ---------------------------------------------------------
-# Inicio do ggplot
-ggplot() +
-  # limite do estado
-  geom_sf(data = estado_df, color = "gray") +
-  # escolas
-  geom_sf(data = escolas_brasilia, aes(color = government_level), show.legend = FALSE) +
-  # rodovias
-  geom_sf(data = rodovias_df, color = "black") +
-  # adicionar tema
-  theme_void()
-
+gganimate::animate(anim, nframes = 20, width = 800, height = 600)
