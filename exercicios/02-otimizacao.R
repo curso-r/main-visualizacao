@@ -1,5 +1,8 @@
 library(tidyverse)
+library(forcats)
 library(dados)
+library(lubridate)
+library(ggthemes)
 
 # O objetivo dos exercícios abaixo é praticar conceitos de otimização do tema,
 # e escalas no ggplot2. 
