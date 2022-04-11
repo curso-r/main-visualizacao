@@ -121,18 +121,6 @@
       "Repository": "CRAN",
       "Hash": "4f57884290cc75ab22f4af9e9d4ca862"
     },
-    "abjData": {
-      "Package": "abjData",
-      "Version": "0.1.0",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "abjData",
-      "RemoteUsername": "abjur",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "a7eb593b5a45283c0cf0c14b143a3ba29cbd6c11",
-      "Hash": "c1291dfe6809eb04ad2c11fd13d2b5ee"
-    },
     "ash": {
       "Package": "ash",
       "Version": "1.0-15",
