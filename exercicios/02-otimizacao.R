@@ -1,6 +1,11 @@
 library(tidyverse)
 library(dados)
 
+# O objetivo dos exercícios abaixo é praticar conceitos de otimização do tema,
+# e escalas no ggplot2. 
+# Oferecemos um gráfico simples, e instruções de como otimizá-lo. 
+# Para cada um deles, existe um arquivo .png com o mesmo completo,
+# para que você possa comparar/se inspirar.
 
 # 1. Usando o gráfico a seguir, faça os exercícios:
 # a) adicione o tema `theme_fivethirtyeight` usando o pacote ggthemes
