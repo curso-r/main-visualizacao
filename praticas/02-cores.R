@@ -85,10 +85,22 @@ p1 +
   tvthemes::theme_spongeBob(title.size = 40, text.font = "Some Time Later") +
   labs(title = "Duas horas depois...")
 
+
 p1 + 
   tvthemes::scale_colour_brooklyn99() +
-  tvthemes::theme_brooklyn99(title.size = 40, text.font = "Roboto Condensed") +
+  tvthemes::theme_brooklyn99(
+    title.size = 40, 
+    text.font = "Roboto Condensed"
+  ) +
   labs(title = "Cool, cool, cool, cool, cool...")
+
+# FONTES
+
+## No windows...
+extrafont::font_import("exemplos_de_aula/fontes", prompt = FALSE)
+extrafont::loadfonts("win")
+
+## No Mac/Linux basta instalar as fontes e reiniciar a sessão
 
 
 # pacote ghibli -----------------------------------------------------------
