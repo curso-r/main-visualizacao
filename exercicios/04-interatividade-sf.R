@@ -52,7 +52,7 @@ dados_gapminder
 
 # b. Agrupe a tabela por continente
 
-# c. Deixe a tabela no modo "striped"
+# c. Deixe a tabela no modo "striped" (listrado)
 
 # d. Adicione a coluna "melhorou", indicando se, na data mais recente (2007),
 #  a expectativa de vida é maior ou menor que a máxima do país.
