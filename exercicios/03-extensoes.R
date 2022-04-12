@@ -115,3 +115,32 @@ img_starwars |>
     labels = glue::glue("<img src='{img_starwars$img}'  width='50' >")
   ) +
   theme(axis.text.y = ggtext::element_markdown())
+
+
+# 4) O código abaixo apresenta histogramas do comprimento
+# do bico dos pinguins da base Palmer Penguins.
+# Transforme esse gráfico usando o pacote ggridges,
+# e também remova o facet.
+# referencia: exercicios/03-pinguins_histogram.png
+
+pinguins |>
+  ggplot(aes(
+    x = comprimento_bico,
+    fill = especie
+  )) +
+  scale_fill_brewer(palette = "Set2") +
+  ggthemes::theme_solarized() + 
+  labs(x = "Comprimento do bico", y = "Espécie") +
+  geom_histogram(show.legend = FALSE) + 
+  facet_wrap(~ especie, nrow = 3)
+
+# Resposta:
+pinguins |>
+  ggplot(aes(
+    x = comprimento_bico,
+    fill = especie
+  )) +
+  scale_fill_brewer(palette = "Set2") +
+  ggthemes::theme_solarized() + 
+  labs(x = "Comprimento do bico", y = "Espécie") +
+  geom_density_ridges(aes(y = especie), show.legend = FALSE)
