@@ -153,12 +153,10 @@ class: middle, center
 
 - Algumas dúvidas serão respondidas na hora. Outras serão respondidas mais tarde na própria aula ou em aulas futuras.
 
-- Só interrompa quem estiver falando em caso de emergência.
-
 ---
 ## Tire suas dúvidas
 
-- **Não fique com dúvida**.
+- **Não fique com dúvidas**.
  
 - Fora do horário de aula ou monitoria:
     - envie suas perguntas gerais **sobre o curso** no Classroom.
@@ -205,7 +203,7 @@ class: middle, center, inverse
 
 .pull-right[
 
-```{r, fig.cap="Ilustração de Allison Horst"}
+```{r}
 knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/dog_treats_pipe.jpg")
 ```
 
@@ -229,7 +227,7 @@ Ilustração de [Allison Horst](https://www.allisonhorst.com)
 
 .pull-right[
 
-```{r, fig.cap="Blog da Curso-R"}
+```{r}
 knitr::include_graphics("https://blog.curso-r.com/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.png")
 ```
 
@@ -257,7 +255,7 @@ Imagem do [blog da Curso-R](https://blog.curso-r.com/posts/2019-02-10-sf-miojo/)
 
 .pull-right[
 
-```{r, fig.cap="Imagem de Allison Horst"}
+```{r}
 knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/presenting_monster.png")
 ```
 
@@ -597,6 +595,22 @@ class: middle, center, inverse
     
 - O objetivo dos recursos pré-atentativos é __<span style="color:blue;">chamar a atenção</span>__.
 
+---
+class: inverse, middle
+
+##### E por último isso
+
+<br/><br/>
+
+# Primeiro você lerá isso
+
+<br/><br/>
+
+### Depois você lerá isso
+
+<br/><br/>
+
+#### Então isso
 
 ---
 class: middle, center
@@ -892,14 +906,6 @@ class: inverse, middle, center
 
 ---
 
-# Vamos ao R!
-
-```{r}
-knitr::include_graphics("img/cat.gif")
-```
-
----
-
 # Como criar uma extensão?
 
 - A [edição mais recente](https://ggplot2-book.org/extensions.html) do livro do `{ggplot2}` possui um tutorial de como criar extensões para o pacote.
@@ -907,6 +913,14 @@ knitr::include_graphics("img/cat.gif")
 - ⚠️  Cuidado! Criar extensões do `{ggplot2}` não é fácil. Trata-se de um pacote complexo, exigindo bastante conhecimento de elementos internos do R.
 
 - Uma forma legal de estudar extensões é olhando o código de pacotes. Recomendamos as extensões do [Thomas Lin Pedersen](https://github.com/thomasp85), já que ele é o mantenedor atual do `{ggplot2}` e, portanto, conhece muito bem as melhores práticas para criar extensões.
+
+---
+
+# Vamos ao R!
+
+```{r}
+knitr::include_graphics("img/cat.gif")
+```
 
 ---
 class: inverse, middle, center
@@ -933,12 +947,6 @@ class: inverse, middle, center
 
 - Vamos visitar tanto o mundo estático quanto dinâmico, para que você saiba por onde começar quando receber um novo desafio.
 
----
-# Vamos ao R!
-
-```{r}
-knitr::include_graphics("img/cat.gif")
-```
 
 ---
 
@@ -1140,6 +1148,14 @@ leaflet(height = 300) %>%
 
 
 ]
+
+---
+# Vamos ao R!
+
+```{r}
+knitr::include_graphics("img/cat.gif")
+```
+
 
 ---
 class: middle, center, inverse
