@@ -111,5 +111,5 @@ pinguins |>
   ggthemes::theme_solarized() + 
   labs(x = "Comprimento do bico", y = "Espécie") +
   geom_histogram(show.legend = FALSE) + 
-  facet_wrap(~ especie, nrow = 3)
+  facet_wrap(~especie, nrow = 3)
 

@@ -14,7 +14,7 @@ library(ggthemes)
 # a) adicione o tema `theme_fivethirtyeight` usando o pacote ggthemes
 # b) adicione a escala de cor brewer aos pontos, com a escala
 # do tipo qualitativa, e a paleta n.2 . Dica: veja a documentação da função!
-# c) adicione as legendas corretas com a função labs() .
+# c) adicione um título informativo com a função labs().
 # Exemplo de resultado: 02-pinguins.png
 pinguins |>
   ggplot() +
@@ -29,29 +29,29 @@ pinguins |>
   # b ...
   # c ...
 
-
 # 2. Usando o gráfico a seguir, faça os exercícios:
 # a) adicione o tema `theme_solarized` usando o pacote ggthemes
 # b) adicione uma escala de cor viridis aos pontos
 # c) adicione um limite no eixo x: as notas podem ser de 0 a 100
 # d) adicione as legendas corretas com a função labs() .
-# e) usando a função theme(), deixe o tamanho do texto das legendas
+# e) usando a função theme(), deixe o tamanho dos valores
 # dos eixos x e y com o tamanho 8, e o tamanho do texto dos
-# títulos das legendas com tamanho 10.
+# títulos dos eixos com tamanho 15.
 # Exemplo de resultado: 02-pixar.png
 pixar_avalicao_publico |>
   drop_na(nota_rotten_tomatoes) |>
   mutate(filme = forcats::fct_reorder(filme, nota_rotten_tomatoes)) |>
   ggplot() +
-  geom_point(aes(x = nota_rotten_tomatoes, y = filme, color = nota_rotten_tomatoes),
-             show.legend = FALSE) #+
+  geom_point(
+    aes(x = nota_rotten_tomatoes, y = filme, color = nota_rotten_tomatoes),
+    size = 5,
+    show.legend = FALSE
+  ) #+
   # a) ....
   # b) ....
   # c) ....
   # d)...
   # e) ...
-
-
 
 # 3. Usando o gráfico a seguir, faça os exercícios:
 # a) adicione o tema `theme_hc` usando o pacote ggthemes
@@ -86,3 +86,4 @@ voos |>
   # c) ...
   # d) ...
   # e) ...
+
