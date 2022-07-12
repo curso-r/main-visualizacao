@@ -130,8 +130,6 @@ class: middle, center
 ---
 ## Dinâmica curso
 
-- As aulas serão em maior parte expositivas.
-
 - As aulas terão uma seção teórica, de exposição de conceitos, e prática, de aplicação de conceitos.
 
 - O objetivo dos exercícios é gerar dúvidas. **Com exceção do trabalho final, nenhum exercício precisa ser entregue**.
@@ -263,7 +261,44 @@ Ilustração de [Allison Horst](https://www.allisonhorst.com)
 
 ]
 
+---
 
+# Gráficos bons e ruins
+
+.pull-left[
+
+### Gráficos para evitar
+
+- Barras que não começam no zero
+- [Gráficos de pizza](https://forum.abj.org.br/t/graficos-de-pizza-sao-ruins/41) (discutível!)
+- ...
+
+]
+
+--
+
+.pull-right[
+
+### Gráficos para tomar cuidado
+
+- Gráficos com dois eixos
+- Gráficos pouco conhecidos
+- ...
+
+]
+
+--
+
+.center[
+
+### [Vamos montar uma lista aqui!](https://docs.google.com/document/d/12TOFqX1Ci-Yn8xPY9y5XT-GQYAju6ObzN-Fy55BbEYE/edit#)
+
+]
+
+---
+class: middle,inverse,center
+
+# Ferramental
 
 ---
 
@@ -477,14 +512,6 @@ O `{ggplot2}`, diferentemente dos outros pacotes do `tidyverse`, não usa o *pip
 
 ---
 
-# Vamos ao R!
-
-```{r}
-knitr::include_graphics("img/cat.gif")
-```
-
----
-
 # [Dúvidas?](https://www.rstudio.com/resources/cheatsheets/)
 
 ```{r, out.width="75%"}
@@ -499,40 +526,13 @@ knitr::include_graphics("https://raw.githubusercontent.com/rstudio/cheatsheets/m
 knitr::include_graphics("img/data-to-viz.png")
 ```
 
-
 ---
 
-# Gráficos bons e ruins
+# Vamos ao R!
 
-.pull-left[
-
-### Gráficos para evitar
-
-- Barras que não começam no zero
-- [Gráficos de pizza](https://forum.abj.org.br/t/graficos-de-pizza-sao-ruins/41) (discutível!)
-- ...
-
-]
-
---
-
-.pull-right[
-
-### Gráficos para tomar cuidado
-
-- Gráficos com dois eixos
-- Gráficos pouco conhecidos
-- ...
-
-]
-
---
-
-.center[
-
-### [Vamos montar uma lista aqui!](https://docs.google.com/document/d/12TOFqX1Ci-Yn8xPY9y5XT-GQYAju6ObzN-Fy55BbEYE/edit#)
-
-]
+```{r}
+knitr::include_graphics("img/cat.gif")
+```
 
 
 ---
