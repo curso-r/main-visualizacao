@@ -1,9 +1,9 @@
 
-# Relatórios e visualização de dados
+# Visualização de dados
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-Repositório principal do curso Relatórios e visualização de dados.
+Repositório principal do curso Visualização de dados.
 
 Inscreva-se no curso: <https://www.curso-r.com/cursos/visualizacao>
 
@@ -16,7 +16,7 @@ abaixo**.
 | julho de 2022   | <https://curso-r.github.io/202207-visualizacao> | <https://github.com/curso-r/202207-visualizacao> |
 | abril de 2022   | <https://curso-r.github.io/202204-visualizacao> | <https://github.com/curso-r/202204-visualizacao> |
 
-**Trabalho de conclusão**: fazer o #tidytuesday da semana ou um à sua
+**Trabalho de conclusão**: fazer o \#tidytuesday da semana ou um à sua
 escolha.
 
 ## Plano de aulas
@@ -35,9 +35,8 @@ dimensões abaixo:
         -   live coding de análise exploratória
 2.  Análise explicativa
     -   Teoria:
-        -   coerência visual
         -   otimização visual
-        -   recursos pré-atentativos
+        -   recursos pré-atentativos e gestalt
         -   temas do ggplot2
             -   ggthemes
             -   hrbrthemes
@@ -48,7 +47,6 @@ dimensões abaixo:
     -   ggrepel
     -   ggridges
     -   ggalt
-    -   geom_sf
     -   gganimate
     -   ggtext
     -   Dinâmica: definição e exemplo para cada pacote
@@ -57,10 +55,10 @@ dimensões abaixo:
     -   plotly
     -   highcharter
     -   reactable
+    -   coisas que faltaram das últimas aulas
     -   Dinâmica: definição e exemplo para cada pacote
 
-Conteúdos extras: - feature engineering - tradução de perguntas de
-pesquisa - live de ggplot qualquer coisa - esquisse
+Conteúdos extras: - live de ggplot qualquer coisa - esquisse
 
 ## Pacotes necessários
 
@@ -72,23 +70,49 @@ dependências:
 -   Misc: necessário para rodar as aulas 4 e 5 (miscelânea + extra)
 
 ``` r
-# Principal
-principal <- c(
+# 
+
+# Aula01
+aula01 <- c(
   "tidyverse",
-  "sf",
-  "geobr",
-  "ggalt",
+  "dados"
+)
+install.packages(aula01)
+
+# Aula02
+aula02 <- c(
   "ggthemes",
   "patchwork",
-  "plotly"
+  "ggimage"
 )
-install.packages(principal)
+
+
+# Aula03
+
+aula03 <- c(
+  "sf",
+  "ggalt",
+  "ggrepel",
+  "ggridges",
+  "ggalt",
+  "gganimate",
+  "ggtext"
+)
+
+# Aula04
+
+aula04 <- c(
+  "plotly",
+  "reactable",
+  "leaflet",
+  "highcharter",
+  "sf",
+  "geobr"
+)
 
 # Pacotes instalados via GitHub
 if (!require(remotes)) install.packages("remotes")
 remotes::install_github("abjur/abjData")
-remotes::install_github("cienciadedatos/dados")
-
 
 # esses pacotes são apenas para a aula de miscelânea.
 # se não conseguir instalar algum deles, não se preocupe!

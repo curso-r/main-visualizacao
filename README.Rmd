@@ -2,7 +2,7 @@
 output: github_document
 ---
 
-# Relatórios e visualização de dados
+# Visualização de dados
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Repositório principal do curso Relatórios e visualização de dados.
+Repositório principal do curso Visualização de dados.
 
 Inscreva-se no curso: https://www.curso-r.com/cursos/visualizacao
 
