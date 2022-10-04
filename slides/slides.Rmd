@@ -226,7 +226,7 @@ Ilustração de [Allison Horst](https://www.allisonhorst.com)
 .pull-right[
 
 ```{r}
-knitr::include_graphics("https://blog.curso-r.com/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.png")
+knitr::include_graphics("https://blog.curso-r.com/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.webp")
 ```
 
 Imagem do [blog da Curso-R](https://blog.curso-r.com/posts/2019-02-10-sf-miojo/)
