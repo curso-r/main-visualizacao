@@ -5,4 +5,4 @@ library(dados)
 ## https://livro.curso-r.com/8-1-o-pacote-ggplot2.html
 
 # Obs: a base imdb pode ser lida rodando
-imdb <- readr::read_rds("https://github.com/curso-r/blog/raw/main/static/data/desafios/imdb.rds")
+imdb <- readr::read_csv("https://raw.githubusercontent.com/curso-r/livro-material/master/assets/data/imdb.csv")
