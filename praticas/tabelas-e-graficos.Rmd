@@ -1,0 +1,84 @@
+---
+title: "Dados de pinguins"
+author: "Beatriz"
+date: "2022-10-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dados)
+library(tidyverse)
+library(reactable)
+```
+
+## Reactable
+
+```{r}
+dados_sumarizados <- pinguins |> 
+  group_by(especie, ano) |> 
+  summarise(media_comprimento_bico = mean(comprimento_bico, na.rm = TRUE),
+            media_massa_corporal = mean(massa_corporal, na.rm = TRUE)) |> 
+  ungroup() |> 
+  pivot_wider(names_from = ano, 
+              values_from = c(media_comprimento_bico, media_massa_corporal))
+```
+```{r}
+dados_sumarizados |> 
+  reactable(sortable = TRUE, searchable = TRUE,
+    columnGroups = list(
+      colGroup(name = "Média comprimento de Bico (em milímetros)", c("media_comprimento_bico_2007", "media_comprimento_bico_2008", "media_comprimento_bico_2009")),
+      colGroup(name = "Média massa corporal (em gramas)", c("media_massa_corporal_2007", "media_massa_corporal_2008", "media_massa_corporal_2009")
+      )
+    ),
+    columns = list(
+      especie = colDef(name = "Espécie"),
+      media_comprimento_bico_2007 = colDef(name = "2007", format = colFormat(digits = 2, locales = "pt")),
+      media_comprimento_bico_2008 = colDef(name = "2008", format = colFormat(digits = 2, locales = "pt")),
+      media_comprimento_bico_2009 = colDef(name = "2009", format = colFormat(digits = 2, locales = "pt")),
+      media_massa_corporal_2007 = colDef(name = "2007", format = colFormat(digits = 0, separators = TRUE, locales = "pt")),
+            media_massa_corporal_2008 = colDef(name = "2008", format = colFormat(digits = 0, separators = TRUE, locales = "pt")),
+            media_massa_corporal_2009 = colDef(name = "2009", format = colFormat(digits = 0, separators = TRUE, locales = "pt"))
+    )
+  )
+```
+
+
+
+## Plotly
+
+```{r}
+grafico_1 <- pinguins |> 
+  ggplot() +
+  aes(x = comprimento_bico, y = profundidade_bico) +
+  geom_point(aes(color = especie)) +
+  theme_bw()
+
+
+grafico_1
+```
+
+```{r}
+plotly::ggplotly(grafico_1, tooltip = c("x", "y", "especie"))
+```
+
+```{r}
+library(plotly)
+
+
+fig <- plot_ly(data = pinguins, x = ~comprimento_bico, y = ~profundidade_bico, color = ~especie)
+
+
+fig
+```
+## Highcharter
+
+```{r}
+library(highcharter)
+
+hchart(pinguins, type = "scatter", hcaes(x = comprimento_bico, y = profundidade_bico,  group = especie))
+```
+

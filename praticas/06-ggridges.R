@@ -30,6 +30,8 @@ gg <- diamante  |>
   ) +
   theme_classic(14)
 
+gg
+
 # como faz para limitar o grafico
 
 gg +
@@ -52,7 +54,7 @@ gg +
 
 # aplicacao interessante --------------------------------------------------
 
-estrela <- "★"
+estrela <- "*"
 labs_estrela <- purrr::map_chr(1:5, ~glue::glue_collapse(rep(estrela, .x)))
 gg +
   scale_y_discrete(labels = labs_estrela) +
