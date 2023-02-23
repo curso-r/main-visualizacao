@@ -1,231 +1,354 @@
-# Revisão ggplot2 ---------------------------------------------------------
+# Isso é uma opção que evita mostrar os números com notação científica
+options(scipen = 999)
+
+
+# Carregar pacotes --------------------------------------------------------
 
 library(tidyverse)
-library(dados)
 
-# o lego do ggplot2 -------------------------------------------------------
+# Ler base IMDB -----------------------------------------------------------
 
-## Passo 1: A base
+imdb <- read_rds("dados/imdb.rds")
 
-# o ggplot2 é iniciado com o tapetinho cinza
-ggplot()
+imdb <- imdb |> 
+  mutate(lucro = receita - orcamento)
 
-# também podemos começar com os dados
-ggplot(dados_starwars)
 
-# alternativa com pipe
-dados_starwars |> 
+# Gráfico de pontos (dispersão) -------------------------------------------
+
+# Apenas o canvas
+imdb |>
   ggplot()
 
-## Passo 2: Mapeamento estético
+# Salvando em um objeto
+p <- imdb |>
+  ggplot()
 
-# utilizamos a função aes(), de aestethics
-ggplot(dados_starwars, aes(x = massa)) 
-ggplot(dados_starwars, aes(x = massa, y = altura))
-ggplot(dados_starwars, aes(massa, altura))
-
-# alternativa
-ggplot(dados_starwars) + # não esqueça de usar + no lugar do |>
-  aes(x = massa, y = altura)
-
-# alternativa
-dados_starwars |> 
+# Gráfico de dispersão da receita contra o orçamento
+imdb |>
   ggplot() +
-  aes(x = massa, y = altura)
+  geom_point(aes(x = orcamento, y = receita))
 
-# outros mapeamentos só aparecem quando incluímos formas geométricas
-dados_starwars |> 
+# Inserindo uma reta horizontal: filmes com receita maior que 1 milhão!
+imdb |>
   ggplot() +
-  aes(x = massa, y = altura, colour = sexo_biologico)
+  geom_point(aes(x = orcamento, y = receita)) +
+  geom_hline(yintercept = 1000000, color = "red", linetype = 2)
 
-## Passo 3: Formas geométricas
-
-# temos muitos geom_* disponíveis. Eles podem ser agrupados em 2 tipos:
-# geoms individuais (representa uma linha da base)
-# geoms agrupados (representa um resumo ou conjunto de linhas)
-
-### geom_point
-
-# utilização básica
-dados_starwars |> 
+# Observe como cada elemento é uma camada do gráfico.
+# Agora colocamos a camada da linha antes da camada
+# dos pontos.
+imdb |>
   ggplot() +
-  aes(x = massa, y = altura, colour = genero) +
+  geom_hline(yintercept = 1000000, color = "red", linetype = 2) +
+  geom_point(aes(x = orcamento, y = receita))
+
+# Atribuindo a variável lucro aos pontos
+imdb |>
+  ggplot() +
+  geom_point(aes(x = orcamento, y = receita, color = lucro))
+
+# Categorizando o lucro antes
+imdb |>
+  drop_na(lucro)  |>
+  mutate(
+    lucrou = ifelse(lucro <= 0, "Não", "Sim")
+  ) |>
+  ggplot() +
+  geom_point(aes(x = orcamento, y = receita, color = lucrou))
+
+# Salvando um gráfico em um arquivo
+imdb |>
+  drop_na(lucro)  |>
+  mutate(
+    lucrou = ifelse(lucro <= 0, "Não", "Sim")
+  ) |>
+  ggplot() +
+  geom_point(aes(x = orcamento, y = receita, color = lucrou), alpha = 0.5)
+
+# se você não especificar essas parâmetros,  ele salva por default do jeito 
+# que ta na sua tela do R
+ggsave("meu_grafico.png")
+
+# podemos especificar o tamanho
+ggsave("meu_grafico.png", 
+       dpi = 300, # resolucao
+       width = 7, # largura
+       height = 5 # altura
+) 
+
+# Filosofia ---------------------------------------------------------------
+
+# Um gráfico estatístico é uma representação visual dos dados 
+# por meio de atributos estéticos (posição, cor, forma, 
+# tamanho, ...) de formas geométricas (pontos, linhas,
+# barras, ...). Leland Wilkinson, The Grammar of Graphics
+
+# Layered grammar of graphics: cada elemento do 
+# gráfico pode ser representado por uma camada e 
+# um gráfico seria a sobreposição dessas camadas.
+# Hadley Wickham, A layered grammar of graphics 
+
+# Gráfico de linhas -------------------------------------------------------
+
+# Nota média dos filmes ao longo dos anos
+
+imdb |>
+  group_by(ano) |>
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |>
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media))
+
+# Número de filmes por ano 
+
+imdb |>
+  filter(!is.na(ano), ano != 2020) |>
+  group_by(ano) |>
+  summarise(num_filmes = n()) |>
+  ggplot() +
+  geom_line(aes(x = ano, y = num_filmes)) 
+
+# Nota média do Robert De Niro por ano
+imdb |>
+  filter(str_detect(elenco, "Robert De Niro")) |>
+  group_by(ano) |>
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |>
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media))
+
+# Colocando pontos no gráfico
+imdb |>
+  filter(str_detect(elenco, "Robert De Niro")) |>
+  group_by(ano) |>
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |>
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media)) +
+  geom_point(aes(x = ano, y = nota_media))
+
+# Reescrevendo de uma forma mais agradável
+imdb |>
+  filter(str_detect(elenco, "Robert De Niro")) |>
+  group_by(ano) |>
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |>
+  ggplot(aes(x = ano, y = nota_media)) +
+  geom_line() +
   geom_point()
 
-dados_starwars |>
-  filter(massa < 1000) |> 
+# Colocando as notas no gráfico
+imdb |>
+  filter(str_detect(elenco, "Robert De Niro")) |>
+  group_by(ano) |>
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |>
+  mutate(nota_media = round(nota_media, 1)) |>
+  ggplot(aes(x = ano, y = nota_media)) +
+  geom_line() +
+  geom_label(aes(label = nota_media))
+
+
+# Gráfico de barras -------------------------------------------------------
+
+# Número de filmes das pessoas que dirigiram filmes na base
+imdb |>
+  count(direcao) |>
+  slice_max(order_by = n, n = 10) |>
   ggplot() +
-  aes(x = massa, y = altura, colour = genero) +
-  geom_point()
+  geom_col(aes(x = direcao, y = n))
 
-# Obs: não é de bom tom usar azul para masculino e vermelho para feminino...
-# veremos o que fazer com as cores na próxima aula.
-
-# fora do aes() e dentro do aes()
-# dentro -> colunas da base
-# fora -> valores fora da base
-dados_starwars |>
-  filter(massa < 1000) |> 
+# Tirando NA e pintando as barras
+imdb |>
+  count(direcao) |>
+  filter(!is.na(direcao)) |>
+  slice_max(order_by = n, n = 10) |>
   ggplot() +
-  aes(x = massa, y = altura) +
-  geom_point(colour = "royalblue")
-
-# errado
-dados_starwars |>
-  filter(massa < 1000) |>
-  ggplot() +
-  aes(x = massa, y = altura) +
-  geom_point(colour = genero)
-
-# errado
-dados_starwars |>
-  filter(massa < 1000) |>
-  ggplot() +
-  aes(x = massa, y = altura, colour = "royalblue") +
-  geom_point()
-
-
-# aes() dentro da geom vs aes() global
-dados_starwars |>
-  filter(massa < 1000) |> 
-  ggplot() +
-  geom_point(aes(x = massa, y = altura, colour = genero))
-
-dados_starwars |>
-  filter(massa < 1000) |> 
-  ggplot() +
-  aes(x = massa, y = altura) +
-  geom_point(aes(colour = genero), size = 4) +
-  geom_point()
-  
-### geom_bar e geom_col
-
-# geom_bar faz conta
-dados_starwars |> 
-  ggplot() +
-  aes(x = genero) +
-  geom_bar()
-
-# geom_col não faz
-dados_starwars |> 
-  count(genero) |> 
-  ggplot() +
-  aes(x = genero, y = n) +
-  geom_col()
-
-### geom_line
-
-# mais comum para séries e tempo
-voos |> 
-  count(mes) |> 
-  ggplot() +
-  aes(x = mes, y = n) +
-  geom_line()
-
-# plotando várias séries
-voos |> 
-  count(mes, companhia_aerea) |> 
-  ggplot() +
-  aes(x = mes, y = n, colour = companhia_aerea) +
-  geom_line()
-
-
-### geom_histogram e geom_density
-
-dados_starwars |>
-  ggplot() +
-  aes(x = altura) +
-  geom_histogram()
-
-dados_starwars |>
-  ggplot() +
-  aes(x = altura) +
-  geom_density()
-
-# para quebrar, use fill, não colour!
-dados_starwars |>
-  ggplot() +
-  aes(x = altura, fill = genero) +
-  geom_density(alpha = .8)
-
-
-# agora vamos brincar com diferentes aspectos a serem mapeados
-dados_starwars |> 
-  drop_na(massa, altura) |> 
-  esquisse::esquisser()
-
-### mais algum?
-
-## Elementos extras
-
-### Facets
-
-dados_starwars |> 
-  filter(!is.na(genero)) |> 
-  ggplot() +
-  aes(x = massa, y = altura) +
-  geom_point() +
-  facet_wrap(~genero)
-
-dados_starwars |> 
-  filter(!is.na(genero)) |> 
-  ggplot() +
-  aes(x = massa, y = altura) +
-  geom_point() +
-  facet_wrap(~genero, scales = "free_x")
-
-dados_starwars |> 
-  mutate(humano = if_else(especie == "Humano", "Humano", "Não-humano")) |>
-  filter(!is.na(genero)) |> 
-  ggplot() +
-  aes(x = massa, y = altura) +
-  geom_point() +
-  facet_grid(humano~genero, scales = "free")
-
-### Escalas
-
-dados_starwars |> 
-  ggplot() +
-  aes(x = massa, y = altura) +
-  geom_point() +
-  scale_x_continuous(
-    limits = c(0, 100), 
-    breaks = seq(0, 100, 10), 
-    labels = paste0(seq(0, 100, 10), "kg")
+  geom_col(
+    aes(x = direcao, y = n, fill = direcao),
+    show.legend = FALSE
   )
 
-# veremos mais exemplos de escalas nas aulas mais avançadas.
-
-### Transformações
-
-# transformações só devem ser usadas quando você sabe o que está
-# fazendo. Geralmente é mais fácil fazer as transformações
-# diretamente nos dados.
-
-dados_starwars |> 
+# Invertendo as coordenadas
+imdb |>
+  count(direcao) |>
+  filter(!is.na(direcao)) |>
+  slice_max(order_by = n, n = 10) |>
   ggplot() +
-  aes(x = sexo_biologico) +
-  geom_bar()
+  geom_col(
+    aes(x = n, y = direcao, fill = direcao),
+    show.legend = FALSE
+  ) 
 
-dados_starwars |> 
-  count(sexo_biologico) |> 
+
+# Ordenando as barras
+imdb |>
+  count(direcao) |>
+  filter(!is.na(direcao)) |>
+  slice_max(order_by = n, n = 10) |>
+  mutate(
+    direcao = forcats::fct_reorder(direcao, n)
+  ) |>
   ggplot() +
-  aes(x = sexo_biologico, y = n) +
-  geom_bar(stat = "identity")
+  geom_col(
+    aes(x = n, y = direcao, fill = direcao),
+    show.legend = FALSE
+  ) 
 
-### Coordenadas
+# Colocando label nas barras
+top_10_direcao <- imdb |>
+  count(direcao) |>
+  filter(!is.na(direcao)) |>
+  slice_max(order_by = n, n = 10) 
 
-dados_starwars |> 
-  filter(massa < 1000) |> 
+top_10_direcao |>
+  mutate(
+    direcao = forcats::fct_reorder(direcao, n)
+  ) |>
   ggplot() +
-  aes(x = massa, y = altura) +
-  geom_point() +
-  coord_fixed(ratio = 0.2)
+  geom_col(
+    aes(x = n, y = direcao, fill = direcao),
+    show.legend = FALSE
+  ) +
+  geom_label(aes(x = n/2, y = direcao, label = n)) 
 
-# pizza!
-dados_starwars |> 
+
+# Histogramas e boxplots --------------------------------------------------
+
+# Histograma do lucro dos filmes do Steven Spielberg 
+imdb |>
+  filter(direcao == "Steven Spielberg") |>
   ggplot() +
-  aes(x = "zzz", fill = genero) +
-  geom_bar() +
-  coord_polar(theta = "y")
+  geom_histogram(aes(x = lucro))
+
+# Arrumando o tamanho das bases
+imdb |>
+  filter(direcao == "Steven Spielberg") |>
+  ggplot() +
+  geom_histogram(
+    aes(x = lucro), 
+    binwidth = 100000000,
+    color = "white"
+  )
+
+# Boxplot do lucro dos filmes das pessoas que dirigiram
+# mais de 15 filmes (que temos informações sobre o lucro)
+imdb |>
+  drop_na(direcao, lucro) |>
+  group_by(direcao) |>
+  filter(n() >= 15) |>
+  ggplot() +
+  geom_boxplot(aes(y = direcao, x = lucro))
+
+# Ordenando pela mediana
+
+imdb |>
+  drop_na(direcao, lucro) |>
+  group_by(direcao) |>
+  filter(n() >= 15) |>
+  ungroup() |>
+  mutate(
+    direcao = forcats::fct_reorder(direcao, lucro, .fun = median)
+  ) |>
+  ggplot() +
+  geom_boxplot(aes(y = direcao, x = lucro))
+
+# Título e labels ---------------------------------------------------------
+
+# Labels
+imdb |>
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita, color = lucro)) +
+  labs(
+    x = "Orçamento ($)",
+    y = "Receita ($)",
+    color = "Lucro ($)",
+    title = "Gráfico de dispersão",
+    subtitle = "Receita vs Orçamento",
+    caption = "Fonte: imdb.com"
+  )
+
+# Escalas
+imdb |>
+  group_by(ano) |>
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |>
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media)) +
+  scale_x_continuous(breaks = seq(1880, 2020, 10)) +
+  scale_y_continuous(breaks = seq(0, 10, 2))
+
+# Visão do gráfico
+
+imdb |>
+  group_by(ano) |>
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |>
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media)) +
+  scale_x_continuous(breaks = seq(1880, 2020, 10), limits = c(1910, 2020)) +
+  scale_y_continuous(breaks = seq(0, 10, 2), limits = c(0, 10))
+
+
+# Cores -------------------------------------------------------------------
+
+# Escolhendo cores pelo nome
+imdb |>
+  count(direcao) |>
+  filter(!is.na(direcao)) |>
+  slice_max(order_by = n, n = 5) |>
+  ggplot() +
+  geom_col(
+    aes(x = n, y = direcao, fill = direcao), 
+    show.legend = FALSE
+  ) +
+  scale_fill_manual(values = c("orange", "royalblue", "purple", "salmon", "darkred"))
+# http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
+
+# Escolhendo pelo hexadecimal
+imdb |>
+  count(direcao) |>
+  filter(!is.na(direcao)) |>
+  slice_max(order_by = n, n = 5) |>
+  ggplot() +
+  geom_col(
+    aes(x = n, y = direcao, fill = direcao), 
+    show.legend = FALSE
+  ) +
+  scale_fill_manual(
+    values = c("#ff4500", "#268b07", "#ff7400", "#abefaf", "#33baba")
+  )
+
+# Mudando textos da legenda
+imdb |>
+  mutate(sucesso_nota = case_when(nota_imdb >= 7 ~ "sucesso_nota_imbd",
+                                  TRUE ~ "sem_sucesso_nota_imdb")) |>
+  group_by(ano, sucesso_nota) |>
+  summarise(num_filmes = n()) |>
+  ggplot() +
+  geom_line(aes(x = ano, y = num_filmes, color = sucesso_nota)) +
+  scale_color_discrete(labels = c("Nota menor que 7", "Nota maior ou igual à 7"))
+
+# Definindo cores das formas geométricas
+imdb |>
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita), color = "#ff7400")
+
+# Tema --------------------------------------------------------------------
+
+# Temas prontos
+imdb |>
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita)) +
+  # theme_bw() 
+  # theme_classic() 
+  # theme_dark()
+  theme_minimal()
+
+# A função theme()
+imdb |>
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita)) +
+  labs(
+    title = "Gráfico de dispersão",
+    subtitle = "Receita vs Orçamento"
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5)
+  )
 
