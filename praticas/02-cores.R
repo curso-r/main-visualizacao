@@ -1,6 +1,77 @@
 library(dados)
 library(tidyverse)
 
+# Revisão ggplot2 ---------------------------------------------------------
+
+library(tidyverse)
+library(dados)
+
+# o lego do ggplot2 -------------------------------------------------------
+
+## Passo 1: A base
+
+# o ggplot2 é iniciado com o tapetinho cinza
+ggplot()
+
+# também podemos começar com os dados
+ggplot(dados_starwars)
+
+# alternativa com pipe
+dados_starwars |> 
+  ggplot()
+
+## Passo 2: Mapeamento estético
+
+# utilizamos a função aes(), de aestethics
+ggplot(dados_starwars, aes(x = massa)) 
+ggplot(dados_starwars, aes(x = massa, y = altura))
+ggplot(dados_starwars, aes(massa, altura))
+
+# alternativa
+ggplot(dados_starwars) + # não esqueça de usar + no lugar do |>
+  aes(x = massa, y = altura)
+
+# alternativa
+dados_starwars |> 
+  ggplot() +
+  aes(x = massa, y = altura)
+
+# outros mapeamentos só aparecem quando incluímos formas geométricas
+dados_starwars |> 
+  ggplot() +
+  aes(x = massa, y = altura, colour = sexo_biologico)
+
+## Passo 3: Formas geométricas
+
+# temos muitos geom_* disponíveis. Eles podem ser agrupados em 2 tipos:
+# geoms individuais (representa uma linha da base)
+# geoms agrupados (representa um resumo ou conjunto de linhas)
+
+### geom_point
+
+# utilização básica
+dados_starwars |> 
+  ggplot() +
+  aes(x = massa, y = altura, colour = genero) +
+  geom_point()
+
+# fora do aes() e dentro do aes()
+# dentro -> colunas da base
+# fora -> valores fora da base
+dados_starwars |>
+  filter(massa < 1000) |> 
+  ggplot() +
+  aes(x = massa, y = altura) +
+  geom_point(colour = "royalblue")
+
+dados_starwars |>
+  filter(massa < 1000) |> 
+  ggplot() +
+  aes(x = massa, y = altura, colour = genero) +
+  geom_point()
+
+# Obs: não é de bom tom usar azul para masculino e vermelho para feminino...
+
 # cores -------------------------------------------------------------------
 
 p1 <- dados_starwars |>
