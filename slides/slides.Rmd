@@ -1,6 +1,6 @@
 ---
 title: "Visualização de dados"
-subtitle: "📑+😎"
+subtitle: "📈+😎"
 author: "<img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '30%'>"
 date: "`r paste(lubridate::month(Sys.Date(), label = TRUE, abbr = FALSE, locale = 'pt_BR.UTF-8'), 'de', lubridate::year(Sys.Date()))`"
 output:
@@ -28,7 +28,8 @@ link <- function(href, ...) {
 }
 knitr::opts_chunk$set(
   echo = FALSE, 
-  fig.align='center'
+  fig.align='center',
+  warning=FALSE
 )
 xaringanExtra::use_panelset()
 ```
@@ -134,7 +135,7 @@ class: middle, center
 
 - O objetivo dos exercícios é gerar dúvidas. **Com exceção do trabalho final, nenhum exercício precisa ser entregue**.
 
-- O certificado será emitido mediante uma **entrega final**, a ser especificada nas últimas aulas do curso. 
+- O certificado será emitido mediante uma **entrega final**, a ser detalhada a seguir. 
 
 - Haverá monitoria para esclarecimento de dúvidas sempre 30 minutos antes do início das aulas.
 
@@ -150,6 +151,36 @@ class: middle, center
 - Para falar, levante a mão.
 
 - Algumas dúvidas serão respondidas na hora. Outras serão respondidas mais tarde na própria aula ou em aulas futuras.
+
+---
+## Trabalho final
+
+Para o TCC do curso, entregará um TidyTuesday! 
+
+```{r}
+#| out.width: 60%
+knitr::include_graphics("https://github.com/rfordatascience/tidytuesday/raw/master/static/tt_logo.png")
+```
+
+
+O TidyTuesday é um evento semanal criado para engajar a comunidade no uso do R para análise de dados. Se quiser conhecer mais, [siga a hashtag #tidytuesday no Twitter](https://twitter.com/hashtag/TidyTuesday)!
+
+Mais informações [aqui](https://github.com/rfordatascience/tidytuesday/).
+
+---
+## Trabalho final
+
+O resultado deverá ser entregue em um __arquivo zip__ contendo as visualizações e códigos. A submissão deve ser feita pelo classroom, subindo um arquivo .zip contendo
+
+- Os __códigos em R__ utilizados para gerar os gráficos.
+- Os __gráficos em imagens__ (.png, .jpeg, .gif etc)
+- Um arquivo __README.md__ contando qual foi sua ideia e o processo de construção das visualizações.
+
+__Observações__
+
+- Não é necessário que a __base de dados__ esteja no repositório, já que ela pode ser lida diretamente da internet.
+- __RMarkdown/Quarto__. Se você estiver confortável com relatórios reprodutíveis, pode entregar o trabalho em um relatório ou apresentação à sua escolha. Nesse caso, envie output final (em HTML, PDF, Word, etc) no lugar das imagens.
+- __GitHub__. Se você estiver confortável com Git/GitHub, pode entregar o link do repositório no lugar do zip.
 
 ---
 ## Tire suas dúvidas
@@ -185,6 +216,10 @@ class: middle, center, inverse
 
 ⬜ Utilizar o `{ggplot2}` em um problema concreto.
 
+--
+
+Ficaremos com esses conteúdos por 2 aulas!
+
 ---
 
 # O que é visualização de dados?
@@ -211,7 +246,7 @@ Ilustração de [Allison Horst](https://www.allisonhorst.com)
 
 ---
 
-# Por quê fazer visualizações de dados?
+# Por que fazer visualizações de dados?
 
 .pull-left[
 
@@ -226,7 +261,7 @@ Ilustração de [Allison Horst](https://www.allisonhorst.com)
 .pull-right[
 
 ```{r}
-knitr::include_graphics("https://blog.curso-r.com/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.png")
+knitr::include_graphics("https://blog.curso-r.com/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.webp")
 ```
 
 Imagem do [blog da Curso-R](https://blog.curso-r.com/posts/2019-02-10-sf-miojo/)
@@ -235,7 +270,7 @@ Imagem do [blog da Curso-R](https://blog.curso-r.com/posts/2019-02-10-sf-miojo/)
 
 ---
 
-# Para quê servem as visualizações?
+# Para que servem as visualizações?
 
 .pull-left[
 
@@ -284,14 +319,6 @@ Ilustração de [Allison Horst](https://www.allisonhorst.com)
 - Gráficos com dois eixos
 - Gráficos pouco conhecidos
 - ...
-
-]
-
---
-
-.center[
-
-### [Vamos montar uma lista aqui!](https://docs.google.com/document/d/12TOFqX1Ci-Yn8xPY9y5XT-GQYAju6ObzN-Fy55BbEYE/edit#)
 
 ]
 
@@ -504,9 +531,9 @@ ggplot(cars) +
 
 ---
 
-# Curiosidade: por quê o `+`?
+# Curiosidade: por que o `+`?
 
-O `{ggplot2}`, diferentemente dos outros pacotes do `tidyverse`, não usa o *pipe* (`%>%` ou `|>` depois do R 4.1). Isso acontece pois o `{ggplot2}` surgiu [antes que o autor tomasse conhecimento do pipe](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/comment/cvi19ly/?utm_source=share&utm_medium=web2x&context=3).
+O `{ggplot2}`, diferentemente dos outros pacotes do `tidyverse`, não usa o *pipe* (`|>` ou `|>` depois do R 4.1). Isso acontece pois o `{ggplot2}` surgiu [antes que o autor tomasse conhecimento do pipe](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/comment/cvi19ly/?utm_source=share&utm_medium=web2x&context=3).
 
 <iframe id="reddit-embed" src="https://www.redditmedia.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/cvi19ly/?depth=1&amp;showmore=false&amp;embed=true&amp;showmedia=false" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" height="437" width="640" scrolling="no"></iframe>
 
@@ -525,6 +552,607 @@ knitr::include_graphics("https://raw.githubusercontent.com/rstudio/cheatsheets/m
 ```{r, out.width="90%"}
 knitr::include_graphics("img/data-to-viz.png")
 ```
+
+---
+
+# Base de dados do exemplo
+
+Para os slides a seguir, vamos usar a base do imdb. Atenção para a coluna lucro, que criamos fazendo a diferença entre receita e orçamento.
+
+```{r}
+#| echo: true
+#| eval: false
+library(tidyverse)
+imdb <- read_rds("dados/imdb.rds")
+imdb <- imdb |> mutate(lucro = receita - orcamento)
+```
+
+
+```{r, include=FALSE}
+library(tidyverse)
+imdb <- read_rds("../dados/imdb.rds")
+imdb <- imdb |> mutate(lucro = receita - orcamento)
+options(width = 80)
+knitr::opts_chunk$set(
+  fig.width = 5,
+  fig.height = 4,
+  fig.align = "center",
+  fig.retina = 2
+)
+```
+
+---
+# Um gráfico de pontos (dispersão)
+
+Podemos fazer um gráfico de dispersão da receita contra o orçamento dos filmes acrescentando a função `geom_point()` ao código anterior.
+
+.tiny[
+```{r ggdispersao, echo=TRUE}
+imdb |> 
+  ggplot() +
+  geom_point(aes(x = orcamento, y = receita))
+```
+]
+
+---
+<br><br>
+
+Muitos pontos para discutir:
+
+- Esse gráfico tem duas camadas: o canvas, gerado pela função `ggplot()`, e os pontos, gerado pela função `geom_point()`.
+
+- Unimos as camadas de um ggplot usando um `+`. Sim, precisamos controlar a nossa vontade de colocar um ` |> ` em vez de `+`, e essa é uma fonte de erro bem comum. O motivo para precisarmos usar `+` em vez do `|>` é o pacote ggplot ter nascido primeiro que o pipe.
+
+- A função `geom_point()` define que a forma geométrica (daí o prefixo `geom`) utilizada para representar os dados será pontos. Existe uma família de funções `geom`, sendo que cada uma vai representar uma forma geométrica diferente.
+
+- O primeiro argumento de qualquer função `geom` é o `mapping`. Esse argumento serve para mapear os dados nos atributos estéticos da forma geométrica escolhida. Ele sempre receberá a função `aes()`. No código, nós omitimos o nome do argumento, mas poderíamos ter escrito `geom_point(mapping = aes(x = orcamento, y = receita))`.
+
+---
+<br><br>
+
+- A função `aes()` serve para *mapear os dados aos elementos estéticos do gráfico*. Os argumentos dela vão sempre depender da forma geométrica que estamos utilizando. No caso de um gráfico de pontos, precisamos definir como as posições do eixo x e y serão construídas. No exemplo, a posição do ponto no eixo x será dada pela coluna `orcamento` e a posição do ponto no eixo y será dada pela coluna `receita`.
+
+- O *warning* indica quantas observações (linhas) precisaram ser removidas, por não possuir informação de orçamento ou receita.
+
+- Veremos nos próximos exemplos que será muito comum manipularmos a base (aplicarmos diversas funções do `dplyr`, por exemplo) antes de chamarmos a função `ggplot`. 
+
+**O mapeamento das COLUNAS nas FORMAS GEOMÉTRICAS deve ser SEMPRE feito dentro da função `aes()`**.
+
+---
+<br><br>
+
+Vamos agora inserir um novo elemento visual ao gráfico: a reta x = y.
+
+.tiny[
+```{r ggreta, echo=TRUE}
+imdb |>
+  ggplot() +
+  geom_point(aes(x = orcamento, y = receita)) +
+  geom_abline(intercept = 0, slope = 1, color = "red")
+```
+]
+
+---
+<br><br>
+
+- A reta x = y é acrescentada ao gráfico pela função `geom_abline()`. Esse `geom` pode ser utilizado para desenhar qualquer reta do tipo `y = a + b * x`, sendo `a` o intercepto (*intercept*) da reta e `b` o seu coeficiente angular (*slope*).
+
+- Essa reta nos permite observar o número de filmes que obtiveram lucro (pontos acima da reta) e aqueles que obtiveram prejuízo (pontos abaixo da reta).
+
+- Como não estamos mapeando colunas a essa reta, não precisamos colocar os argumentos da função `geom_abline()` do `aes()`.
+
+---
+<br><br>
+
+Veja como o ggplot realmente é construído por camadas. Agora, colocamos a camada da reta antes da camada dos pontos. Os pontos ficam em cima da reta.
+
+.tiny[
+```{r ggretavermelha, echo=TRUE}
+imdb |>
+  ggplot() +
+  geom_abline(intercept = 0, slope = 1, color = "red") +
+  geom_point(aes(x = orcamento, y = receita))
+```
+]
+
+---
+<br><br>
+
+Os atributos `x` e `y` são necessários para construirmos um gráfico de pontos. Outros atributos também podem ser mapeados em pontos, como a cor. Como a coluna `lucro` é numérica, um degradê de cores é criado para os pontos, a depender do lucro.
+
+.tiny[
+```{r ggdispersaoazul, echo=TRUE}
+imdb |>
+  ggplot() +
+  geom_point(aes(x = orcamento, y = receita, color = lucro))
+```
+]
+
+---
+<br><br>
+
+Poderíamos também classificar os filmes entre aqueles que lucraram ou não. Uma cor é atribuída a cada categoria.
+
+.tiny[
+```{r gglucro, echo=TRUE}
+imdb |>
+  mutate(
+    lucrou = ifelse(lucro <= 0, "Não", "Sim")
+  ) |>
+  ggplot() +
+  geom_point(aes(x = orcamento, y = receita, color = lucrou))
+```
+]
+
+---
+# Gráfico de linhas
+
+Utilizamos o `geom_line` para fazer gráficos de linhas. Gráficos de linha são muito utilizados para representar *séries temporais*, isto é, observações medidas repetidamente em intervalos (em geral) equidistantes de tempo.
+
+Assim como nos gráficos de pontos, precisamos definir as posições `x` e `y` para construirmos gráficos de linhas.
+
+A seguir, construímos o gráfico das notas médias dos filmes produzidos em cada ano, 
+
+---
+<br><br>
+
+.tiny[
+```{r gglinha, fig.width = 8, fig.height = 4, echo=TRUE}
+imdb |> 
+  group_by(ano) |> 
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |> 
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media))
+```
+]
+
+---
+<br><br>
+
+Se mapearmos uma coluna à cor das retas, serão construídas uma reta correspondente a cada categoria distinta dessa coluna.
+
+.tiny[
+```{r gglinhacolorida, fig.width = 8, fig.height = 3, echo=TRUE}
+imdb |> 
+  filter(!is.na(idioma)) |> 
+  mutate(idioma_ingles = case_when(idioma == "English" ~ "Apenas Inglês",
+                                   str_detect(idioma, "English") ~ "Inglês e outros idiomas",
+                                   TRUE ~ "Outros idiomas")) |>
+  group_by(ano, idioma_ingles) |> 
+  summarise(num_filmes = n(), .groups = "drop") |> 
+  ggplot() +
+  geom_line(aes(x = ano, y = num_filmes, color = idioma_ingles))
+```
+]
+
+---
+<br><br>
+
+Podemos colocar pontos e retas no mesmo gráfico. Basta acrescentar os dois `geoms`. O gráfico abaixo mostra nota média anual dos filmes do Robert De Niro.
+
+```{r ggdeniro, fig.width = 8, fig.height = 3, echo=TRUE}
+imdb |> 
+  filter(str_detect(elenco, "Robert De Niro")) |> 
+  group_by(ano) |> 
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |> 
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media)) +
+  geom_point(aes(x = ano, y = nota_media))
+```
+
+---
+<br><br>
+
+Quando precisamos usar o mesmo `aes()` em vários `geoms`, podemos defini-lo dentro da função `ggplot()`. Esse `aes()` será então distribuído para todo `geom` do gráfico. O código anterior pode ser reescrito da seguinte forma.
+
+```{r gglinhaponto, fig.width = 8, fig.height = 3, echo=TRUE}
+imdb |> 
+  filter(str_detect(elenco, "Robert De Niro")) |> 
+  group_by(ano) |> 
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |> 
+  ggplot(aes(x = ano, y = nota_media)) +
+  geom_line() +
+  geom_point()
+```
+
+---
+<br><br>
+
+Se algum `geom` necessitar de um atributo que os outros não precisam, esse atributo pode ser especificado normalmente dentro dele. Abaixo, utilizamos o `geom_label` para colocar as notas médias no gráfico. Além do `x` e `y`, o `geom_label` também precisa do texto que será escrito no gráfico.
+
+.tiny[
+```{r gglinhalabel, fig.width = 8, fig.height = 3, echo=TRUE}
+imdb |> 
+  filter(str_detect(elenco, "Robert De Niro")) |> 
+  group_by(ano) |> 
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |> 
+  mutate(nota_media = round(nota_media, 1)) |> 
+  ggplot(aes(x = ano, y = nota_media)) +
+  geom_line() +
+  geom_label(aes(label = nota_media))
+```
+]
+
+---
+# Gráfico de barras
+
+Para construir gráficos de barras, utilizamos o `geom_col`. A seguir, construímos um gráfico de barras do número de filmes das 10 pessoas que mais dirigiram filmes na nossa base do IMDB.
+
+.tiny[
+```{r ggbarras, fig.width = 7, fig.height = 3.5, echo=TRUE}
+imdb |> 
+  count(direcao) |>
+  slice_max(order_by = n, n = 10) |> 
+  ggplot() +
+  geom_col(aes(x = direcao, y = n))
+```
+]
+---
+<br><br>
+
+Gráficos de barras também precisam dos atributos `x` e `y`, sendo que o atributo `y` representará a altura de cada barra.
+
+No gráfico anterior, vemos que o `NA` é considerado uma "opção" de direcao e entra no gráfico. Podemos retirar os `NAs` dessa coluna previamente utilizando a função `filter()`.
+
+A seguir, além de retirar os `NAs`, atribuímos a coluna `direcao` à cor das colunas. Repare que, nesse caso, não utilizamos o atributo `color` e sim `fill`. A regra é a seguinte: o atributo `color` colore objetos sem área (pontos, linhas, contornos), o atributo `fill` preenche objetos com cor (barras, áreas, polígonos em geral).
+
+---
+<br><br>
+
+.tiny[
+```{r ggbarracolorida, fig.width = 7, fig.height = 3.5, echo=TRUE}
+imdb |> 
+  count(direcao) |>
+  filter(!is.na(direcao)) |> 
+  slice_max(order_by = n, n = 10) |> 
+  ggplot() +
+  geom_col(
+    aes(x = direcao, y = n, fill = direcao), show.legend = FALSE
+  )
+```
+]
+
+---
+<br><br>
+
+Para consertar as labels do eixo `x`, uma alternativa é inverter os eixos do gráfico, construindo barras horizontais.
+
+.tiny[
+```{r ggbarracoordflip, fig.width = 7, fig.height = 3.5, echo=TRUE}
+imdb |> 
+  count(direcao) |>
+  filter(!is.na(direcao)) |> 
+  slice_max(order_by = n, n = 10) |> 
+  ggplot() +
+  geom_col(
+    aes(x = direcao, y = n, fill = direcao), show.legend = FALSE
+  ) +
+  coord_flip()
+```
+]
+
+---
+<br><br>
+
+Para ordenar as colunas, precisamos mudar a ordem dos níveis do *fator* `direcao`. Para isso, utilizamos a função `fct_reorder()` do pacote `forcats`. A nova ordem será estabelecida pela coluna `n` (quantidade de filmes).
+
+Fatores dentro do R são números inteiros (1, 2, 3, ...) que possuem uma representação textual. Variáveis categóricas são transformadas em fatores pelo ggplot pois todo eixo cartesiano é numérico. Assim, os textos de uma variável categórica são, internamente, números inteiros.
+
+Por padrão, os inteiros são atribuídos a cada categoria de uma variável pela ordem alfabética (repare na ordem das pessoas que dirigiram filmes nos gráficos anteriores). Assim, se transformássemos o vetor `c("banana", "uva", "melancia")` em um fator, a atribuição de inteiros seria: "banana" vira 1, "melancia" vira 2 e "uva" vira 3. Embora sejam inteiros internamente, sempre que chamássemos esse novo vetor, ainda sim veríamos os textos "banana", "uva" e "melancia".
+
+---
+<br><br>
+
+.tiny[
+```{r ggbarraforcats, fig.width = 7, fig.height = 3.5, echo=TRUE}
+imdb |> 
+  count(direcao) |>
+  filter(!is.na(direcao)) |> 
+  slice_max(order_by = n, n = 10) |> 
+  mutate(direcao = forcats::fct_reorder(direcao, n)) |> 
+  ggplot() +
+  geom_col(
+    aes(x = direcao, y = n, fill = direcao),
+    show.legend = FALSE
+  ) +
+  coord_flip()
+```
+]
+
+---
+<br><br>
+
+Por fim, podemos colocar uma label com o número de filmes de cada pessoa que dirigiu filmes dentro de cada barra.
+
+.tiny[
+```{r ggbarralabel, fig.width = 7, fig.height = 3.5, echo=TRUE}
+imdb |> 
+  count(direcao) |>
+  filter(!is.na(direcao)) |> 
+  slice_max(order_by = n, n = 10) |> 
+  mutate(direcao = forcats::fct_reorder(direcao, n)) |> 
+  ggplot() +
+  geom_col(aes(x = direcao, y = n, fill = direcao), show.legend = FALSE) +
+  geom_label(aes(x = direcao, y = n/2, label = n)) +
+  coord_flip()
+```
+]
+
+---
+# Histograma
+
+Para construir histogramas, usamos o `geom_histogram`. Esse `geom` só precisa do atributo `x` (o eixo y é construído automaticamente). Histogramas são úteis para avaliarmos a distribuição de uma variável.
+
+A seguir, construímos o histograma do lucro dos filmes do diretor Steven Spielberg.
+O primeiro *warning* nos diz que o eixo x foi dividido em 30 intervalos para a construção do histograma.
+
+---
+<br><br>
+
+```{r gghist, fig.width = 7, fig.height = 3.5, echo=TRUE}
+imdb |> 
+  filter(direcao == "Steven Spielberg") |>
+  ggplot() +
+  geom_histogram(aes(x = lucro))
+```
+
+---
+<br><br>
+
+Para definir o tamanho de cada intervalo, podemos utilizar o argumento `bindwidth`.
+
+.tiny[
+```{r gghistbind, fig.width = 7, fig.height = 3.5, echo=TRUE}
+imdb |> 
+  filter(direcao == "Steven Spielberg") |>
+  ggplot() +
+  geom_histogram(
+    aes(x = lucro), 
+    binwidth = 100000000,
+    color = "white"
+  )
+```
+]
+
+---
+# Boxplot
+
+Boxplots também são úteis para estudarmos a distribuição de uma variável, principalmente quando queremos comparar várias distribuições. 
+
+Para construir um boxplot no ggplot, utilizamos a função `geom_boxplot`. Ele precisa dos atributos `x` e `y`, sendo que ao atributo `x` devemos mapear uma variável categórica.
+
+A seguir, construímos boxplots do lucro dos filmes das pessoas que dirigiram de 15 filmes.
+
+---
+<br><br>
+
+.tiny[
+```{r ggboxplot, fig.width = 7, fig.height = 3.5, echo=TRUE}
+direcao_mais_15_filmes <- imdb |> 
+  filter(!is.na(direcao), !is.na(lucro) ) |>
+  group_by(direcao) |> 
+  count(direcao, sort = TRUE) |> 
+  filter(n >= 15)
+imdb |> 
+  filter(direcao %in% direcao_mais_15_filmes$direcao) |> 
+  ggplot() +
+  geom_boxplot(aes(x = direcao, y = lucro)) +
+  coord_flip()
+```
+]
+
+---
+<br><br>
+
+Também podemos reordenar a ordem dos boxplots utilizando a função `forcats::fct_reorder`.
+
+.tiny[
+```{r ggboxplotreorder, fig.width = 7, fig.height = 3.5, echo=TRUE}
+imdb |> 
+  filter(direcao %in% direcao_mais_15_filmes$direcao) |> 
+  mutate(direcao = forcats::fct_reorder(direcao, lucro, .na_rm = TRUE)) |> 
+  ggplot() +
+  geom_boxplot(aes(x = direcao, y = lucro)) +
+  coord_flip()
+```
+]
+
+---
+# Títulos, labels e escalas
+
+Para colocar títulos no gráfico ou trocar as labels dos atributos, utilizamos a função `labs()`. 
+
+Para mudar as escalas (textos e quebras), utilizamos as funções da família `scale_`.
+
+Podemos usar a função `coord_cartesian()` para definir qual porção do gráfico deve ser mostrada.
+
+---
+<br><br>
+
+Colocando título, subtítulo e mudando as labels.
+
+.tiny[
+```{r gglabs, fig.width = 7, fig.height = 3, echo=TRUE}
+imdb |>
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita, color = lucro)) +
+  labs(
+    x = "Orçamento ($)", y = "Receita ($)", color = "Lucro ($)",
+    title = "Gráfico de dispersão", subtitle = "Receita vs Orçamento"
+  )
+```
+]
+
+---
+<br><br>
+
+Mudando as quebras dos eixos `x` e `y`.
+
+.tiny[
+```{r ggscale, fig.width = 7, fig.height = 3, echo=TRUE}
+imdb |> 
+  group_by(ano) |> 
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |> 
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media)) +
+  scale_x_continuous(breaks = seq(1916, 2016, 10)) +
+  scale_y_continuous(breaks = seq(0, 10, 2))
+```
+]
+
+---
+<br><br>
+
+Mudando a escala do gráfico.
+
+.tiny[
+```{r ggcoordcartesian, fig.width = 7, fig.height = 3, echo=TRUE}
+imdb |> 
+  group_by(ano) |> 
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |> 
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media)) +
+  scale_x_continuous(breaks = seq(1916, 2016, 10)) +
+  scale_y_continuous(breaks = seq(0, 10, 2)) +
+  coord_cartesian(ylim = c(0, 10))
+```
+]
+
+---
+# Cores
+
+Também existe funções `scale` para os atributos de cor: `scale_color_` e `scale_fill_`. 
+
+Para escolher manualmente as cores de um gráfico, utilize as funções 
+`scale_color_manual` e `scale_fill_manual()`.
+
+Para trocar o nome nas legendas geradas por atributos de cor, utilize as funções `scale_color_discrete` e `scale_fill_discrete`.
+
+---
+<br><br>
+
+Substituindo as cores padrão do gráfico por um outro conjunto de cores.
+
+.tiny[
+```{r ggfillmanual, fig.width = 7, fig.height = 3, echo=TRUE}
+imdb |> 
+  count(direcao) |>
+  filter(!is.na(direcao)) |> 
+  slice_max(order_by = n, n = 5) |> 
+  ggplot() +
+  geom_col(aes(x = direcao, y = n, fill = direcao), show.legend = FALSE) +
+  coord_flip() +
+  scale_fill_manual(values = c("red", "blue", "green", "pink", "purple"))
+```
+]
+
+---
+<br><br>
+
+Também podemos usar códigos hexadecimais.
+
+.tiny[
+```{r ggfillhex, fig.width = 7, fig.height = 3, echo=TRUE}
+imdb |> 
+  count(direcao) |>
+  filter(!is.na(direcao)) |> 
+  slice_max(order_by = n, n = 5) |> 
+  ggplot() +
+  geom_col(aes(x = direcao, y = n, fill = direcao), show.legend = FALSE) +
+  coord_flip() +
+  scale_fill_manual(
+    values = c("#ff4500", "#268b07", "#ff7400", "#0befff", "#a4bdba")
+  )
+```
+]
+
+---
+<br><br>
+
+Trocando os textos da legenda.
+
+.tiny[
+```{r gglabelslegenda, fig.width = 7, fig.height = 3, echo=TRUE}
+imdb |> 
+  mutate(sucesso_nota = case_when(nota_imdb >= 7 ~ "sucesso_nota_imbd",
+                                  TRUE ~ "sem_sucesso_nota_imdb")) |>
+  group_by(ano, sucesso_nota) |> 
+  summarise(num_filmes = n(), .groups = "drop") |> 
+  ggplot() +
+  geom_line(aes(x = ano, y = num_filmes, color = sucesso_nota)) +
+  scale_color_discrete(labels = c("Nota menor que 7", "Nota maior ou igual à 7"))
+```
+]
+
+---
+# Temas
+
+Os gráficos que vimos até agora usam o tema padrão do ggplot2. Existem outros temas prontos para utilizarmos presentes na família de funções `theme_`.
+
+Você também pode criar o seu próprio tema utilizando a função `theme()`. Nesse caso, para trocar os elementos estéticos do gráfico precisamos usar as funções `element_text()` para textos, `element_line()` para linhas, `element_rect()` para áreas e `element_blank()` para remover elementos.
+
+---
+<br><br>
+
+```{r ggthememinimal, echo=TRUE}
+imdb |> 
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita)) +
+  theme_minimal() 
+```
+
+---
+<br><br>
+
+```{r ggthemebw, echo=TRUE}
+imdb |> 
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita)) +
+  theme_bw()
+```
+
+---
+<br><br>
+
+```{r ggthemeclassic, echo=TRUE}
+imdb |> 
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita)) +
+  theme_classic()
+```
+
+---
+<br><br>
+
+```{r ggthemedark}
+imdb |> 
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita)) +
+  theme_dark()
+```
+
+---
+<br><br>
+
+Criando um próprio tema.
+
+.tiny[
+
+```{r ggthemealterado, fig.width = 7, fig.height = 3, echo=TRUE}
+imdb |> 
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita), color = "white") +
+  labs(title = "Gráfico de dispersão", subtitle = "Receita vs Orçamento") +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    axis.title = element_text(color = "purple"),
+    panel.background = element_rect(fill = "black"),
+    panel.grid = element_blank()
+  )
+```
+
+]
 
 ---
 
@@ -679,7 +1307,7 @@ knitr::include_graphics("img/hcl.png")
 notas_pixar <- dados::pixar_avalicao_publico |> 
   dplyr::count(nota_cinema_score) |> 
   dplyr::mutate(
-    nota = forcats::fct_explicit_na(nota_cinema_score, "(vazio)"),
+    nota = forcats::fct_na_value_to_level(nota_cinema_score, "(vazio)"),
     nota = forcats::fct_relevel(nota, c("A-", "A", "A+", "(vazio)"))
   )
 notas_pixar |> 
@@ -1072,8 +1700,8 @@ A seguir, mostramos um exemplo simples de como criar um mapa leaflet.
 ```{r echo=TRUE}
 library(leaflet)
 
-leaflet(height = 300) %>%
-  addTiles() %>%  # Adiciona a camada gráfica do OpenStreetMap (padrão)
+leaflet(height = 300) |>
+  addTiles() |>  # Adiciona a camada gráfica do OpenStreetMap (padrão)
   addMarkers(
     lng = -46.6623969, lat = -23.5581664, 
     popup = "A Curso-R morava aqui antes da pandemia. Agora ela mora no mundo todo!"

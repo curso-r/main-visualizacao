@@ -14,6 +14,7 @@
     <script src="libs/react/react-dom.min.js"></script>
     <script src="libs/reactwidget/react-tools.js"></script>
     <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <link href="libs/reactable/reactable.css" rel="stylesheet" />
     <script src="libs/reactable-binding/reactable.js"></script>
     <script src="libs/plotly-binding/plotly.js"></script>
     <script src="libs/typedarray/typedarray.min.js"></script>
@@ -39,13 +40,13 @@ class: center, middle, inverse, title-slide
 # Visualização de dados
 ]
 .subtitle[
-## 📑+😎
+## 📈+😎
 ]
 .author[
 ### <img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '30%'>
 ]
 .date[
-### julho de 2022
+### fevereiro de 2023
 ]
 
 ---
@@ -200,7 +201,7 @@ class: middle, center
 
 - O objetivo dos exercícios é gerar dúvidas. **Com exceção do trabalho final, nenhum exercício precisa ser entregue**.
 
-- O certificado será emitido mediante uma **entrega final**, a ser especificada nas últimas aulas do curso. 
+- O certificado será emitido mediante uma **entrega final**, a ser detalhada a seguir. 
 
 - Haverá monitoria para esclarecimento de dúvidas sempre 30 minutos antes do início das aulas.
 
@@ -216,6 +217,33 @@ class: middle, center
 - Para falar, levante a mão.
 
 - Algumas dúvidas serão respondidas na hora. Outras serão respondidas mais tarde na própria aula ou em aulas futuras.
+
+---
+## Trabalho final
+
+Para o TCC do curso, entregará um TidyTuesday! 
+
+&lt;img src="https://github.com/rfordatascience/tidytuesday/raw/master/static/tt_logo.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+O TidyTuesday é um evento semanal criado para engajar a comunidade no uso do R para análise de dados. Se quiser conhecer mais, [siga a hashtag #tidytuesday no Twitter](https://twitter.com/hashtag/TidyTuesday)!
+
+Mais informações [aqui](https://github.com/rfordatascience/tidytuesday/).
+
+---
+## Trabalho final
+
+O resultado deverá ser entregue em um __arquivo zip__ contendo as visualizações e códigos. A submissão deve ser feita pelo classroom, subindo um arquivo .zip contendo
+
+- Os __códigos em R__ utilizados para gerar os gráficos.
+- Os __gráficos em imagens__ (.png, .jpeg, .gif etc)
+- Um arquivo __README.md__ contando qual foi sua ideia e o processo de construção das visualizações.
+
+__Observações__
+
+- Não é necessário que a __base de dados__ esteja no repositório, já que ela pode ser lida diretamente da internet.
+- __RMarkdown/Quarto__. Se você estiver confortável com relatórios reprodutíveis, pode entregar o trabalho em um relatório ou apresentação à sua escolha. Nesse caso, envie output final (em HTML, PDF, Word, etc) no lugar das imagens.
+- __GitHub__. Se você estiver confortável com Git/GitHub, pode entregar o link do repositório no lugar do zip.
 
 ---
 ## Tire suas dúvidas
@@ -251,6 +279,10 @@ class: middle, center, inverse
 
 ⬜ Utilizar o `{ggplot2}` em um problema concreto.
 
+--
+
+Ficaremos com esses conteúdos por 2 aulas!
+
 ---
 
 # O que é visualização de dados?
@@ -275,7 +307,7 @@ Ilustração de [Allison Horst](https://www.allisonhorst.com)
 
 ---
 
-# Por quê fazer visualizações de dados?
+# Por que fazer visualizações de dados?
 
 .pull-left[
 
@@ -289,7 +321,7 @@ Ilustração de [Allison Horst](https://www.allisonhorst.com)
 
 .pull-right[
 
-&lt;img src="https://blog.curso-r.com/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="https://blog.curso-r.com/images/posts/conteudo/sf-miojo/mapa_muni_bonito_uf_cat.webp" style="display: block; margin: auto;" /&gt;
 
 Imagem do [blog da Curso-R](https://blog.curso-r.com/posts/2019-02-10-sf-miojo/)
 
@@ -297,7 +329,7 @@ Imagem do [blog da Curso-R](https://blog.curso-r.com/posts/2019-02-10-sf-miojo/)
 
 ---
 
-# Para quê servem as visualizações?
+# Para que servem as visualizações?
 
 .pull-left[
 
@@ -347,14 +379,6 @@ Ilustração de [Allison Horst](https://www.allisonhorst.com)
 
 ]
 
---
-
-.center[
-
-### [Vamos montar uma lista aqui!](https://docs.google.com/document/d/12TOFqX1Ci-Yn8xPY9y5XT-GQYAju6ObzN-Fy55BbEYE/edit#)
-
-]
-
 ---
 class: middle,inverse,center
 
@@ -379,7 +403,7 @@ class: middle,inverse,center
 - A ferramenta: precisa ser __rápida__ de programar
 - O objetivo é **aprender**
 
-&lt;img src="slides_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -394,7 +418,7 @@ class: middle,inverse,center
 - A ferramenta: precisa ser __customizável__
 - O objetivo é **comunicar**
 
-&lt;img src="slides_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -423,7 +447,7 @@ O pacote `{ggplot2}` segue duas filosofias que nos ajudam a entender o processo 
 
 Para construir um gráfico, começamos com o *canvas*. A função `ggplot()` cria a primeira camada do nosso gráfico: uma tela em branco (cinza).
 
-&lt;img src="slides_files/figure-html/unnamed-chunk-15-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides_files/figure-html/unnamed-chunk-16-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -539,9 +563,9 @@ ggplot(cars) +
 
 ---
 
-# Curiosidade: por quê o `+`?
+# Curiosidade: por que o `+`?
 
-O `{ggplot2}`, diferentemente dos outros pacotes do `tidyverse`, não usa o *pipe* (`%&gt;%` ou `|&gt;` depois do R 4.1). Isso acontece pois o `{ggplot2}` surgiu [antes que o autor tomasse conhecimento do pipe](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/comment/cvi19ly/?utm_source=share&amp;utm_medium=web2x&amp;context=3).
+O `{ggplot2}`, diferentemente dos outros pacotes do `tidyverse`, não usa o *pipe* (`|&gt;` ou `|&gt;` depois do R 4.1). Isso acontece pois o `{ggplot2}` surgiu [antes que o autor tomasse conhecimento do pipe](https://www.reddit.com/r/dataisbeautiful/comments/3mp9r7/comment/cvi19ly/?utm_source=share&amp;utm_medium=web2x&amp;context=3).
 
 &lt;iframe id="reddit-embed" src="https://www.redditmedia.com/r/dataisbeautiful/comments/3mp9r7/im_hadley_wickham_chief_scientist_at_rstudio_and/cvi19ly/?depth=1&amp;amp;showmore=false&amp;amp;embed=true&amp;amp;showmedia=false" sandbox="allow-scripts allow-same-origin allow-popups" style="border: none;" height="437" width="640" scrolling="no"&gt;&lt;/iframe&gt;
 
@@ -556,6 +580,681 @@ O `{ggplot2}`, diferentemente dos outros pacotes do `tidyverse`, não usa o *pip
 # [Qual gráfico escolher?](https://www.data-to-viz.com)
 
 &lt;img src="img/data-to-viz.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Base de dados do exemplo
+
+Para os slides a seguir, vamos usar a base do imdb. Atenção para a coluna lucro, que criamos fazendo a diferença entre receita e orçamento.
+
+
+```r
+library(tidyverse)
+imdb &lt;- read_rds("dados/imdb.rds")
+imdb &lt;- imdb |&gt; mutate(lucro = receita - orcamento)
+```
+
+
+
+
+---
+# Um gráfico de pontos (dispersão)
+
+Podemos fazer um gráfico de dispersão da receita contra o orçamento dos filmes acrescentando a função `geom_point()` ao código anterior.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  ggplot() +
+  geom_point(aes(x = orcamento, y = receita))
+```
+
+&lt;img src="slides_files/figure-html/ggdispersao-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Muitos pontos para discutir:
+
+- Esse gráfico tem duas camadas: o canvas, gerado pela função `ggplot()`, e os pontos, gerado pela função `geom_point()`.
+
+- Unimos as camadas de um ggplot usando um `+`. Sim, precisamos controlar a nossa vontade de colocar um ` |&gt; ` em vez de `+`, e essa é uma fonte de erro bem comum. O motivo para precisarmos usar `+` em vez do `|&gt;` é o pacote ggplot ter nascido primeiro que o pipe.
+
+- A função `geom_point()` define que a forma geométrica (daí o prefixo `geom`) utilizada para representar os dados será pontos. Existe uma família de funções `geom`, sendo que cada uma vai representar uma forma geométrica diferente.
+
+- O primeiro argumento de qualquer função `geom` é o `mapping`. Esse argumento serve para mapear os dados nos atributos estéticos da forma geométrica escolhida. Ele sempre receberá a função `aes()`. No código, nós omitimos o nome do argumento, mas poderíamos ter escrito `geom_point(mapping = aes(x = orcamento, y = receita))`.
+
+---
+&lt;br&gt;&lt;br&gt;
+
+- A função `aes()` serve para *mapear os dados aos elementos estéticos do gráfico*. Os argumentos dela vão sempre depender da forma geométrica que estamos utilizando. No caso de um gráfico de pontos, precisamos definir como as posições do eixo x e y serão construídas. No exemplo, a posição do ponto no eixo x será dada pela coluna `orcamento` e a posição do ponto no eixo y será dada pela coluna `receita`.
+
+- O *warning* indica quantas observações (linhas) precisaram ser removidas, por não possuir informação de orçamento ou receita.
+
+- Veremos nos próximos exemplos que será muito comum manipularmos a base (aplicarmos diversas funções do `dplyr`, por exemplo) antes de chamarmos a função `ggplot`. 
+
+**O mapeamento das COLUNAS nas FORMAS GEOMÉTRICAS deve ser SEMPRE feito dentro da função `aes()`**.
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Vamos agora inserir um novo elemento visual ao gráfico: a reta x = y.
+
+.tiny[
+
+```r
+imdb |&gt;
+  ggplot() +
+  geom_point(aes(x = orcamento, y = receita)) +
+  geom_abline(intercept = 0, slope = 1, color = "red")
+```
+
+&lt;img src="slides_files/figure-html/ggreta-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+- A reta x = y é acrescentada ao gráfico pela função `geom_abline()`. Esse `geom` pode ser utilizado para desenhar qualquer reta do tipo `y = a + b * x`, sendo `a` o intercepto (*intercept*) da reta e `b` o seu coeficiente angular (*slope*).
+
+- Essa reta nos permite observar o número de filmes que obtiveram lucro (pontos acima da reta) e aqueles que obtiveram prejuízo (pontos abaixo da reta).
+
+- Como não estamos mapeando colunas a essa reta, não precisamos colocar os argumentos da função `geom_abline()` do `aes()`.
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Veja como o ggplot realmente é construído por camadas. Agora, colocamos a camada da reta antes da camada dos pontos. Os pontos ficam em cima da reta.
+
+.tiny[
+
+```r
+imdb |&gt;
+  ggplot() +
+  geom_abline(intercept = 0, slope = 1, color = "red") +
+  geom_point(aes(x = orcamento, y = receita))
+```
+
+&lt;img src="slides_files/figure-html/ggretavermelha-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Os atributos `x` e `y` são necessários para construirmos um gráfico de pontos. Outros atributos também podem ser mapeados em pontos, como a cor. Como a coluna `lucro` é numérica, um degradê de cores é criado para os pontos, a depender do lucro.
+
+.tiny[
+
+```r
+imdb |&gt;
+  ggplot() +
+  geom_point(aes(x = orcamento, y = receita, color = lucro))
+```
+
+&lt;img src="slides_files/figure-html/ggdispersaoazul-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Poderíamos também classificar os filmes entre aqueles que lucraram ou não. Uma cor é atribuída a cada categoria.
+
+.tiny[
+
+```r
+imdb |&gt;
+  mutate(
+    lucrou = ifelse(lucro &lt;= 0, "Não", "Sim")
+  ) |&gt;
+  ggplot() +
+  geom_point(aes(x = orcamento, y = receita, color = lucrou))
+```
+
+&lt;img src="slides_files/figure-html/gglucro-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Gráfico de linhas
+
+Utilizamos o `geom_line` para fazer gráficos de linhas. Gráficos de linha são muito utilizados para representar *séries temporais*, isto é, observações medidas repetidamente em intervalos (em geral) equidistantes de tempo.
+
+Assim como nos gráficos de pontos, precisamos definir as posições `x` e `y` para construirmos gráficos de linhas.
+
+A seguir, construímos o gráfico das notas médias dos filmes produzidos em cada ano, 
+
+---
+&lt;br&gt;&lt;br&gt;
+
+.tiny[
+
+```r
+imdb |&gt; 
+  group_by(ano) |&gt; 
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |&gt; 
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media))
+```
+
+&lt;img src="slides_files/figure-html/gglinha-1.png" width="576" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Se mapearmos uma coluna à cor das retas, serão construídas uma reta correspondente a cada categoria distinta dessa coluna.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  filter(!is.na(idioma)) |&gt; 
+  mutate(idioma_ingles = case_when(idioma == "English" ~ "Apenas Inglês",
+                                   str_detect(idioma, "English") ~ "Inglês e outros idiomas",
+                                   TRUE ~ "Outros idiomas")) |&gt;
+  group_by(ano, idioma_ingles) |&gt; 
+  summarise(num_filmes = n(), .groups = "drop") |&gt; 
+  ggplot() +
+  geom_line(aes(x = ano, y = num_filmes, color = idioma_ingles))
+```
+
+&lt;img src="slides_files/figure-html/gglinhacolorida-1.png" width="576" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Podemos colocar pontos e retas no mesmo gráfico. Basta acrescentar os dois `geoms`. O gráfico abaixo mostra nota média anual dos filmes do Robert De Niro.
+
+
+```r
+imdb |&gt; 
+  filter(str_detect(elenco, "Robert De Niro")) |&gt; 
+  group_by(ano) |&gt; 
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |&gt; 
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media)) +
+  geom_point(aes(x = ano, y = nota_media))
+```
+
+&lt;img src="slides_files/figure-html/ggdeniro-1.png" width="576" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Quando precisamos usar o mesmo `aes()` em vários `geoms`, podemos defini-lo dentro da função `ggplot()`. Esse `aes()` será então distribuído para todo `geom` do gráfico. O código anterior pode ser reescrito da seguinte forma.
+
+
+```r
+imdb |&gt; 
+  filter(str_detect(elenco, "Robert De Niro")) |&gt; 
+  group_by(ano) |&gt; 
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |&gt; 
+  ggplot(aes(x = ano, y = nota_media)) +
+  geom_line() +
+  geom_point()
+```
+
+&lt;img src="slides_files/figure-html/gglinhaponto-1.png" width="576" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Se algum `geom` necessitar de um atributo que os outros não precisam, esse atributo pode ser especificado normalmente dentro dele. Abaixo, utilizamos o `geom_label` para colocar as notas médias no gráfico. Além do `x` e `y`, o `geom_label` também precisa do texto que será escrito no gráfico.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  filter(str_detect(elenco, "Robert De Niro")) |&gt; 
+  group_by(ano) |&gt; 
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |&gt; 
+  mutate(nota_media = round(nota_media, 1)) |&gt; 
+  ggplot(aes(x = ano, y = nota_media)) +
+  geom_line() +
+  geom_label(aes(label = nota_media))
+```
+
+&lt;img src="slides_files/figure-html/gglinhalabel-1.png" width="576" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Gráfico de barras
+
+Para construir gráficos de barras, utilizamos o `geom_col`. A seguir, construímos um gráfico de barras do número de filmes das 10 pessoas que mais dirigiram filmes na nossa base do IMDB.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  count(direcao) |&gt;
+  slice_max(order_by = n, n = 10) |&gt; 
+  ggplot() +
+  geom_col(aes(x = direcao, y = n))
+```
+
+&lt;img src="slides_files/figure-html/ggbarras-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+---
+&lt;br&gt;&lt;br&gt;
+
+Gráficos de barras também precisam dos atributos `x` e `y`, sendo que o atributo `y` representará a altura de cada barra.
+
+No gráfico anterior, vemos que o `NA` é considerado uma "opção" de direcao e entra no gráfico. Podemos retirar os `NAs` dessa coluna previamente utilizando a função `filter()`.
+
+A seguir, além de retirar os `NAs`, atribuímos a coluna `direcao` à cor das colunas. Repare que, nesse caso, não utilizamos o atributo `color` e sim `fill`. A regra é a seguinte: o atributo `color` colore objetos sem área (pontos, linhas, contornos), o atributo `fill` preenche objetos com cor (barras, áreas, polígonos em geral).
+
+---
+&lt;br&gt;&lt;br&gt;
+
+.tiny[
+
+```r
+imdb |&gt; 
+  count(direcao) |&gt;
+  filter(!is.na(direcao)) |&gt; 
+  slice_max(order_by = n, n = 10) |&gt; 
+  ggplot() +
+  geom_col(
+    aes(x = direcao, y = n, fill = direcao), show.legend = FALSE
+  )
+```
+
+&lt;img src="slides_files/figure-html/ggbarracolorida-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Para consertar as labels do eixo `x`, uma alternativa é inverter os eixos do gráfico, construindo barras horizontais.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  count(direcao) |&gt;
+  filter(!is.na(direcao)) |&gt; 
+  slice_max(order_by = n, n = 10) |&gt; 
+  ggplot() +
+  geom_col(
+    aes(x = direcao, y = n, fill = direcao), show.legend = FALSE
+  ) +
+  coord_flip()
+```
+
+&lt;img src="slides_files/figure-html/ggbarracoordflip-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Para ordenar as colunas, precisamos mudar a ordem dos níveis do *fator* `direcao`. Para isso, utilizamos a função `fct_reorder()` do pacote `forcats`. A nova ordem será estabelecida pela coluna `n` (quantidade de filmes).
+
+Fatores dentro do R são números inteiros (1, 2, 3, ...) que possuem uma representação textual. Variáveis categóricas são transformadas em fatores pelo ggplot pois todo eixo cartesiano é numérico. Assim, os textos de uma variável categórica são, internamente, números inteiros.
+
+Por padrão, os inteiros são atribuídos a cada categoria de uma variável pela ordem alfabética (repare na ordem das pessoas que dirigiram filmes nos gráficos anteriores). Assim, se transformássemos o vetor `c("banana", "uva", "melancia")` em um fator, a atribuição de inteiros seria: "banana" vira 1, "melancia" vira 2 e "uva" vira 3. Embora sejam inteiros internamente, sempre que chamássemos esse novo vetor, ainda sim veríamos os textos "banana", "uva" e "melancia".
+
+---
+&lt;br&gt;&lt;br&gt;
+
+.tiny[
+
+```r
+imdb |&gt; 
+  count(direcao) |&gt;
+  filter(!is.na(direcao)) |&gt; 
+  slice_max(order_by = n, n = 10) |&gt; 
+  mutate(direcao = forcats::fct_reorder(direcao, n)) |&gt; 
+  ggplot() +
+  geom_col(
+    aes(x = direcao, y = n, fill = direcao),
+    show.legend = FALSE
+  ) +
+  coord_flip()
+```
+
+&lt;img src="slides_files/figure-html/ggbarraforcats-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Por fim, podemos colocar uma label com o número de filmes de cada pessoa que dirigiu filmes dentro de cada barra.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  count(direcao) |&gt;
+  filter(!is.na(direcao)) |&gt; 
+  slice_max(order_by = n, n = 10) |&gt; 
+  mutate(direcao = forcats::fct_reorder(direcao, n)) |&gt; 
+  ggplot() +
+  geom_col(aes(x = direcao, y = n, fill = direcao), show.legend = FALSE) +
+  geom_label(aes(x = direcao, y = n/2, label = n)) +
+  coord_flip()
+```
+
+&lt;img src="slides_files/figure-html/ggbarralabel-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Histograma
+
+Para construir histogramas, usamos o `geom_histogram`. Esse `geom` só precisa do atributo `x` (o eixo y é construído automaticamente). Histogramas são úteis para avaliarmos a distribuição de uma variável.
+
+A seguir, construímos o histograma do lucro dos filmes do diretor Steven Spielberg.
+O primeiro *warning* nos diz que o eixo x foi dividido em 30 intervalos para a construção do histograma.
+
+---
+&lt;br&gt;&lt;br&gt;
+
+
+```r
+imdb |&gt; 
+  filter(direcao == "Steven Spielberg") |&gt;
+  ggplot() +
+  geom_histogram(aes(x = lucro))
+```
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+&lt;img src="slides_files/figure-html/gghist-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Para definir o tamanho de cada intervalo, podemos utilizar o argumento `bindwidth`.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  filter(direcao == "Steven Spielberg") |&gt;
+  ggplot() +
+  geom_histogram(
+    aes(x = lucro), 
+    binwidth = 100000000,
+    color = "white"
+  )
+```
+
+&lt;img src="slides_files/figure-html/gghistbind-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Boxplot
+
+Boxplots também são úteis para estudarmos a distribuição de uma variável, principalmente quando queremos comparar várias distribuições. 
+
+Para construir um boxplot no ggplot, utilizamos a função `geom_boxplot`. Ele precisa dos atributos `x` e `y`, sendo que ao atributo `x` devemos mapear uma variável categórica.
+
+A seguir, construímos boxplots do lucro dos filmes das pessoas que dirigiram de 15 filmes.
+
+---
+&lt;br&gt;&lt;br&gt;
+
+.tiny[
+
+```r
+direcao_mais_15_filmes &lt;- imdb |&gt; 
+  filter(!is.na(direcao), !is.na(lucro) ) |&gt;
+  group_by(direcao) |&gt; 
+  count(direcao, sort = TRUE) |&gt; 
+  filter(n &gt;= 15)
+imdb |&gt; 
+  filter(direcao %in% direcao_mais_15_filmes$direcao) |&gt; 
+  ggplot() +
+  geom_boxplot(aes(x = direcao, y = lucro)) +
+  coord_flip()
+```
+
+&lt;img src="slides_files/figure-html/ggboxplot-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Também podemos reordenar a ordem dos boxplots utilizando a função `forcats::fct_reorder`.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  filter(direcao %in% direcao_mais_15_filmes$direcao) |&gt; 
+  mutate(direcao = forcats::fct_reorder(direcao, lucro, .na_rm = TRUE)) |&gt; 
+  ggplot() +
+  geom_boxplot(aes(x = direcao, y = lucro)) +
+  coord_flip()
+```
+
+&lt;img src="slides_files/figure-html/ggboxplotreorder-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Títulos, labels e escalas
+
+Para colocar títulos no gráfico ou trocar as labels dos atributos, utilizamos a função `labs()`. 
+
+Para mudar as escalas (textos e quebras), utilizamos as funções da família `scale_`.
+
+Podemos usar a função `coord_cartesian()` para definir qual porção do gráfico deve ser mostrada.
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Colocando título, subtítulo e mudando as labels.
+
+.tiny[
+
+```r
+imdb |&gt;
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita, color = lucro)) +
+  labs(
+    x = "Orçamento ($)", y = "Receita ($)", color = "Lucro ($)",
+    title = "Gráfico de dispersão", subtitle = "Receita vs Orçamento"
+  )
+```
+
+&lt;img src="slides_files/figure-html/gglabs-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Mudando as quebras dos eixos `x` e `y`.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  group_by(ano) |&gt; 
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |&gt; 
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media)) +
+  scale_x_continuous(breaks = seq(1916, 2016, 10)) +
+  scale_y_continuous(breaks = seq(0, 10, 2))
+```
+
+&lt;img src="slides_files/figure-html/ggscale-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Mudando a escala do gráfico.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  group_by(ano) |&gt; 
+  summarise(nota_media = mean(nota_imdb, na.rm = TRUE)) |&gt; 
+  ggplot() +
+  geom_line(aes(x = ano, y = nota_media)) +
+  scale_x_continuous(breaks = seq(1916, 2016, 10)) +
+  scale_y_continuous(breaks = seq(0, 10, 2)) +
+  coord_cartesian(ylim = c(0, 10))
+```
+
+&lt;img src="slides_files/figure-html/ggcoordcartesian-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Cores
+
+Também existe funções `scale` para os atributos de cor: `scale_color_` e `scale_fill_`. 
+
+Para escolher manualmente as cores de um gráfico, utilize as funções 
+`scale_color_manual` e `scale_fill_manual()`.
+
+Para trocar o nome nas legendas geradas por atributos de cor, utilize as funções `scale_color_discrete` e `scale_fill_discrete`.
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Substituindo as cores padrão do gráfico por um outro conjunto de cores.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  count(direcao) |&gt;
+  filter(!is.na(direcao)) |&gt; 
+  slice_max(order_by = n, n = 5) |&gt; 
+  ggplot() +
+  geom_col(aes(x = direcao, y = n, fill = direcao), show.legend = FALSE) +
+  coord_flip() +
+  scale_fill_manual(values = c("red", "blue", "green", "pink", "purple"))
+```
+
+&lt;img src="slides_files/figure-html/ggfillmanual-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Também podemos usar códigos hexadecimais.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  count(direcao) |&gt;
+  filter(!is.na(direcao)) |&gt; 
+  slice_max(order_by = n, n = 5) |&gt; 
+  ggplot() +
+  geom_col(aes(x = direcao, y = n, fill = direcao), show.legend = FALSE) +
+  coord_flip() +
+  scale_fill_manual(
+    values = c("#ff4500", "#268b07", "#ff7400", "#0befff", "#a4bdba")
+  )
+```
+
+&lt;img src="slides_files/figure-html/ggfillhex-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Trocando os textos da legenda.
+
+.tiny[
+
+```r
+imdb |&gt; 
+  mutate(sucesso_nota = case_when(nota_imdb &gt;= 7 ~ "sucesso_nota_imbd",
+                                  TRUE ~ "sem_sucesso_nota_imdb")) |&gt;
+  group_by(ano, sucesso_nota) |&gt; 
+  summarise(num_filmes = n(), .groups = "drop") |&gt; 
+  ggplot() +
+  geom_line(aes(x = ano, y = num_filmes, color = sucesso_nota)) +
+  scale_color_discrete(labels = c("Nota menor que 7", "Nota maior ou igual à 7"))
+```
+
+&lt;img src="slides_files/figure-html/gglabelslegenda-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Temas
+
+Os gráficos que vimos até agora usam o tema padrão do ggplot2. Existem outros temas prontos para utilizarmos presentes na família de funções `theme_`.
+
+Você também pode criar o seu próprio tema utilizando a função `theme()`. Nesse caso, para trocar os elementos estéticos do gráfico precisamos usar as funções `element_text()` para textos, `element_line()` para linhas, `element_rect()` para áreas e `element_blank()` para remover elementos.
+
+---
+&lt;br&gt;&lt;br&gt;
+
+
+```r
+imdb |&gt; 
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita)) +
+  theme_minimal() 
+```
+
+&lt;img src="slides_files/figure-html/ggthememinimal-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;
+
+
+```r
+imdb |&gt; 
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita)) +
+  theme_bw()
+```
+
+&lt;img src="slides_files/figure-html/ggthemebw-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;
+
+
+```r
+imdb |&gt; 
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita)) +
+  theme_classic()
+```
+
+&lt;img src="slides_files/figure-html/ggthemeclassic-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;
+
+&lt;img src="slides_files/figure-html/ggthemedark-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;
+
+Criando um próprio tema.
+
+.tiny[
+
+
+```r
+imdb |&gt; 
+  ggplot() +
+  geom_point(mapping = aes(x = orcamento, y = receita), color = "white") +
+  labs(title = "Gráfico de dispersão", subtitle = "Receita vs Orçamento") +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    axis.title = element_text(color = "purple"),
+    panel.background = element_rect(fill = "black"),
+    panel.grid = element_blank()
+  )
+```
+
+&lt;img src="slides_files/figure-html/ggthemealterado-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+]
 
 ---
 
@@ -702,14 +1401,14 @@ class: middle, center
 
 .pull-left[
 
-&lt;img src="slides_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides_files/figure-html/unnamed-chunk-23-1.png" width="1500" style="display: block; margin: auto;" /&gt;
 
 ]
 
 
 .pull-right[
 
-&lt;img src="slides_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides_files/figure-html/unnamed-chunk-24-1.png" width="1500" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -717,7 +1416,7 @@ class: middle, center
 
 # É subjetivo...
 
-&lt;img src="img/same-picture.jpg" width="1067" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/same-picture.jpg" width="533" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -745,7 +1444,7 @@ class: middle, center
 # Exemplos
 
 
-&lt;img src="slides_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides_files/figure-html/unnamed-chunk-26-1.png" width="2700" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -768,14 +1467,14 @@ class: middle, center
 .pull-left[
 
 
-&lt;img src="slides_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides_files/figure-html/unnamed-chunk-27-1.png" width="1800" style="display: block; margin: auto;" /&gt;
 
 ]
 
 .pull-right[
 
 
-&lt;img src="slides_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides_files/figure-html/unnamed-chunk-28-1.png" width="1800" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -874,8 +1573,8 @@ O pacote `reactable` nos permite criar tabelas interativas baseadas na bibliotec
 
 A interatividade dos `htmlwidgets` não depende de uma sessão R rodando por trás. Você pode utilizá-los em qualquer documento `.html`.
 
-<div id="htmlwidget-a2fac78f72a2cb57ce8e" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a2fac78f72a2cb57ce8e">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"mpg":[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],"cyl":[6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],"disp":[160,160,108,258,360,225,360,146.7,140.8,167.6,167.6,275.8,275.8,275.8,472,460,440,78.7,75.7,71.1,120.1,318,304,350,400,79,120.3,95.1,351,145,301,121],"hp":[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],"drat":[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92,3.92,3.07,3.07,3.07,2.93,3,3.23,4.08,4.93,4.22,3.7,2.76,3.15,3.73,3.08,4.08,4.43,3.77,4.22,3.62,3.54,4.11],"wt":[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],"qsec":[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3,18.9,17.4,17.6,18,17.98,17.82,17.42,19.47,18.52,19.9,20.01,16.87,17.3,15.41,17.05,18.9,16.7,16.9,14.5,15.5,14.6,18.6],"vs":[0,0,1,1,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,0,1],"am":[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1],"gear":[4,4,4,3,3,3,3,4,4,4,4,3,3,3,3,3,3,4,4,4,3,3,3,3,3,4,5,5,5,5,5,4],"carb":[4,4,1,1,2,1,4,2,2,4,4,3,3,3,4,4,4,1,2,1,1,2,2,4,2,1,2,2,4,6,8,2]},"columns":[{"accessor":".rownames","name":"","type":"character","sortable":false,"filterable":false,"rowHeader":true},{"accessor":"mpg","name":"mpg","type":"numeric"},{"accessor":"cyl","name":"cyl","type":"numeric"},{"accessor":"disp","name":"disp","type":"numeric"},{"accessor":"hp","name":"hp","type":"numeric"},{"accessor":"drat","name":"drat","type":"numeric"},{"accessor":"wt","name":"wt","type":"numeric"},{"accessor":"qsec","name":"qsec","type":"numeric"},{"accessor":"vs","name":"vs","type":"numeric"},{"accessor":"am","name":"am","type":"numeric"},{"accessor":"gear","name":"gear","type":"numeric"},{"accessor":"carb","name":"carb","type":"numeric"}],"defaultPageSize":4,"paginationType":"numbers","showPageInfo":true,"minRows":1,"striped":true,"compact":true,"dataKey":"6409f477c58a0118835a99d4b0c7f170"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-261bd1fdf2e91ce00d77" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-261bd1fdf2e91ce00d77">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"mpg":[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],"cyl":[6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],"disp":[160,160,108,258,360,225,360,146.7,140.8,167.6,167.6,275.8,275.8,275.8,472,460,440,78.7,75.7,71.1,120.1,318,304,350,400,79,120.3,95.1,351,145,301,121],"hp":[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],"drat":[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92,3.92,3.07,3.07,3.07,2.93,3,3.23,4.08,4.93,4.22,3.7,2.76,3.15,3.73,3.08,4.08,4.43,3.77,4.22,3.62,3.54,4.11],"wt":[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],"qsec":[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3,18.9,17.4,17.6,18,17.98,17.82,17.42,19.47,18.52,19.9,20.01,16.87,17.3,15.41,17.05,18.9,16.7,16.9,14.5,15.5,14.6,18.6],"vs":[0,0,1,1,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,0,1],"am":[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1],"gear":[4,4,4,3,3,3,3,4,4,4,4,3,3,3,3,3,3,4,4,4,3,3,3,3,3,4,5,5,5,5,5,4],"carb":[4,4,1,1,2,1,4,2,2,4,4,3,3,3,4,4,4,1,2,1,1,2,2,4,2,1,2,2,4,6,8,2]},"columns":[{"id":".rownames","name":"","type":"character","sortable":false,"filterable":false,"rowHeader":true},{"id":"mpg","name":"mpg","type":"numeric"},{"id":"cyl","name":"cyl","type":"numeric"},{"id":"disp","name":"disp","type":"numeric"},{"id":"hp","name":"hp","type":"numeric"},{"id":"drat","name":"drat","type":"numeric"},{"id":"wt","name":"wt","type":"numeric"},{"id":"qsec","name":"qsec","type":"numeric"},{"id":"vs","name":"vs","type":"numeric"},{"id":"am","name":"am","type":"numeric"},{"id":"gear","name":"gear","type":"numeric"},{"id":"carb","name":"carb","type":"numeric"}],"defaultPageSize":4,"striped":true,"compact":true,"dataKey":"5b3b1b9433e88dd26cbc4c3644e92607"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 
 
 ---
@@ -930,8 +1629,8 @@ plotly::ggplotly(
 
 .pull-right[
 
-<div id="htmlwidget-6a1bbee4b1d3d603e08e" style="width:504px;height:400px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6a1bbee4b1d3d603e08e">{"x":{"data":[{"x":[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],"y":[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],"text":["wt: 2.620<br />mpg: 21.0","wt: 2.875<br />mpg: 21.0","wt: 2.320<br />mpg: 22.8","wt: 3.215<br />mpg: 21.4","wt: 3.440<br />mpg: 18.7","wt: 3.460<br />mpg: 18.1","wt: 3.570<br />mpg: 14.3","wt: 3.190<br />mpg: 24.4","wt: 3.150<br />mpg: 22.8","wt: 3.440<br />mpg: 19.2","wt: 3.440<br />mpg: 17.8","wt: 4.070<br />mpg: 16.4","wt: 3.730<br />mpg: 17.3","wt: 3.780<br />mpg: 15.2","wt: 5.250<br />mpg: 10.4","wt: 5.424<br />mpg: 10.4","wt: 5.345<br />mpg: 14.7","wt: 2.200<br />mpg: 32.4","wt: 1.615<br />mpg: 30.4","wt: 1.835<br />mpg: 33.9","wt: 2.465<br />mpg: 21.5","wt: 3.520<br />mpg: 15.5","wt: 3.435<br />mpg: 15.2","wt: 3.840<br />mpg: 13.3","wt: 3.845<br />mpg: 19.2","wt: 1.935<br />mpg: 27.3","wt: 2.140<br />mpg: 26.0","wt: 1.513<br />mpg: 30.4","wt: 3.170<br />mpg: 15.8","wt: 2.770<br />mpg: 19.7","wt: 3.570<br />mpg: 15.0","wt: 2.780<br />mpg: 21.4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":25.2054794520548,"r":7.30593607305936,"b":39.1598173515982,"l":37.2602739726027},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.31745,5.61955],"tickmode":"array","ticktext":["2","3","4","5"],"tickvals":[2,3,4,5],"categoryorder":"array","categoryarray":["2","3","4","5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"wt","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[9.225,35.075],"tickmode":"array","ticktext":["10","15","20","25","30","35"],"tickvals":[10,15,20,25,30,35],"categoryorder":"array","categoryarray":["10","15","20","25","30","35"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"mpg","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","height":400,"barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"6180718d3a8a":{"x":{},"y":{},"type":"scatter"}},"cur_data":"6180718d3a8a","visdat":{"6180718d3a8a":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a05910b9a953da4df0f3" style="width:360px;height:400px;" class="plotly html-widget "></div>
+<script type="application/json" data-for="htmlwidget-a05910b9a953da4df0f3">{"x":{"data":[{"x":[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.424,5.345,2.2,1.615,1.835,2.465,3.52,3.435,3.84,3.845,1.935,2.14,1.513,3.17,2.77,3.57,2.78],"y":[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],"text":["wt: 2.620<br />mpg: 21.0","wt: 2.875<br />mpg: 21.0","wt: 2.320<br />mpg: 22.8","wt: 3.215<br />mpg: 21.4","wt: 3.440<br />mpg: 18.7","wt: 3.460<br />mpg: 18.1","wt: 3.570<br />mpg: 14.3","wt: 3.190<br />mpg: 24.4","wt: 3.150<br />mpg: 22.8","wt: 3.440<br />mpg: 19.2","wt: 3.440<br />mpg: 17.8","wt: 4.070<br />mpg: 16.4","wt: 3.730<br />mpg: 17.3","wt: 3.780<br />mpg: 15.2","wt: 5.250<br />mpg: 10.4","wt: 5.424<br />mpg: 10.4","wt: 5.345<br />mpg: 14.7","wt: 2.200<br />mpg: 32.4","wt: 1.615<br />mpg: 30.4","wt: 1.835<br />mpg: 33.9","wt: 2.465<br />mpg: 21.5","wt: 3.520<br />mpg: 15.5","wt: 3.435<br />mpg: 15.2","wt: 3.840<br />mpg: 13.3","wt: 3.845<br />mpg: 19.2","wt: 1.935<br />mpg: 27.3","wt: 2.140<br />mpg: 26.0","wt: 1.513<br />mpg: 30.4","wt: 3.170<br />mpg: 15.8","wt: 2.770<br />mpg: 19.7","wt: 3.570<br />mpg: 15.0","wt: 2.780<br />mpg: 21.4"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":29.1506849315069,"r":7.30593607305936,"b":43.1050228310502,"l":37.2602739726027},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.31745,5.61955],"tickmode":"array","ticktext":["2","3","4","5"],"tickvals":[2,3,4,5],"categoryorder":"array","categoryarray":["2","3","4","5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"wt","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[9.225,35.075],"tickmode":"array","ticktext":["10","15","20","25","30","35"],"tickvals":[10,15,20,25,30,35],"categoryorder":"array","categoryarray":["10","15","20","25","30","35"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"mpg","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","height":400,"barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"a51473887430":{"x":{},"y":{},"type":"scatter"}},"cur_data":"a51473887430","visdat":{"a51473887430":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 
 
 ]
@@ -969,16 +1668,16 @@ A seguir, mostramos um exemplo simples de como criar um mapa leaflet.
 ```r
 library(leaflet)
 
-leaflet(height = 300) %&gt;%
-  addTiles() %&gt;%  # Adiciona a camada gráfica do OpenStreetMap (padrão)
+leaflet(height = 300) |&gt;
+  addTiles() |&gt;  # Adiciona a camada gráfica do OpenStreetMap (padrão)
   addMarkers(
     lng = -46.6623969, lat = -23.5581664, 
     popup = "A Curso-R morava aqui antes da pandemia. Agora ela mora no mundo todo!"
   )
 ```
 
-<div id="htmlwidget-bd75e686edd1703a0992" style="width:504px;height:300px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bd75e686edd1703a0992">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-23.5581664,-46.6623969,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"A Curso-R morava aqui antes da pandemia. Agora ela mora no mundo todo!",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-23.5581664,-23.5581664],"lng":[-46.6623969,-46.6623969]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ad2cf83b62a7c0c9f3e5" style="width:360px;height:300px;" class="leaflet html-widget "></div>
+<script type="application/json" data-for="htmlwidget-ad2cf83b62a7c0c9f3e5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-23.5581664,-46.6623969,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"A Curso-R morava aqui antes da pandemia. Agora ela mora no mundo todo!",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-23.5581664,-23.5581664],"lng":[-46.6623969,-46.6623969]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 ## Pacotes alternativos
