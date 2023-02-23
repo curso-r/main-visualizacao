@@ -29,6 +29,9 @@ pinguins |>
   # b ...
   # c ...
 
+
+?xlim
+
 # 2. Usando o gráfico a seguir, faça os exercícios:
 # a) adicione o tema `theme_solarized` usando o pacote ggthemes
 # b) adicione uma escala de cor viridis aos pontos
