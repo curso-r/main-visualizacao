@@ -2,4 +2,3 @@ visualizacao.Rproj
 exercicios
 exemplos_de_aula
 dados
-renv.lock
