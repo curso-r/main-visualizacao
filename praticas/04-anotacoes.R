@@ -1,5 +1,8 @@
 ## Anotação manual
 
+library(dados)
+library(tidyverse)
+
 jabba <- dados_starwars |> 
   filter(massa > 1000)
 

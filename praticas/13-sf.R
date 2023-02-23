@@ -70,7 +70,7 @@ dados_com_pnud_anos <- dados_geobr |>
   inner_join(pnud_min, by = "muni_id") |> 
   mutate(ano = as.numeric(ano))
 
-
+# install.packages("transformr")
 library(gganimate)
 anim <- dados_com_pnud_anos  %>% 
   ggplot(aes(fill = idhm)) +
